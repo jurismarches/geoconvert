@@ -1,18 +1,18 @@
 
-def  DeptConvert(value):
+def dept_convert(value):
 	"""
 	Convert code dept
 
-	>>> departement('121')
+	>>> dept_convert('121')
 	False
 
-	>>> departement('2A')
+	>>> dept_convert('2A')
 	'corse-du-sud'
 
-	>>> departement('cotes d\'armr')
+	>>> dept_convert("cotes d'armr")
 	False
 
-	>>> departement('cotes d\'armor')
+	>>> dept_convert("cotes d'armor")
 	'22'
 
 	"""
