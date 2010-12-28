@@ -118,8 +118,8 @@ def dept_convert(value):
     cp['94'] = 'val-de-marne'
     cp['95'] = 'val-d\'oise'
     nom_dep = value.replace(" ","-").lower()
-    if value in cp.keys():
-        return cp[value]
+    if (len(value) == 5 and value[:2] in cp.keys()) or value in cp.keys():
+        return cp[value[:2]]
     else:            
         if nom_dep in cp.values():
             for key,value in cp.items():
