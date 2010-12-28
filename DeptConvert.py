@@ -6,6 +6,9 @@ def dept_convert(value):
     >>> dept_convert('121')
     False
 
+    >>> dept_convert('44000')
+    'loire-atlantique'
+
     >>> dept_convert('2A')
     'corse-du-sud'
 
