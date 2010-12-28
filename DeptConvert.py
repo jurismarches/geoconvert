@@ -9,10 +9,10 @@ def departement(value):
 	>>> departement('2A')
 	'corse-du-sud'
 
-	>>> departement('cotes d\'armr')
+	>>> departement("cotes d\'armr")
 	False
 
-	>>> departement('cotes d\'armor')
+	>>> departement("cotes d\'armor")
 	'22'
 
 	"""
