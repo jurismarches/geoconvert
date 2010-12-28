@@ -1,5 +1,5 @@
 
-def  DeptConvert(value):
+def departement(value):
 	"""
 	Convert code dept
 
