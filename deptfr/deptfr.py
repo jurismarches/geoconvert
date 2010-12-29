@@ -160,5 +160,9 @@ def dept2cp(chaine):
             return None
 
 if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
+    import sys
+    import re
+    if(re.match(r"[0-9]+",sys.argv[1])):
+        print(cp2dept(sys.argv[1]))
+    else:
+        print(dept2cp(sys.argv[1]))
