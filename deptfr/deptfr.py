@@ -144,9 +144,8 @@ def dept2cp(chaine):
     '33'
 
     """
-
-    if re.match(r"[A-Za-z \t\n\r\f\v]+(?P<tab>[0-9]{5})[A-Za-z \t\n\r\f\v]+",chaine):
-        new = re.sub(r"[A-Za-z \t\n\r\f\v]+(?P<tab>[0-9]{5})[A-Za-z \t\n\r\f\v]+", r"\g<tab>", chaine)
+    if re.match('.*(\d{5}).*', chaine):
+        new = re.sub('.*(?P<tab>\d{5}).*', r"\g<tab>", chaine)
         for key in tab.keys():
             if new[:2] == key or new[:3] == key:
                 return key 
