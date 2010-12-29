@@ -1,129 +1,164 @@
+import re
 
-def dept_convert(value):
+tab = dict()
+tab['01'] = 'ain'
+tab['02'] = 'aisne'
+tab['03'] = 'allier'
+tab['04'] = 'alpes-de-hautes-provence'
+tab['05'] = 'hautes-alpes'
+tab['06'] = 'alpes-maritimes'
+tab['07'] = 'ardeche'
+tab['08'] = 'ardennes'
+tab['09'] = 'ariege'
+tab['10'] = 'aube'
+tab['11'] = 'aude'
+tab['12'] = 'aveyron'
+tab['13'] = 'bouches-du-rhone'
+tab['14'] = 'calvados'
+tab['15'] = 'cantal'
+tab['16'] = 'charente'
+tab['17'] = 'charente-maritime'
+tab['18'] = 'cher'
+tab['19'] = 'correze'
+tab['2A'] = 'corse-du-sud'
+tab['2B'] = 'haute-corse'  
+tab['21'] = 'cote-d\'or'  
+tab['22'] = 'cotes-d\'armor'
+tab['23'] = 'creuse'
+tab['24'] = 'dordogne'
+tab['25'] = 'doubs'
+tab['26'] = 'drome'
+tab['27'] = 'eure'
+tab['28'] = 'eure-et-loir'
+tab['29'] = 'finistere'
+tab['30'] = 'gard'
+tab['31'] = 'haute-garonne'
+tab['32'] = 'gers'
+tab['33'] = 'gironde'
+tab['34'] = 'herault'
+tab['35'] = 'ille-et-vilaine'
+tab['36'] = 'indre'
+tab['37'] = 'indre-et-loire'
+tab['38'] = 'isere'
+tab['39'] = 'jura'
+tab['40'] = 'landes'
+tab['41'] = 'loir-et-cher'
+tab['42'] = 'loire'
+tab['43'] = 'haute-loire'
+tab['44'] = 'loire-atlantique'
+tab['45'] = 'loiret'
+tab['46'] = 'lot'
+tab['47'] = 'lot-et-garonne'
+tab['48'] = 'lozere'
+tab['49'] = 'maine-et-loire'
+tab['50'] = 'manche'
+tab['51'] = 'marne'
+tab['52'] = 'haute-marne'
+tab['53'] = 'mayenne'
+tab['54'] = 'meurthe-et-moselle'
+tab['55'] = 'meuse'
+tab['56'] = 'morbihan'
+tab['57'] = 'moselle'
+tab['58'] = 'nievre'
+tab['59'] = 'nord'
+tab['60'] = 'oise'
+tab['61'] = 'orne'
+tab['62'] = 'pas-de-calais'
+tab['63'] = 'puy-de-dome'
+tab['64'] = 'pyrenees-atlantique'
+tab['65'] = 'hautes-pyrenees'
+tab['66'] = 'pyrenees-orientales'
+tab['67'] = 'bas-rhin'
+tab['68'] = 'haut-rhin'
+tab['69'] = 'rhone'
+tab['70'] = 'haute-saone'
+tab['71'] = 'saone-et-loire'
+tab['72'] = 'sarthe'
+tab['73'] = 'savoie'
+tab['74'] = 'haute-savoie'
+tab['75'] = 'paris'
+tab['76'] = 'seine-maritime'
+tab['77'] = 'seine-et-marne'
+tab['78'] = 'yvelines'
+tab['79'] = 'deux-sevres'
+tab['80'] = 'somme'
+tab['81'] = 'tarn'
+tab['82'] = 'tarn-et-garonne'
+tab['83'] = 'var'
+tab['84'] = 'vaucluse'
+tab['85'] = 'vendee'
+tab['86'] = 'vienne'
+tab['87'] = 'haute-vienne'
+tab['88'] = 'vosges'
+tab['94'] = 'yonne'
+tab['90'] = 'territoire-de-belfort'
+tab['91'] = 'essonne'
+tab['92'] = 'haut-de-seine'
+tab['93'] = 'sein-saint-denis'
+tab['94'] = 'val-de-marne'
+tab['95'] = 'val-d\'oise'
+tab['971'] = 'guadeloupe'
+tab['972'] = 'martinique'
+tab['973'] = 'guyane'
+tab['974'] = 'la-reunion'
+tab['976'] = 'mayotte'
+
+
+def cp2dept(cp):
     """
-    Convert code dept
+    Return the departement name from a CP or the departement number
+    
+    >>> cp2dept('121')
 
-    >>> dept_convert('121')
-    False
-
-    >>> dept_convert('44000')
+    >>> cp2dept('44000')
     'loire-atlantique'
 
-    >>> dept_convert('2A')
+    >>> cp2dept('2A')
     'corse-du-sud'
-
-    >>> dept_convert("cotes d'armr")
-    False
-
-    >>> dept_convert("cotes d'armor")
-    '22'
 
     """
 
-    cp = dict()
-    cp['01'] = 'ain'
-    cp['02'] = 'aisne'
-    cp['03'] = 'allier'
-    cp['04'] = 'alpes-de-hautes-provence'
-    cp['05'] = 'hautes-alpes'
-    cp['06'] = 'alpes-maritimes'
-    cp['07'] = 'ardeche'
-    cp['08'] = 'ardennes'
-    cp['09'] = 'ariege'
-    cp['10'] = 'aube'
-    cp['11'] = 'aude'
-    cp['12'] = 'aveyron'
-    cp['13'] = 'bouches-du-rhone'
-    cp['14'] = 'calvados'
-    cp['15'] = 'cantal'
-    cp['16'] = 'charente'
-    cp['17'] = 'charente-maritime'
-    cp['18'] = 'cher'
-    cp['19'] = 'correze'
-    cp['2A'] = 'corse-du-sud'
-    cp['2B'] = 'haute-corse'  
-    cp['21'] = 'cote-d\'or'  
-    cp['22'] = 'cotes-d\'armor'
-    cp['23'] = 'creuse'
-    cp['24'] = 'dordogne'
-    cp['25'] = 'doubs'
-    cp['26'] = 'drome'
-    cp['27'] = 'eure'
-    cp['28'] = 'eure-et-loir'
-    cp['29'] = 'finistere'
-    cp['30'] = 'gard'
-    cp['31'] = 'haute-garonne'
-    cp['32'] = 'gers'
-    cp['33'] = 'gironde'
-    cp['34'] = 'herault'
-    cp['35'] = 'ille-et-vilaine'
-    cp['36'] = 'indre'
-    cp['37'] = 'indre-et-loire'
-    cp['38'] = 'isere'
-    cp['39'] = 'jura'
-    cp['40'] = 'landes'
-    cp['41'] = 'loir-et-cher'
-    cp['42'] = 'loire'
-    cp['43'] = 'haute-loire'
-    cp['44'] = 'loire-atlantique'
-    cp['45'] = 'loiret'
-    cp['46'] = 'lot'
-    cp['47'] = 'lot-et-garonne'
-    cp['48'] = 'lozere'
-    cp['49'] = 'maine-et-loire'
-    cp['50'] = 'manche'
-    cp['51'] = 'marne'
-    cp['52'] = 'haute-marne'
-    cp['53'] = 'mayenne'
-    cp['54'] = 'meurthe-et-moselle'
-    cp['55'] = 'meuse'
-    cp['56'] = 'morbihan'
-    cp['57'] = 'moselle'
-    cp['58'] = 'nievre'
-    cp['59'] = 'nord'
-    cp['60'] = 'oise'
-    cp['61'] = 'orne'
-    cp['62'] = 'pas-de-calais'
-    cp['63'] = 'puy-de-dome'
-    cp['64'] = 'pyrenees-atlantique'
-    cp['65'] = 'hautes-pyrenees'
-    cp['66'] = 'pyrenees-orientales'
-    cp['67'] = 'bas-rhin'
-    cp['68'] = 'haut-rhin'
-    cp['69'] = 'rhone'
-    cp['70'] = 'haute-saone'
-    cp['71'] = 'saone-et-loire'
-    cp['72'] = 'sarthe'
-    cp['73'] = 'savoie'
-    cp['74'] = 'haute-savoie'
-    cp['75'] = 'paris'
-    cp['76'] = 'seine-maritime'
-    cp['77'] = 'seine-et-marne'
-    cp['78'] = 'yvelines'
-    cp['79'] = 'deux-sevres'
-    cp['80'] = 'somme'
-    cp['81'] = 'tarn'
-    cp['82'] = 'tarn-et-garonne'
-    cp['83'] = 'var'
-    cp['84'] = 'vaucluse'
-    cp['85'] = 'vendee'
-    cp['86'] = 'vienne'
-    cp['87'] = 'haute-vienne'
-    cp['88'] = 'vosges'
-    cp['89'] = 'yonne'
-    cp['90'] = 'territoire-de-belfort'
-    cp['91'] = 'essonne'
-    cp['92'] = 'haut-de-seine'
-    cp['93'] = 'sein-saint-denis'
-    cp['94'] = 'val-de-marne'
-    cp['95'] = 'val-d\'oise'
-    nom_dep = value.replace(" ","-").lower()
-    if (len(value) == 5 and value[:2] in cp.keys()) or value in cp.keys():
-        return cp[value[:2]]
-    else:            
-        if nom_dep in cp.values():
-            for key,value in cp.items():
+
+    if (len(cp) == 5 and cp[:2] in tab.keys()):
+        return tab[cp[:2]]
+    elif (len(cp) == 5 and cp[:3] in tab.keys()):
+        return tab[cp[:3]]
+    elif cp in tab.keys():
+        return tab[cp]
+    else:
+        return None
+
+def dept2cp(chaine):
+    """
+    Return the departement number from the departement name
+
+    >>> dept2cp('Martinique')
+    '972'
+
+    >>> dept2cp("cotes d'armr")
+
+    >>> dept2cp("cotes d'armor")
+    '22'
+
+    >>> dept2cp("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX")
+    '33'
+
+    """
+
+    if re.match(r"[A-Za-z \t\n\r\f\v]+(?P<tab>[0-9]{5})[A-Za-z \t\n\r\f\v]+",chaine):
+        new = re.sub(r"[A-Za-z \t\n\r\f\v]+(?P<tab>[0-9]{5})[A-Za-z \t\n\r\f\v]+", r"\g<tab>", chaine)
+        for key in tab.keys():
+            if new[:2] == key or new[:3] == key:
+                return key 
+    else:
+        nom_dep = chaine.replace(" ","-").lower()
+        if nom_dep in tab.values():
+            for key,value in tab.items():
                 if value == nom_dep:
                     return key
         else:
-            return False
+            return None
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
