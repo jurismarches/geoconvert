@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 import re
 
 tab = dict()
@@ -128,6 +129,32 @@ def cp2dept(cp):
     else:
         return None
 
+
+def adr2cp(chaine):
+    """
+    Return the departement number from any text which contains any zip code
+
+    >>> adr2cp(u"Chemin du Solarium\\n Le Haut Vigneau\\n 33175 GRADIGNAN CEDEX")
+    '33'
+
+    >>> adr2cp("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX 061256784589")
+    '33'
+
+    >>> adr2cp("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX")
+    '33'
+    """
+
+    #Test de la chaine de caracteres passée en parametre
+    for line in chaine.splitlines():
+        for word in line.split(' '):
+            try:
+                if int(word):
+                    for key in tab.keys():
+                        if word[:2] == key or word[:3] == key:
+                            return key 
+            except ValueError:
+                return None
+
 def dept2cp(chaine):
     """
     Return the departement number from the departement name
@@ -140,23 +167,14 @@ def dept2cp(chaine):
     >>> dept2cp("cotes d'armor")
     '22'
 
-    >>> dept2cp("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX")
-    '33'
-
     """
-    if re.match('.*(\d{5}).*', chaine):
-        new = re.sub('.*(?P<tab>\d{5}).*', r"\g<tab>", chaine)
-        for key in tab.keys():
-            if new[:2] == key or new[:3] == key:
-                return key 
+    nom_dep = chaine.replace(" ","-").lower()
+    if nom_dep in tab.values():
+        for key,value in tab.items():
+            if value == nom_dep:
+                return key
     else:
-        nom_dep = chaine.replace(" ","-").lower()
-        if nom_dep in tab.values():
-            for key,value in tab.items():
-                if value == nom_dep:
-                    return key
-        else:
-            return None
+        return None
 
 if __name__ == "__main__":
     import sys
