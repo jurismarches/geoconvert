@@ -137,6 +137,9 @@ def adr2cp(chaine):
     >>> adr2cp(u"Chemin du Solarium\\n Le Haut Vigneau\\n 33175 GRADIGNAN CEDEX")
     '33'
 
+    >>> adr2cp("Chemin du Solarium 061256784589 Le Haut Vigneau 33175 GRADIGNAN CEDEX ")
+    '33'
+
     >>> adr2cp("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX 061256784589")
     '33'
 
@@ -148,12 +151,13 @@ def adr2cp(chaine):
     for line in chaine.splitlines():
         for word in line.split(' '):
             try:
-                if int(word):
+                if int(word) and len(word) == 5:
                     for key in tab.keys():
                         if word[:2] == key or word[:3] == key:
                             return key 
             except ValueError:
-                return None
+                pass
+    return None
 
 def dept2cp(chaine):
     """
