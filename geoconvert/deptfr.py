@@ -171,19 +171,18 @@ def dept2cp(chaine):
     >>> dept2cp("cotes d'armor")
     '22'
 
-    """
-    nom_dep = chaine.replace(" ","-").lower()
-    if nom_dep in tab.values():
-        for key,value in tab.items():
-            if value == nom_dep:
-                return key
-    else:
-        return None
+    >>> dept2cp(u'H\xe9rault')
+    '34'
 
+    """
+    try:
+        nom_dep = chaine.replace(" ","-").lower().encode('ASCII', 'replace').replace('?', '.')
+    except:
+        nom_dep = chaine.replace(" ","-").lower()
+    for key,value in tab.items():
+        if re.search(nom_dep, value):
+            return key
+    return None
 if __name__ == "__main__":
-    import sys
-    import re
-    if(re.match(r"[0-9]+",sys.argv[1])):
-        print(cp2dept(sys.argv[1]))
-    else:
-        print(dept2cp(sys.argv[1]))
+    import doctest
+    doctest.testmod()
