@@ -174,14 +174,17 @@ def dept2cp(chaine):
     >>> dept2cp(u'H\xe9rault')
     '34'
 
+    >>> dept2cp(u'')
+
     """
-    try:
-        nom_dep = chaine.replace(" ","-").lower().encode('ASCII', 'replace').replace('?', '.')
-    except:
-        nom_dep = chaine.replace(" ","-").lower()
-    for key,value in tab.items():
-        if re.search(nom_dep, value):
-            return key
+    if chaine:
+        try:
+            nom_dep = chaine.replace(" ","-").lower().encode('ASCII', 'replace').replace('?', '.')
+        except:
+            nom_dep = chaine.replace(" ","-").lower()
+        for key,value in tab.items():
+            if re.search(nom_dep, value):
+                return key
     return None
 if __name__ == "__main__":
     import doctest
