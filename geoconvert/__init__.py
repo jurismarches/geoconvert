@@ -1,1 +1,1 @@
-__all__ = ['deptfr']
+__all__ = ['deptfr', 'countrycode']
