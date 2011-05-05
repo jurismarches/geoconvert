@@ -2,6 +2,20 @@
 import re
 
 def country2code(country):
+    """
+    Get country name and return his code.
+    >>> country2code('france')
+    'FR'
+
+    >>> country2code('Madagascar')
+    'MG'
+
+    >>> country2code(u'S\xe9n\xe9gal')
+    'SN'
+
+    >>> country2code('République démocratique du Congo')
+    'CG'
+    """
     country_dict = dict()
     country_dict['andorre'] = 'AD'
     country_dict['emirats arabes unis'] = 'AE'
@@ -251,9 +265,13 @@ def country2code(country):
 
     if country:
         try:
-            nom_dep = country.replace(" ","-").lower().encode('asciI', 'replace').replace('?', '.')
+            country = country.replace(" ","-").lower().encode('ASCII', 'replace').replace('?', '.')
         except:
-            nom_dep = country.replace(" ","-").lower()
+            country = country.replace(" ","-").lower()
         for key,value in country_dict.items():
-            if re.search(nom_dep, key):
+            if re.search(country, key) or re.search(key, country):
                 return value
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
