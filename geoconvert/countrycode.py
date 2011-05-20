@@ -15,6 +15,9 @@ def country2code(country):
 
     >>> country2code('République démocratique du Congo')
     'CG'
+
+    >>> country2code('Mongolia')
+    'MN'
     """
     country_dict = dict()
     country_dict['andorre'] = 'AD'
@@ -162,6 +165,7 @@ def country2code(country):
     country_dict['mali'] = 'ML'
     country_dict['myanmar'] = 'MM'
     country_dict['mongolie'] = 'MN'
+    country_dict['mongolia'] = 'MN'
     country_dict['macao'] = 'MO'
     country_dict['mariannes du nord'] = 'MP'
     country_dict['martinique'] = 'MQ'
@@ -242,6 +246,7 @@ def country2code(country):
     country_dict['tuvalu'] = 'TV'
     country_dict['taiwan'] = 'TW'
     country_dict['tanzanie'] = 'TZ'
+    country_dict['tanzania'] = 'TZ'
     country_dict['ukraine'] = 'UA'
     country_dict['ouganda'] = 'UG'
     country_dict['iles mineures eloignees des etats-unis'] = 'UM'
