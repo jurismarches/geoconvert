@@ -16,6 +16,12 @@ def country2code(country):
     >>> country2code('République démocratique du Congo')
     'CG'
 
+    >>> country2code('Mali')
+    'ML'
+
+    >>> country2code('Sri Lanka ')
+    'LK'
+
     >>> country2code('Mongolia')
     'MN'
     """
@@ -270,11 +276,11 @@ def country2code(country):
 
     if country:
         try:
-            country = country.replace(" ","-").lower().encode('ASCII', 'replace').replace('?', '.')
+            country = country.lower().encode('ASCII', 'replace').replace('?', '.')
         except:
-            country = country.replace(" ","-").lower()
+            country = country.lower()
         for key,value in country_dict.items():
-            if re.search(country, key) or re.search(key, country):
+            if re.search(r"^%s" % country, key) or re.search(key, country):
                 return value
 
 if __name__ == '__main__':
