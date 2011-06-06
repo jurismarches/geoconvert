@@ -94,8 +94,8 @@ tab['88'] = 'vosges'
 tab['94'] = 'yonne'
 tab['90'] = 'territoire-de-belfort'
 tab['91'] = 'essonne'
-tab['92'] = 'haut-de-seine'
-tab['93'] = 'sein-saint-denis'
+tab['92'] = 'hauts-de-seine'
+tab['93'] = 'seine-saint-denis'
 tab['94'] = 'val-de-marne'
 tab['95'] = 'val-d\'oise'
 tab['971'] = 'guadeloupe'
@@ -171,15 +171,21 @@ def dept2cp(chaine):
     >>> dept2cp("cotes d'armor")
     '22'
 
+    >>> dept2cp(u'Hauts-de-Seine ')
+    '92'
+
     >>> dept2cp(u'H\xe9rault')
     '34'
+
+    >>> dept2cp(u'Seine-Saint-Denis ')
+    '93'
 
     >>> dept2cp(u'')
 
     """
     if chaine:
         try:
-            nom_dep = chaine.replace(" ","-").lower().encode('ASCII', 'replace').replace('?', '.')
+            nom_dep = chaine.strip(' ').replace(" ","-").lower().encode('ASCII', 'replace').replace('?', '.')
         except:
             nom_dep = chaine.replace(" ","-").lower()
         for key,value in tab.items():
