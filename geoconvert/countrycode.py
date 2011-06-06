@@ -22,8 +22,20 @@ def country2code(country, lang='FR'):
     >>> country2code('Sri Lanka ')
     'LK'
 
-    >>> country2code('Mongolia')
+    >>> country2code('Mongolia', lang='EN')
     'MN'
+
+    >>> country2code('Marocco', lang='EN')
+    'MA'
+
+    >>> country2code('Georgia', lang='EN')
+    'GE'
+
+    >>> country2code('Namibia', lang='EN')
+    'NA'
+
+    >>> country2code('Armenia', lang='EN')
+    'AM'
 
     >>> country2code('sweden', lang='EN')
     'SE'
@@ -430,6 +442,7 @@ def country2code(country, lang='FR'):
     country_dict_en['montenegro'] = 'ME'
     country_dict_en['montserrat'] = 'MS'
     country_dict_en['morocco'] = 'MA'
+    country_dict_en['marocco'] = 'MA'
     country_dict_en['mozambique'] = 'MZ'
     country_dict_en['myanmar'] = 'MM'
     country_dict_en['namibia'] = 'NA'
