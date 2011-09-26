@@ -104,7 +104,6 @@ tab['973'] = 'guyane'
 tab['974'] = 'la-reunion'
 tab['976'] = 'mayotte'
 
-
 def cp2dept(cp):
     """
     Return the departement name from a CP or the departement number
@@ -145,18 +144,33 @@ def adr2cp(chaine):
 
     >>> adr2cp("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX")
     '33'
+
+    >>> adr2cp('7 cours Grandval\\nBP 414 - 20183 AJACCIO - CEDEX')
+    '2A'
+
+    >>> adr2cp('20212   Erbajolo')
+    '2B'
+
+    >>> adr2cp('20223   Solenzara Air')
+    '2A'
     """
 
     #Test de la chaine de caracteres passée en parametre
     for line in chaine.splitlines():
         for word in line.split(' '):
-            try:
-                if int(word) and len(word) == 5:
-                    for key in tab.keys():
-                        if word[:2] == key or word[:3] == key:
-                            return key 
-            except ValueError:
-                pass
+            if word[:2] != '20':
+                try:
+                    if int(word) and len(word) == 5:
+                        for key in tab.keys():
+                            if word[:2] == key or word[:3] == key:
+                                return key 
+                except ValueError:
+                    pass
+            else:
+                if int(word) < 20200 or int(word) in [20223, 20900]:
+                    return '2A'
+                else:
+                    return '2B'
     return None
 
 def dept2cp(chaine):
@@ -192,6 +206,7 @@ def dept2cp(chaine):
             if re.search(nom_dep, value):
                 return key
     return None
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
