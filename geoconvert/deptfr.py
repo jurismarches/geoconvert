@@ -153,11 +153,16 @@ def adr2cp(chaine):
 
     >>> adr2cp('20223   Solenzara Air')
     '2A'
+
+    >>> adr2cp('BP 55342 20223   Solenzara Air')
+    '2A'
     """
 
     #Test de la chaine de caracteres passée en parametre
     for line in chaine.splitlines():
-        for word in line.split(' '):
+        word = re.search(r"(?:\s+|^)(\d{5})\s+[a-zA-Z]+", line)
+        if word:
+            word = word.group(1)
             if word[:2] != '20':
                 try:
                     if int(word) and len(word) == 5:
