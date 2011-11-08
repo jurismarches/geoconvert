@@ -22,6 +22,9 @@ def country2code(country, lang='FR'):
     >>> country2code('Sri Lanka ')
     'LK'
 
+    >>> country2code(u'\xa0V\xe9n\xe9zuela\xa0')
+    'VE'
+
     >>> country2code('Mongolia', lang='EN')
     'MN'
 
@@ -547,9 +550,9 @@ def country2code(country, lang='FR'):
             country_dict = country_dict_fr
 
         try:
-            country = country.lower().encode('ASCII', 'replace').replace('?', '.')
+            country = country.lower().strip().encode('ASCII', 'replace').replace('?', '.')
         except:
-            country = country.lower()
+            country = country.lower().strip()
         for key,value in country_dict.items():
             if re.search(r"^%s" % country, key) or re.search(key, country):
                 return value
