@@ -199,6 +199,9 @@ def dept2cp(chaine):
     >>> dept2cp(u'Seine-Saint-Denis ')
     '93'
 
+    >>> dept2cp(u'Loire')
+    '42'
+
     >>> dept2cp(u'')
 
     """
@@ -207,6 +210,9 @@ def dept2cp(chaine):
             nom_dep = chaine.strip(' ').replace(" ","-").lower().encode('ASCII', 'replace').replace('?', '.')
         except:
             nom_dep = chaine.replace(" ","-").lower()
+        for key,value in tab.items():
+            if nom_dep == value:
+                return key
         for key,value in tab.items():
             if re.search(nom_dep, value):
                 return key
