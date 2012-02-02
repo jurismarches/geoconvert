@@ -14,7 +14,7 @@ def country2code(country, lang='FR'):
     'SN'
 
     >>> country2code('République démocratique du Congo')
-    'CG'
+    'CD'
 
     >>> country2code('Mali')
     'ML'
@@ -82,6 +82,7 @@ def country2code(country, lang='FR'):
     country_dict_fr['belarus'] = 'BY'
     country_dict_fr['belize'] = 'BZ'
     country_dict_fr['canada'] = 'CA'
+    country_dict_fr['r.+publique d.+mocratique du congo'] = 'CD'
     country_dict_fr['cocos (keeling)'] = 'CC'
     country_dict_fr['centrafricaine'] = 'CF'
     country_dict_fr['congo'] = 'CG'
