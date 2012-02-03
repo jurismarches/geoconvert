@@ -43,6 +43,9 @@ def country2code(country, lang='FR'):
     >>> country2code('sweden', lang='EN')
     'SE'
 
+    >>> country2code(u'Vi\xeatnam')
+    'VN'
+
     """
     country_dict_fr = dict()
     country_dict_fr['andorre'] = 'AD'
@@ -285,6 +288,7 @@ def country2code(country, lang='FR'):
     country_dict_fr['iles vierges britanniques'] = 'VG'
     country_dict_fr['iles vierges des etats-unis'] = 'VI'
     country_dict_fr['viet nam'] = 'VN'
+    country_dict_fr['vietnam'] = 'VN'
     country_dict_fr['vanuatu'] = 'VU'
     country_dict_fr['wallis et futuna'] = 'WF'
     country_dict_fr['samoa'] = 'WS'
