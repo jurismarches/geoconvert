@@ -420,6 +420,7 @@ def country2code(country, lang='FR'):
     country_dict_en['korea'] = 'KR'
     country_dict_en['kuwait'] = 'KW'
     country_dict_en['kyrgyzstan'] = 'KG'
+    country_dict_en['kyrgyz republic'] = 'KG'
     country_dict_en['lao people\'s democratic republic'] = 'LA'
     country_dict_en['latvia'] = 'LV'
     country_dict_en['lebanon'] = 'LB'
