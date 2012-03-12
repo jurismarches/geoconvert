@@ -46,6 +46,8 @@ def country2code(country, lang='FR'):
     >>> country2code(u'Vi\xeatnam')
     'VN'
 
+    >>> country2code(u'aaa ( bbb')
+
     """
     country_dict_fr = dict()
     country_dict_fr['andorre'] = 'AD'
@@ -561,8 +563,12 @@ def country2code(country, lang='FR'):
 
         try:
             country = country.lower().strip().encode('ASCII', 'replace').replace('?', '.')
+            country = country.replace('(', '')
+            country = country.replace(')', '')
         except:
             country = country.lower().strip()
+            country = country.replace('(', '')
+            country = country.replace(')', '')
         for key,value in country_dict.items():
             if re.search(r"^%s" % country, key) or re.search(key, country):
                 return value
