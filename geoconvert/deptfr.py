@@ -21,8 +21,8 @@ tab['16'] = 'charente'
 tab['17'] = 'charente-maritime'
 tab['18'] = 'cher'
 tab['19'] = 'correze'
-tab['2A'] = 'corse-du-sud'
-tab['2B'] = 'haute-corse'  
+tab['20A'] = 'corse-du-sud'
+tab['20B'] = 'haute-corse'
 tab['21'] = 'cote-d\'or'  
 tab['22'] = 'cotes-d\'armor'
 tab['23'] = 'creuse'
@@ -113,11 +113,21 @@ def cp2dept(cp):
     >>> cp2dept('44000')
     'loire-atlantique'
 
+    >>> cp2dept('2a')
+    'corse-du-sud'
+
     >>> cp2dept('2A')
+    'corse-du-sud'
+
+    >>> cp2dept('20A')
     'corse-du-sud'
 
     """
 
+    # Normalize caps and format for 20A and 20B
+    cp = cp.upper()
+    if cp in ['2A', '2B']:
+        cp = '%s0%s' % tuple(cp)
 
     if (len(cp) == 5 and cp[:2] in tab.keys()):
         return tab[cp[:2]]
@@ -146,16 +156,16 @@ def adr2cp(chaine):
     '33'
 
     >>> adr2cp('7 cours Grandval\\nBP 414 - 20183 AJACCIO - CEDEX')
-    '2A'
+    '20A'
 
     >>> adr2cp('20212   Erbajolo')
-    '2B'
+    '20B'
 
     >>> adr2cp('20223   Solenzara Air')
-    '2A'
+    '20A'
 
     >>> adr2cp('BP 55342 20223   Solenzara Air')
-    '2A'
+    '20A'
     """
 
     #Test de la chaine de caracteres passée en parametre
@@ -173,9 +183,9 @@ def adr2cp(chaine):
                     pass
             else:
                 if int(word) < 20200 or int(word) in [20223, 20900]:
-                    return '2A'
+                    return '20A'
                 else:
-                    return '2B'
+                    return '20B'
     return None
 
 def dept2cp(chaine):
@@ -201,6 +211,9 @@ def dept2cp(chaine):
 
     >>> dept2cp(u'Loire')
     '42'
+
+    >>> dept2cp(u'Corse-du-Sud')
+    '20A'
 
     >>> dept2cp(u'')
 
