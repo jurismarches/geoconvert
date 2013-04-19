@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 import re
 
+
 def country2code(country, lang='FR'):
     """
     Get country name and return his code.
@@ -45,6 +46,12 @@ def country2code(country, lang='FR'):
 
     >>> country2code(u'Vi\xeatnam')
     'VN'
+
+    >>> country2code('Nigeria')
+    'NG'
+
+    >>> country2code(u'Niger')
+    'NE'
 
     >>> country2code(u'aaa ( bbb')
 
@@ -569,8 +576,8 @@ def country2code(country, lang='FR'):
             country = country.lower().strip()
             country = country.replace('(', '')
             country = country.replace(')', '')
-        for key,value in country_dict.items():
-            if re.search(r"^%s" % country, key) or re.search(key, country):
+        for key, value in country_dict.items():
+            if (re.search(r"^%s" % country, key) or re.search(key, country)) and len(country) == len(key):
                 return value
 
 if __name__ == '__main__':
