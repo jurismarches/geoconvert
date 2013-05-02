@@ -1,9 +1,18 @@
 # -*- coding: utf8 -*-
 import re
+import string
+import unicodedata
+
+
+def remove_accents(str):
+    """
+    Remove accents from a string
+    """
+    return unicodedata.normalize('NFKD', unicode(str)).encode('ascii', 'ignore')
 
 
 def country2code(country, lang='FR'):
-    """
+    ur"""
     Get country name and return his code.
     >>> country2code('france')
     'FR'
@@ -54,6 +63,40 @@ def country2code(country, lang='FR'):
     'NE'
 
     >>> country2code(u'aaa ( bbb')
+
+
+    >>> country2code(u" Le  nigéria c'est trop   sympa")
+    'NG'
+
+    >>> country2code(u"Pays d'exécution : Niger")
+    'NE'
+
+    >>> country2code(u"Knotts Island, NC 27950\n\n27950-0039\nUnited States", lang='EN')
+    'US'
+
+    >>> country2code("  Côte d'Ivoire ")
+    'CI'
+
+    >>> country2code("721 APS BLDG 3334\nUNIT 3295 \nRamstein Air Base, Non-U.S. 66877 \nGermany ", lang='EN')
+    'DE'
+
+    >>> country2code("Saudi Arabia", lang='EN')
+    'SA'
+
+    >>> country2code("U.S. Mission Iraq\n\nIraq")
+    'IQ'
+
+    >>> country2code("Pays:France ?".encode('ascii', 'ignore'))
+    'FR'
+
+    >>> country2code("Country execution:nigeria.", lang='EN')
+    'NG'
+    
+    >>> country2code(",royaume-uni,")
+    'GB'
+    
+    >>> country2code("PAYS-BRÉSIL")
+    'BR'
 
     """
     country_dict_fr = dict()
@@ -562,22 +605,16 @@ def country2code(country, lang='FR'):
     country_dict_en['yemen'] = 'YE'
     country_dict_en['zambia'] = 'ZM'
     country_dict_en['zimbabwe'] = 'ZW'
+
     if country:
         if lang == 'EN':
             country_dict = country_dict_en
         else:
             country_dict = country_dict_fr
-
-        try:
-            country = country.lower().strip().encode('ASCII', 'replace').replace('?', '.')
-            country = country.replace('(', '')
-            country = country.replace(')', '')
-        except:
-            country = country.lower().strip()
-            country = country.replace('(', '')
-            country = country.replace(')', '')
-        for key, value in country_dict.items():
-            if (re.search(r"^%s" % country, key) or re.search(key, country)) and len(country) == len(key):
+        # Normalize string
+        country = ' %s ' % re.sub(r'\s+', ' ', remove_accents(country).lower()).strip()
+        for key, value in country_dict.iteritems():
+            if re.search(r'(\s|[^\w\s])%s(\s|[^\w\s])' % key, country):
                 return value
 
 if __name__ == '__main__':
