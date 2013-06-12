@@ -2,7 +2,7 @@ Geoconvert 1.9.10
 
 Installation
 ============
-Install the latest version from GitHub
+Install the latest version from Bitbucket
 
-  $ pip install https://github.com/pabluk/DeptConvert/tarball/master
+  $ pip install https://bitbucket.org/jurismarches/deptconvert/get/master.tar.gz
 
