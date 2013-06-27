@@ -23,7 +23,7 @@ tab['18'] = 'cher'
 tab['19'] = 'correze'
 tab['20A'] = 'corse-du-sud'
 tab['20B'] = 'haute-corse'
-tab['21'] = 'cote-d\'or'  
+tab['21'] = 'cote-d\'or'
 tab['22'] = 'cotes-d\'armor'
 tab['23'] = 'creuse'
 tab['24'] = 'dordogne'
@@ -107,7 +107,7 @@ tab['976'] = 'mayotte'
 def cp2dept(cp):
     """
     Return the departement name from a CP or the departement number
-    
+
     >>> cp2dept('121')
 
     >>> cp2dept('44000')
@@ -128,11 +128,12 @@ def cp2dept(cp):
     cp = cp.upper()
     if cp in ['2A', '2B']:
         cp = '%s0%s' % tuple(cp)
-
     if (len(cp) == 5 and cp[:2] in tab.keys()):
         return tab[cp[:2]]
     elif (len(cp) == 5 and cp[:3] in tab.keys()):
         return tab[cp[:3]]
+    elif (len(cp) == 6 and cp[2] == " ") and cp[:2] in tab.keys():
+        return tab[cp[:2]]
     elif cp in tab.keys():
         return tab[cp]
     else:
@@ -178,7 +179,7 @@ def adr2cp(chaine):
                     if int(word) and len(word) == 5:
                         for key in tab.keys():
                             if word[:2] == key or word[:3] == key:
-                                return key 
+                                return key
                 except ValueError:
                     pass
             else:
