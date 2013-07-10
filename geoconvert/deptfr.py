@@ -167,13 +167,24 @@ def adr2cp(chaine):
 
     >>> adr2cp('BP 55342 20223   Solenzara Air')
     '20A'
+
+    >>> adr2cp('Chemin du Solarium Le Haut Vigneau 33 175 GRADIGNAN CEDEX')
+    '33'
+
+    >>> adr2cp('20 223   Solenzara Air')
+    '20A'
     """
 
     #Test de la chaine de caracteres passée en parametre
     for line in chaine.splitlines():
-        word = re.search(r"(?:\s+|^)(\d{5})\s+[a-zA-Z]+", line)
+        word = re.search(r"(?:\s+|^)(\d{5}|\d{2}\s\d{3})\s+[a-zA-Z]+", line)
         if word:
-            word = word.group(1)
+            # If postal code with whitespace (44 300)
+            if word.group(1).find(' '):
+                word = word.group(1).replace(' ', '')
+            # Else (44300)
+            else:
+                word = word.group(1)
             if word[:2] != '20':
                 try:
                     if int(word) and len(word) == 5:
