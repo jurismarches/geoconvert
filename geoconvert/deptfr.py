@@ -173,6 +173,9 @@ def adr2cp(chaine):
 
     >>> adr2cp('20 223   Solenzara Air')
     '20A'
+
+    >>> adr2cp('97821 Le Port Cedex')
+    '971'
     """
 
     #Test de la chaine de caracteres passée en parametre
@@ -185,7 +188,7 @@ def adr2cp(chaine):
             # Else (44300)
             else:
                 word = word.group(1)
-            if word[:2] != '20':
+            if word[:2] != '20' and word[:3] != '978':
                 try:
                     if int(word) and len(word) == 5:
                         for key in tab.keys():
@@ -194,7 +197,9 @@ def adr2cp(chaine):
                 except ValueError:
                     pass
             else:
-                if int(word) < 20200 or int(word) in [20223, 20900]:
+                if word[:3] == '978':
+                    return '971'  #as asked by FO for another script
+                elif int(word) < 20200 or int(word) in [20223, 20900]:
                     return '20A'
                 else:
                     return '20B'
