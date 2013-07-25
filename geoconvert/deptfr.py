@@ -104,6 +104,7 @@ tab['973'] = 'guyane'
 tab['974'] = 'la-reunion'
 tab['976'] = 'mayotte'
 
+
 def cp2dept(cp):
     """
     Return the departement name from a CP or the departement number
@@ -176,11 +177,14 @@ def adr2cp(chaine):
 
     >>> adr2cp('97821 Le Port Cedex')
     '971'
+
+    >>> adr2cp('27006 Évreux Cedex')
+    '27'
     """
 
     #Test de la chaine de caracteres passée en parametre
     for line in chaine.splitlines():
-        word = re.search(r"(?:\s+|^)(\d{5}|\d{2}\s\d{3})\s+[a-zA-Z]+", line)
+        word = re.search(r"(?:\s+|^)(\d{5}|\d{2}\s\d{3})\s+[a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ]+", line)
         if word:
             # If postal code with whitespace (44 300)
             if word.group(1).find(' '):
@@ -198,12 +202,13 @@ def adr2cp(chaine):
                     pass
             else:
                 if word[:3] == '978':
-                    return '971'  #as asked by FO for another script
+                    return '971'  # as asked by FO for another script
                 elif int(word) < 20200 or int(word) in [20223, 20900]:
                     return '20A'
                 else:
                     return '20B'
     return None
+
 
 def dept2cp(chaine):
     """
@@ -237,13 +242,13 @@ def dept2cp(chaine):
     """
     if chaine:
         try:
-            nom_dep = chaine.strip(' ').replace(" ","-").lower().encode('ASCII', 'replace').replace('?', '.')
+            nom_dep = chaine.strip(' ').replace(" ", "-").lower().encode('ASCII', 'replace').replace('?', '.')
         except:
-            nom_dep = chaine.replace(" ","-").lower()
-        for key,value in tab.items():
+            nom_dep = chaine.replace(" ", "-").lower()
+        for key, value in tab.items():
             if nom_dep == value:
                 return key
-        for key,value in tab.items():
+        for key, value in tab.items():
             if re.search(nom_dep, value):
                 return key
     return None
