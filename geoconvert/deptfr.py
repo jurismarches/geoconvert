@@ -181,13 +181,22 @@ def adr2cp(chaine):
     >>> adr2cp('27006 Évreux Cedex')
     '27'
 
+    >>> adr2cp('  27006 Évreux Cedex')
+    '27'
+
     >>> adr2cp('27006')
     '27'
+
+    >>> adr2cp('Roissy-en-France95700')
+    '95'
+
+    >>> adr2cp(' 44200 BP 10720 Nantes cedex')
+    '44'
     """
 
     #Test de la chaine de caracteres passée en parametre
     for line in chaine.splitlines():
-        word = re.search(r"(?:\s+|^)(\d{5}|\d{2}\s\d{3})\s*([^\d\s]|$)", line)
+        word = re.search(r"(?:[^\d]|^)(\d{2}\s?\d{3})\s*([^\d\s]|$)", line)
         if word:
             # If postal code with whitespace (44 300)
             if word.group(1).find(' '):
