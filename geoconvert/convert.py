@@ -3,6 +3,7 @@ import re
 import string
 
 from utils import remove_accents
+from utils import safe_string
 from utils import reverse_dict
 
 from data import regions
@@ -176,11 +177,26 @@ def region_id_to_name(region_id):
     return None
 
 def region_name_to_id(region_name):
-    regions_reversed = reverse_dict(regions)
     if region_name:
-        region_name = remove_accents(region_name)
-        return regions_reversed[region_name]
-    return re
+        regions_reversed = reverse_dict(regions)
+        region_name = safe_string(region_name)
+        try:
+            return regions_reversed[region_name]
+        except KeyError:
+            pass
+    return None
+
+def region_info_from_id(region_id):
+    if region_id:
+        try:
+            return principal_places[str(region_id)]
+        except KeyError:
+            pass
+    return None
+
+def region_info_from_name(region_name):
+    region_id = region_name_to_id(region_name)
+    return region_info_from_id(region_id)
 
 def country_name_to_id(country, lang='FR'):
     ur"""

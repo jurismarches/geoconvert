@@ -7,6 +7,10 @@ def remove_accents(text):
     """
     Remove accents from a string
     """
+    try:
+        text = text.decode('utf-8')
+    except UnicodeEncodeError:
+        pass
     return unicodedata.normalize('NFKD', unicode(text)).encode('ascii', 'ignore')
 
 def safe_string(text):
@@ -23,6 +27,10 @@ def safe_string(text):
     >>> safe_string('ile- de  france')
     'ile de france'
     """
+    try:
+        text = text.decode('utf-8')
+    except UnicodeEncodeError:
+        pass
     text = remove_accents(text)
     text = text.replace('-', ' ')
     text = re.sub(r'\s+', ' ', text.strip())
