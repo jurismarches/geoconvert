@@ -157,6 +157,11 @@ def dept_name_to_zipcode(text):
 
     >>> dept_name_to_zipcode(u'')
 
+    >>> dept_name_to_zipcode(u'Yonne')
+    '89'
+
+    >>> dept_name_to_zipcode(u'Saint Pierre et Miquelon')
+    '975'
     """
     if text:
         try:

@@ -66,6 +66,7 @@ departments = {
 "02": "aisne",
 "03": "allier",
 "04": "alpes-de-hautes-provence",
+"04": "alpes-de-haute-provence",
 "05": "hautes-alpes",
 "06": "alpes-maritimes",
 "07": "ardeche",
@@ -127,6 +128,7 @@ departments = {
 "62": "pas-de-calais",
 "63": "puy-de-dome",
 "64": "pyrenees-atlantique",
+"64": "pyrenees-atlantiques",
 "65": "hautes-pyrenees",
 "66": "pyrenees-orientales",
 "67": "bas-rhin",
@@ -151,7 +153,7 @@ departments = {
 "86": "vienne",
 "87": "haute-vienne",
 "88": "vosges",
-"94": "yonne",
+"89": "yonne",
 "90": "territoire-de-belfort",
 "91": "essonne",
 "92": "hauts-de-seine",
@@ -162,7 +164,13 @@ departments = {
 "972": "martinique",
 "973": "guyane",
 "974": "la-reunion",
+"974": "ile-de-la-reunion",
+"975": "saint-pierre-et-miquelon",
 "976": "mayotte",
+"984": "terres-australes-et-antarctiques",
+"986": "wallis-et-futuna",
+"987": "polynesie-francaise",
+"988": "nouvelle-caledonie"
 }
 
 countries_fr = {
