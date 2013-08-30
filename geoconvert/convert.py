@@ -99,11 +99,17 @@ def address_to_zipcode(text):
 
     >>> address_to_zipcode(' 44200 BP 10720 Nantes cedex')
     '44'
+
+    >>> address_to_zipcode('a l attention de M. Bon Jean, Avenue des clients BP 72152, F - 31020 Toulouse')
+    '31'
+
+    >>> address_to_zipcode('a l attention de M. Bon Jean, Avenue des clients BP72152, F - 31020 Toulouse')
+    '31'
     """
 
     # Test de text de caracteres passée en parametre
     for line in text.splitlines():
-        word = re.search(r"(?:[^\d]|^)(\d{2}\s?\d{3})\s*([^\d\s]|$)", line)
+        word = re.search(r"(?<!BP)(?:[^\d]|^)(?<!BP)(\d{2}\s?\d{3})\s*([^\d\s]|$)", line)
         if word:
             # If postal code with whitespace (44 300)
             if word.group(1).find(' '):
