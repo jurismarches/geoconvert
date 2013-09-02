@@ -215,6 +215,9 @@ def country_name_to_id(country, lang='FR'):
     >>> country_name_to_id('france')
     'FR'
 
+    >>> country_name_to_id('Comores')
+    'KM'
+
     >>> country_name_to_id('Madagascar')
     'MG'
 
