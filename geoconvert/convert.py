@@ -251,6 +251,9 @@ def country_name_to_id(country, lang='FR'):
     >>> country_name_to_id('Namibia', lang='EN')
     'NA'
 
+    >>> country_name_to_id('Venezuela', lang='EN')
+    'VE'
+
     >>> country_name_to_id('Armenia', lang='EN')
     'AM'
 
