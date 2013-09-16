@@ -43,7 +43,10 @@ class GeoconvertTestCase(unittest.TestCase):
             ('a l attention de M. Bon Jean, Avenue des clients BP72152, F - 31020 Toulouse', '31'),
             ('a l attention de M. Bon Jean, Avenue des clients bp72152, F - 31020 Toulouse', '31'),
             ('BP 1330, 6503 TARBES Cedex 9, tel. 05.62.54.58.63', '06'),
-            ('06503 TARBES Cedex 9, tel. 05.62.54.58.63', '06')]
+            ('6503 TARBES Cedex 9, tel. 05.62.54.58.63', '06'),
+            ('97700 Saint-Barthelemy', '974'),
+            ('a l attention de M. Bon Jean, Avenue des client', None),
+        ]
         for test in data:
             self.assertEqual(address_to_zipcode(test[0]), test[1])
 
