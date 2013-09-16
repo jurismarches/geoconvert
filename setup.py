@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 import re
-
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 def get_version():
@@ -17,7 +16,7 @@ def get_version():
 
 
 setup(
-    name="geoconvert",
+    name="Geoconvert",
     version=get_version(),
-    packages=find_packages(),
+    packages=['geoconvert'],
 )
