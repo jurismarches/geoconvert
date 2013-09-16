@@ -13,3 +13,8 @@ Usage
     from geoconvert.convert import region_id_to_name
     from geoconvert.convert import region_name_to_id
     from geoconvert.convert import country_name_to_id
+
+Tests
+=====
+
+    python test_geoconvert.py
