@@ -2,7 +2,7 @@ Installation
 ============
 Install the latest version from Bitbucket
 
-    $ pip install https://bitbucket.org/jurismarches/deptconvert/get/master.tar.gz
+    $ pip install https://bitbucket.org/jurismarches/geoconvert/get/master.tar.gz
 
 Usage
 =====
