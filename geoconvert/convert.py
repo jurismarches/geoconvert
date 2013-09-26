@@ -39,7 +39,7 @@ def address_to_zipcode(text):
     """
 
     for line in text.splitlines():
-        word = re.search(r"(?<!BP)(?:[^\d]|^)(?<!BP)(\d{2}\s?\d{3}|0?[1-9]\s?\d{3})\s*([^\d\s]|$)", line, re.IGNORECASE)
+        word = re.search(r"(?<!BP)(?<!B.P.)(?<!CS)(?:[^\d]|^)(?<!BP)(?<!B.P.)(?<!CS)(\d{2}\s?\d{3}|0?[1-9]\s?\d{3})\s*([^\d\s]|$)", line, re.IGNORECASE)
         if word:
             # If postal code with whitespace (44 300)
             if word.group(1).find(' '):
