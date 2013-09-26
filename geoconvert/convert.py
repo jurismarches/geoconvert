@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 import re
-
+from itertools import ifilter
 from utils import remove_accents
 from utils import safe_string
 from utils import reverse_dict
@@ -39,30 +39,31 @@ def address_to_zipcode(text):
     """
 
     for line in text.splitlines():
-        word = re.search(r"(?<!BP)(?<!B.P.)(?<!CS)(?:[^\d]|^)(?<!BP)(?<!B.P.)(?<!CS)(\d{2}\s?\d{3}|0?[1-9]\s?\d{3})\s*([^\d\s]|$)", line, re.IGNORECASE)
-        if word:
-            # If postal code with whitespace (44 300)
-            if word.group(1).find(' '):
-                word = word.group(1).replace(' ', '')
-            # Else (44300)
-            else:
-                word = word.group(1)
-            if word[:2] != '20' and word[:3] != '978':
+        zipcode_match = re.search(r"(?<!BP)(?<!B.P.)(?<!CS)(?:[^\d]|^)(?<!BP)(?<!B.P.)(?<!CS)(?P<zipcode>\d{2}\s?\d{3}|0?[1-9]\s?\d{3})\s*([^\d\s]|$)", line, re.IGNORECASE)
+        if zipcode_match:
+            zipcode = zipcode_match.group('zipcode').replace(' ', '').zfill(5)
+
+            # Jurismarches custom world
+            if zipcode[:3] == '978':
+                return '971'
+
+            elif zipcode[:3] == '977':  # Refs #1092
+                return '974'
+
+            # Corse
+            elif zipcode[:2] == '20':
                 try:
-                    if int(word):
-                        word = word.zfill(5)
-                        for key in departments.keys():
-                            if word[:2] == key or word[:3] == key:
-                                return key
+                    if int(zipcode) < 20200 or int(zipcode) in [20223, 20900]:
+                        return '20A'
+                    else:
+                        return '20B'
                 except ValueError:
-                    pass
+                    return None
+
+            # Other
             else:
-                if word[:3] == '978':
-                    return '971'  # as asked by FO for another script
-                elif int(word) < 20200 or int(word) in [20223, 20900]:
-                    return '20A'
-                else:
-                    return '20B'
+                return next(ifilter(lambda zc: zipcode.startswith(zc), departments.keys()), None)
+
     return None
 
 

@@ -50,7 +50,12 @@ class GeoconvertTestCase(unittest.TestCase):
             ('conseil général du Haut-Rhin, 100 avenue d alsace B.P. 20351, conseil général du Haut-Rhin-68006 Colmar Cedex', '68'),
             ('conseil général du Haut-Rhin, 100 avenue d alsace B.P.20351, conseil général du Haut-Rhin-68006 Colmar Cedex', '68'),
             ('Avenue des clients CS 72152, F - 31020 Toulouse', '31'),
-            ('Avenue des clients CS72152, F - 31020 Toulouse', '31')]
+            ('Avenue des clients CS72152, F - 31020 Toulouse', '31'),
+            ('6503 TARBES Cedex 9, tel. 05.62.54.58.63', '06'),
+            ('97700 Saint-Barthelemy', '974'),
+            ('a l attention de M. Bon Jean, Avenue des client', None)
+        ]
+
         for test in data:
             self.assertEqual(address_to_zipcode(test[0]), test[1])
 
