@@ -38,24 +38,21 @@ class AddressParser(object):
     Simple french address parser
     """
     address_class = Address
-    zipcode_filters_re = re.compile(r'(?P<address>.*?)(?=CEDEX|$)', flags=re.IGNORECASE)
+    zipcode_filters_re = re.compile(r'CEDEX\s+?\d+', flags=re.IGNORECASE | re.MULTILINE)
     zipcode_re = re.compile(
         r'(?<!BP)(?<!B\.P\.)(?<!CS)(?:[^\d]|^)(?P<zipcode>\d{2}\s*?\d{2,3})',
-        flags=re.IGNORECASE)
+        flags=re.IGNORECASE | re.MULTILINE)
 
     def _parse_zipcode(self, address):
         """
         Tries to extract zipcode from address
         """
-        filter_match = self.zipcode_filters_re.match(address)
+        address = self.zipcode_filters_re.sub('', address)
+        match_list = list(self.zipcode_re.finditer(address))
 
-        if filter_match:
-            address = filter_match.group('address')
-            match_list = list(self.zipcode_re.finditer(address))
-
-            # It's easier to parse zipcode from the end of the string
-            if match_list:
-                return match_list[-1].group('zipcode').replace(' ', '').zfill(5)
+        # It's easier to parse zipcode from the end of the string
+        if match_list:
+            return match_list[-1].group('zipcode').replace(' ', '').zfill(5)
 
     def get_address_class(self):
         """

@@ -163,6 +163,14 @@ class AddressParserTestCase(unittest.TestCase):
             ('Mme Cindy DUMAS, 15000 Bd Lepic - 73103 B.P. 89348 Aix-les-Bains', '73103', '73'),
             ('Mme Cindy DUMAS, 15000 Bd Lepic - 73103 b.p. 89348 Aix-les-Bains', '73103', '73'),
             ('Mme Cindy DUMAS, 15000 Bd Lepic - 73103 bp 89348 Aix-les-Bains', '73103', '73'),
+            (u"M. le président Du Conseil Général Du Lot, avenue de l'europe - regourd Cedex 9 46005 Cahors", '46005', '46'),
+            (u"M. le maire, place Dr Pierre Esquirol Cedex 9 47916 Agen.", '47916', '47'),
+            ("M. Claude Lopez, 44 avenue Saint Lazare Cedex 2 34965 Montpellier", '34965', '34'),
+            (u"M. le président, le Forum 3, rue Malakoff Cedex 01 38031 Grenoble", '38031', '38'),
+            (ur"Samop - mandataire du cg38, les jardins d'entreprises \r\nbâtiment b4 \r\n213 rue de gerland 69007 Lyon", '69007', '69'),
+            (u"M. le président, 9, rue Saint Pierre Lentin cs 94117 Cedex 1 45041 Orléans Cedex", '45041', '45'),
+            (u"M. le président Du Conseil Général Du Lot, avenue de l'europe - regourd Cedex 9 46005 Cahors", '46005', '46'),
+            (u"M. le président, hôtel du Département , rue Gaston Manent B.P. 1324 Cedex 9 65013 Tarbes", '65013', '65'),
             ('a l attention de M. Bon Jean, Avenue des client', None, None)
         ]
 
