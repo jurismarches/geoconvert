@@ -131,11 +131,11 @@ class AddressParserTestCase(unittest.TestCase):
     def setUp(self):
         self.address_parser = AddressParser()
         self.data = [
-            (u"Chemin du Solarium\\n Le Haut Vigneau\\n 33175 GRADIGNAN CEDEX", '33175', '33'),
+            (u"Chemin du Solarium\n Le Haut Vigneau\n 33175 GRADIGNAN CEDEX", '33175', '33'),
             ("Chemin du Solarium 061256784589 Le Haut Vigneau 33175 GRADIGNAN CEDEX ", '33175', '33'),
             ("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX 061256784589", '33175', '33'),
             ("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX", '33175', '33'),
-            ('7 cours Grandval\\nBP 414 - 20183 AJACCIO - CEDEX', '20183', '2A'),
+            ('7 cours Grandval\nBP 414 - 20183 AJACCIO - CEDEX', '20183', '2A'),
             ('20212   Erbajolo', '20212', '2B'),
             ('20223   Solenzara Air', '20223', '2B'),
             ('BP 55342 20223   Solenzara Air', '20223', '2B'),
@@ -167,11 +167,13 @@ class AddressParserTestCase(unittest.TestCase):
             (u"M. le maire, place Dr Pierre Esquirol Cedex 9 47916 Agen.", '47916', '47'),
             ("M. Claude Lopez, 44 avenue Saint Lazare Cedex 2 34965 Montpellier", '34965', '34'),
             (u"M. le président, le Forum 3, rue Malakoff Cedex 01 38031 Grenoble", '38031', '38'),
-            (ur"Samop - mandataire du cg38, les jardins d'entreprises \r\nbâtiment b4 \r\n213 rue de gerland 69007 Lyon", '69007', '69'),
+            (u"Samop - mandataire du cg38, les jardins d'entreprises \r\nbâtiment b4 \r\n213 rue de gerland 69007 Lyon", '69007', '69'),
             (u"M. le président, 9, rue Saint Pierre Lentin cs 94117 Cedex 1 45041 Orléans Cedex", '45041', '45'),
             (u"M. le président Du Conseil Général Du Lot, avenue de l'europe - regourd Cedex 9 46005 Cahors", '46005', '46'),
             (u"M. le président, hôtel du Département , rue Gaston Manent B.P. 1324 Cedex 9 65013 Tarbes", '65013', '65'),
-            ('a l attention de M. Bon Jean, Avenue des client', None, None)
+            ('a l attention de M. Bon Jean, Avenue des client', None, None),
+            (u"SICTOM du Guiers\n27 avenue Pravaz BP66\n38480 - Pont de Beauvoisin ", '38480', '38'),
+            (u"SICTOM du Guiers\n27\n avenue Pravaz BP\n\n 66\n38480\n - Pont de Beauvoisin ", '38480', '38'),
         ]
 
     def test_zipcode(self):
