@@ -176,8 +176,14 @@ class AddressParserTestCase(unittest.TestCase):
             (u"SICTOM du Guiers\n27\n avenue Pravaz BP\n\n 66\n38480\n - Pont de Beauvoisin ", '38480', '38'),
             (u"Mlle DAMAGNEZ Julie, place Victor Pauchet pil daa Marchés Publics 80054 Amiens Cedex 1", '80054', '80'),
             (u"CS 17569 80054 Amiens CEDEX 158", '80054', '80'),
+            (u"Adresse de test C.S. 17569 80054 Amiens CEDEX 15800", '80054', '80'),
+            (u"Adresse de test CS. 17569 80054 Amiens CEDEX 15800", '80054', '80'),
+            (u"Adresse de test C.S 17569 80054 Amiens CEDEX 15800", '80054', '80'),
+            (u"Adresse de test BP. 17569 80054 Amiens CEDEX 15800", '80054', '80'),
+            (u"Adresse de test B.P 17569 80054 Amiens CEDEX 15800", '80054', '80'),
             (u"M. Bonnet Roland, Directeur interdépartemental des routes Centre-Ouest, le Pastel 22 rue des Pénitents Blancs Le Pastel 22 rue des Pénitents Blancs 87032 Limoges Cedex", '87032', '87'),
-            (u"Mme del bianco Véronique, Chargée de marché public, service des marchés publics 93130 Noisy-le-Sec", '93130', '93')
+            (u"Mme del bianco Véronique, Chargée de marché public, service es marchés publics 93130 Noisy-le-Sec", '93130', '93'),
+            (u"direction de la Commande Publique, à l'attention de M. le président, 379 rue Hubert Delisle B.P 437 97838 Le Tampon Cedex", '97838', '978'),
         ]
 
     def test_zipcode(self):
