@@ -131,7 +131,7 @@ class AddressParserTestCase(unittest.TestCase):
     def setUp(self):
         self.address_parser = AddressParser()
         self.data = [
-            (u"Chemin du Solarium\n Le Haut Vigneau\n 33175 GRADIGNAN CEDEX", '33175', '33'),
+            (u"Chemin du Solarium\n Le Haut Vigneau\n 33175 GRADIGNAN CEDEX 1", '33175', '33'),
             ("Chemin du Solarium 061256784589 Le Haut Vigneau 33175 GRADIGNAN CEDEX ", '33175', '33'),
             ("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX 061256784589", '33175', '33'),
             ("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX", '33175', '33'),
@@ -174,6 +174,10 @@ class AddressParserTestCase(unittest.TestCase):
             ('a l attention de M. Bon Jean, Avenue des client', None, None),
             (u"SICTOM du Guiers\n27 avenue Pravaz BP66\n38480 - Pont de Beauvoisin ", '38480', '38'),
             (u"SICTOM du Guiers\n27\n avenue Pravaz BP\n\n 66\n38480\n - Pont de Beauvoisin ", '38480', '38'),
+            (u"Mlle DAMAGNEZ Julie, place Victor Pauchet pil daa Marchés Publics 80054 Amiens Cedex 1", '80054', '80'),
+            (u"CS 17569 80054 Amiens CEDEX 158", '80054', '80'),
+            (u"M. Bonnet Roland, Directeur interdépartemental des routes Centre-Ouest, le Pastel 22 rue des Pénitents Blancs Le Pastel 22 rue des Pénitents Blancs 87032 Limoges Cedex", '87032', '87'),
+            (u"Mme del bianco Véronique, Chargée de marché public, service des marchés publics 93130 Noisy-le-Sec", '93130', '93')
         ]
 
     def test_zipcode(self):

@@ -39,7 +39,8 @@ class AddressParser(object):
     """
     address_class = Address
     zipcode_filters_re = [
-        re.compile(r'(BP|B\.P\.|CS|CEDEX)\s*?\d+', flags=re.IGNORECASE)
+        # Use \s before group because of words like "Publics", "Blancs"
+        re.compile(r'\s(BP|B\.P\.|CS|CEDEX)\s*\d*', flags=re.IGNORECASE | re.UNICODE)
     ]
     zipcode_re = re.compile(r'(?P<zipcode>\d{2}\s*?\d{2,3})')
 
