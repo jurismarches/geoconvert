@@ -17,6 +17,9 @@ def get_version():
 
 setup(
     name="Geoconvert",
+    author='Jurismarches',
+    author_email='informatique@jurismarches.com',
     version=get_version(),
+    license='MIT',
     packages=['geoconvert'],
 )
