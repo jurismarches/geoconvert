@@ -1,10 +1,11 @@
-Geoconvert try to convert data like zipcode, address, department name to generic data.
+Geoconvert convert (obvious) data like zipcode, address, department name to generic data.
 
 Installation
 ============
-Install the latest version from Bitbucket
 
-    $ pip install https://bitbucket.org/jurismarches/geoconvert/get/master.tar.gz
+Install the latest version from Github:
+
+    $ pip install https://github.com/jurismarches/geoconvert/archive/master.zip
 
 Examples
 ========
