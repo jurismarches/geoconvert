@@ -76,5 +76,8 @@ class AddressParser(object):
         cleaned_address = self._clean_address(address)
         zipcode = self._parse_zipcode(cleaned_address)
 
-        return address_class(
-            zipcode=zipcode)
+        if zipcode and zipcode.isdigit():
+            return address_class(
+                zipcode=zipcode)
+
+        return None
