@@ -80,4 +80,5 @@ class AddressParser(object):
             return address_class(
                 zipcode=zipcode)
 
-        return None
+        return address_class(
+            zipcode=None)
