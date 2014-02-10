@@ -66,6 +66,8 @@ class GeoconvertTestCase(unittest.TestCase):
             (u'Loire', '42'),
             (u'Corse-du-Sud', '20A'),
             (u'', None),
+            (u'Vendé?e', '85'),
+            (u'Loire Atlanti)que', '44'),
             (u'Yonne', '89'),
             (u'Saint Pierre et Miquelon', '975')]
         for test in data:

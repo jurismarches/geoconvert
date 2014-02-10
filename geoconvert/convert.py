@@ -67,20 +67,26 @@ def address_to_zipcode(text):
     return None
 
 
+# unwanted chars in dept names
+_DEPT_REJECT = re.compile(r"[^\w'-]")
+
+
 def dept_name_to_zipcode(text):
     """
     Return the departement number from the departement name
     """
     if text:
-        try:
-            nom_dep = text.strip(' ').replace(" ", "-").lower().encode('ASCII', 'replace').replace('?', '.')
-        except:
-            nom_dep = text.replace(" ", "-").lower()
+        if not isinstance(text, unicode):
+            text = unicode(text, 'utf-8')
+        # replace spaces for '-'
+        nom_dep = text.strip(' ').replace(" ", "-").lower()
+        # remove accents
+        nom_dep = remove_accents(nom_dep)
+        # remove unwanted chars
+        nom_dep = _DEPT_REJECT.sub('', nom_dep)
+        # match
         for key, value in departments.items():
             if nom_dep == value:
-                return key
-        for key, value in departments.items():
-            if re.search(nom_dep, value):
                 return key
     return None
 
