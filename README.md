@@ -34,3 +34,9 @@ Tests
 =====
 
     python test_geoconvert.py
+
+Releases
+========
+
+To release a new version you must update `__version__` on `geoconvert/__init__.py`
+and tag the master branch with the same version.
