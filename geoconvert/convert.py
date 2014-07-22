@@ -141,11 +141,7 @@ def country_name_to_id(country, lang='FR'):
             countries = countries_fr
         # Normalize string
         country = ' %s ' % re.sub(r'\s+', ' ', remove_accents(country).lower()).strip()
-        try:
-            country_items = countries.iteritems()
-        except AttributeError:
-            country_items = countries.items()
-        for key, value in country_items:
+        for key, value in countries:
             if re.search(r'(\s|[^\w\s])%s(\s|[^\w\s])' % key, country):
                 return value
     return None
