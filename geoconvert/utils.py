@@ -1,5 +1,6 @@
 # -*- coding: utf8 -*-
 import re
+import sys
 import unicodedata
 
 
@@ -11,7 +12,18 @@ def remove_accents(text):
         text = text.decode('utf-8')
     except UnicodeEncodeError:
         pass
-    return unicodedata.normalize('NFKD', unicode(text)).encode('ascii', 'ignore')
+    except AttributeError:
+        pass
+    try:
+        text = unicode(text)
+    except NameError:
+        # unicode module doesn't exist on Python 3.X
+        pass
+    text_normalized = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore')
+    if sys.version_info >= (3,):
+        text_normalized = text_normalized.decode()
+    return text_normalized
+
 
 def safe_string(text):
     u"""
@@ -36,6 +48,7 @@ def safe_string(text):
     text = re.sub(r'\s+', ' ', text.strip())
     text = text.lower().encode('ASCII', 'replace').replace('?', '.')
     return text
+
 
 def reverse_dict(dict_to_reverse):
     """

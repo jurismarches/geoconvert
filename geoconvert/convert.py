@@ -1,15 +1,19 @@
 # -*- coding: utf8 -*-
 import re
-from itertools import ifilter
-from utils import remove_accents
-from utils import safe_string
-from utils import reverse_dict
+from .utils import remove_accents
+from .utils import safe_string
+from .utils import reverse_dict
 
-from data import regions
-from data import departments
-from data import principal_places
-from data import countries_en
-from data import countries_fr
+from .data import regions
+from .data import departments
+from .data import principal_places
+from .data import countries_en
+from .data import countries_fr
+
+try:
+    from itertools import ifilter
+except ImportError:
+    ifilter = filter
 
 
 def zipcode_to_dept_name(zipcode):
@@ -76,8 +80,12 @@ def dept_name_to_zipcode(text):
     Return the departement number from the departement name
     """
     if text:
-        if not isinstance(text, unicode):
-            text = unicode(text, 'utf-8')
+        try:
+            if not isinstance(text, unicode):
+                text = unicode(text, 'utf-8')
+        except NameError:
+            # unicode module doesn't exist on Python 3.X
+            pass
         # replace spaces for '-'
         nom_dep = text.strip(' ').replace(" ", "-").lower()
         # remove accents
@@ -133,7 +141,11 @@ def country_name_to_id(country, lang='FR'):
             countries = countries_fr
         # Normalize string
         country = ' %s ' % re.sub(r'\s+', ' ', remove_accents(country).lower()).strip()
-        for key, value in countries.iteritems():
+        try:
+            country_items = countries.iteritems()
+        except AttributeError:
+            country_items = countries.items()
+        for key, value in country_items:
             if re.search(r'(\s|[^\w\s])%s(\s|[^\w\s])' % key, country):
                 return value
     return None
