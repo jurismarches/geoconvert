@@ -1,5 +1,7 @@
 Geoconvert convert (obvious) data like zipcode, address, department name to generic data.
 
+[![Build Status](https://travis-ci.org/jurismarches/geoconvert.svg?branch=master)](https://travis-ci.org/jurismarches/geoconvert)
+
 Installation
 ============
 
