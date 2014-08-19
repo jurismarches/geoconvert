@@ -121,7 +121,8 @@ class GeoconvertTestCase(unittest.TestCase):
             (u"Knotts Island, NC 27950\n\n27950-0039\nUnited States", 'US'),
             ("721 APS BLDG 3334\nUNIT 3295 \nRamstein Air Base, Non-U.S. 66877 \nGermany ", 'DE'),
             ("Saudi Arabia", 'SA'),
-            ("Country execution:nigeria.", 'NG')]
+            ("Country execution:nigeria.", 'NG'),
+            ("RUSSIA", 'RU')]
         for test in data:
             self.assertEqual(country_name_to_id(test[0], lang='EN'), test[1])
 

@@ -612,6 +612,7 @@ countries_en = [
     ('qatar', 'QA'),
     ('reunion', 'RE'),
     ('romania', 'RO'),
+    ('russia', 'RU'),
     ('russian federation', 'RU'),
     ('rwanda', 'RW'),
     ('saint barthélemy', 'BL'),
