@@ -1,2 +1,2 @@
-__author__ = "Jurismarches <informatique@jurismarches.com>"
-__version__ = "3.0.0"
+__author__ = "Jurismarches <it@jurismarches.com>"
+__version__ = "3.0.1"
