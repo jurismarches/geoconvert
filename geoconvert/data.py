@@ -551,6 +551,8 @@ countries_en = [
     ('kyrgyz republic', 'KG'),
     ('kyrgyzstan', 'KG'),
     ("lao people's democratic republic", 'LA'),
+    ("lao PDR", 'LA'),
+    ("lao", 'LA'),
     ('latvia', 'LV'),
     ('lebanon', 'LB'),
     ('lesotho', 'LS'),
