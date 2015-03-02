@@ -49,7 +49,8 @@ class GeoconvertTestCase(unittest.TestCase):
             ('Avenue des clients CS72152, F - 31020 Toulouse', '31'),
             ('6503 TARBES Cedex 9, tel. 05.62.54.58.63', '06'),
             ('97700 Saint-Barthelemy', '974'),
-            ('a l attention de M. Bon Jean, Avenue des client', None)
+            ('a l attention de M. Bon Jean, Avenue des client', None),
+            ("13 avenue de la porte d'Italie TSA 61371, F - 75621 Paris", '75')
         ]
 
         for test in data:
