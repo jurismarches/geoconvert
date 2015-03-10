@@ -139,9 +139,15 @@ def country_name_to_id(country, lang='FR'):
             countries = countries_en
         else:
             countries = countries_fr
+
+        items_found = []
         # Normalize string
         country = ' %s ' % re.sub(r'\s+', ' ', remove_accents(country).lower()).strip()
         for key, value in countries:
             if re.search(r'(\s|[^\w\s])%s(\s|[^\w\s])' % key, country):
-                return value
+                items_found.append((key, value))
+
+        if items_found:
+            return max(items_found, key=lambda item: len(item[0]))[1]
+
     return None
