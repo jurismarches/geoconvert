@@ -42,7 +42,7 @@ class AddressParser(object):
         # Use \s before group because of words like "Publics", "Blancs"
         re.compile(r'\s(B\.?P\.?|C\.?S\.?|CEDEX)\s*\d*', flags=re.IGNORECASE | re.UNICODE)
     ]
-    zipcode_re = re.compile(r'(?P<zipcode>\d{2}\s*?\d{2,3})')
+    zipcode_re = re.compile(r'(?P<zipcode>(?<!\d)(\d{2}\s*?\d{2,3}|\d{5})(?!\d))')
 
     def _clean_address(self, address):
         """

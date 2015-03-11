@@ -191,6 +191,9 @@ class AddressParserTestCase(unittest.TestCase):
             (u"M. Bonnet Roland, Directeur interdépartemental des routes Centre-Ouest, le Pastel 22 rue des Pénitents Blancs Le Pastel 22 rue des Pénitents Blancs 87032 Limoges Cedex", '87032', '87'),
             (u"Mme del bianco Véronique, Chargée de marché public, service es marchés publics 93130 Noisy-le-Sec", '93130', '93'),
             (u"direction de la Commande Publique, à l'attention de M. le président, 379 rue Hubert Delisle B.P 437 97838 Le Tampon Cedex", '97838', '978'),
+            (u"M. le Directeur, Paris Bâtiment 153 93352 Paris", '93352', '93'),
+            (u"M. le Directeur, Paris Bâtiment 53 93352 Paris", '93352', '93'),
+            (u"M. le Directeur, Paris Bâtiment 3 93352 Paris", '93352', '93')
         ]
 
     def test_zipcode(self):
