@@ -106,6 +106,8 @@ class GeoconvertTestCase(unittest.TestCase):
             ("U.S. Mission Iraq\n\nIraq", 'IQ'),
             ("Pays:France ?".encode('ascii', 'ignore'), 'FR'),
             (",royaume-uni,", 'GB'),
+            (u"trinité-et-Tobago", 'TT'),
+            ("surinam", 'SR'),
             ("PAYS-BRÉSIL", 'BR')]
         for test in data:
             self.assertEqual(country_name_to_id(test[0]), test[1])
