@@ -108,6 +108,12 @@ class GeoconvertTestCase(unittest.TestCase):
             (",royaume-uni,", 'GB'),
             (u"trinité-et-Tobago", 'TT'),
             ("surinam", 'SR'),
+            (u"saint-barthélemy", 'BL'),
+            (u"saint-barthélemy", 'BL'),
+            ('sint maarten', 'SX'),
+            (u'curaçao', 'CW'),
+            ("andorre", 'AD'),
+            ('bonaire, saint-eustache et saba', 'BQ'),
             ("PAYS-BRÉSIL", 'BR')]
         for test in data:
             self.assertEqual(country_name_to_id(test[0]), test[1])
@@ -117,6 +123,7 @@ class GeoconvertTestCase(unittest.TestCase):
             ('Mongolia', 'MN'),
             ('Marocco', 'MA'),
             ('Georgia', 'GE'),
+            ('kosovo', 'KO'),
             ('Namibia', 'NA'),
             ('Venezuela', 'VE'),
             ('Armenia', 'AM'),
@@ -128,6 +135,10 @@ class GeoconvertTestCase(unittest.TestCase):
             ("RUSSIA", 'RU'),
             ("PAPUA NEW GUINEA", 'PG'),
             ("guinea-bissau", 'GW'),
+            ("netherlands antilles", 'AN'),
+            ("netherlands or something", 'NL'),
+            (u'curaçao', 'CW'),
+            (u'saint barthélemy', 'BL'),
             ("united states minor outlying islands", 'UM')]
         for test in data:
             self.assertEqual(country_name_to_id(test[0], lang='EN'), test[1])
