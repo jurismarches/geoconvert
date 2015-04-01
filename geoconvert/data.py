@@ -662,6 +662,7 @@ countries_en = [
     ('syrian arab republic', 'SY'),
     ('taiwan, province of china', 'TW'),
     ('tajikistan', 'TJ'),
+    ('tanzania', 'TZ'),
     ('tanzania, united republic of', 'TZ'),
     ('thailand', 'TH'),
     ('timor-leste', 'TL'),
