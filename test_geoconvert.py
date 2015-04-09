@@ -116,7 +116,9 @@ class GeoconvertTestCase(unittest.TestCase):
             ('bonaire, saint-eustache et saba', 'BQ'),
             ('soudan', 'SD'),
             ('soudan du sud', 'SS'),
-            ("PAYS-BRÉSIL", 'BR')]
+            ("PAYS-BRÉSIL", 'BR'),
+            (u"Lorem ipsum Libye - LIBYE", 'LY')
+        ]
         for test in data:
             self.assertEqual(country_name_to_id(test[0]), test[1])
 
@@ -144,7 +146,9 @@ class GeoconvertTestCase(unittest.TestCase):
             ('Sudan', 'SD'),
             ('South Sudan', 'SS'),
             ('tanzania', 'TZ'),
-            ("united states minor outlying islands", 'UM')]
+            ("united states minor outlying islands", 'UM'),
+            ("Lorem ipsum Libya - LIBYA", 'LY')
+        ]
         for test in data:
             self.assertEqual(country_name_to_id(test[0], lang='EN'), test[1])
 
