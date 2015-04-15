@@ -32,7 +32,7 @@ class GeoconvertTestCase(unittest.TestCase):
             ('BP 55342 20223   Solenzara Air', '20A'),
             ('Chemin du Solarium Le Haut Vigneau 33 175 GRADIGNAN CEDEX', '33'),
             ('20 223   Solenzara Air', '20A'),
-            ('97821 Le Port Cedex', '971'),
+            ('97821 Le Port Cedex', '974'),
             ('27006 Évreux Cedex', '27'),
             ('  27006 Évreux Cedex', '27'),
             ('27006', '27'),
@@ -48,9 +48,12 @@ class GeoconvertTestCase(unittest.TestCase):
             ('Avenue des clients CS 72152, F - 31020 Toulouse', '31'),
             ('Avenue des clients CS72152, F - 31020 Toulouse', '31'),
             ('6503 TARBES Cedex 9, tel. 05.62.54.58.63', '06'),
-            ('97700 Saint-Barthelemy', '974'),
+            ('97701 Saint-Barthelemy', '971'),
+            ('97098 Saint-Barthelemy', '971'),
             ('a l attention de M. Bon Jean, Avenue des client', None),
-            ("13 avenue de la porte d'Italie TSA 61371, F - 75621 Paris", '75')
+            ("13 avenue de la porte d'Italie TSA 61371, F - 75621 Paris", '75'),
+            ("avenue René Cassin — BP 67190 97801 Saint-Denis Cedex 9", '974'),
+            ("M. le maire, hôtel de Ville 97717 Saint-Denis", '974')
         ]
 
         for test in data:

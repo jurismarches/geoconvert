@@ -47,12 +47,21 @@ def address_to_zipcode(text):
         if zipcode_match:
             zipcode = zipcode_match.group('zipcode').replace(' ', '').zfill(5)
 
-            # Jurismarches custom world
             if zipcode[:3] == '978':
-                return '971'
-
-            elif zipcode[:3] == '977':  # Refs #1092
+                # Reunion uses 978 sometimes instead of 974
                 return '974'
+
+            elif zipcode[:3] == '977':
+                # Merge St Berthelemy 97701 in Guadeloupe
+                if zipcode == '97701':
+                    return '971'
+
+                # Otherwise, Reunion uses 977 sometimes instead of 974
+                return '974'
+
+            elif zipcode == '97098':
+                # Merge St Berthelemy 97098 in Guadeloupe
+                return '971'
 
             # Corse
             elif zipcode[:2] == '20':
