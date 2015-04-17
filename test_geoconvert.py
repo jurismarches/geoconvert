@@ -106,6 +106,7 @@ class GeoconvertTestCase(unittest.TestCase):
             (u" Le  nigéria c'est trop   sympa", 'NG'),
             (u"Pays d'exécution : Niger", 'NE'),
             ("  Côte d'Ivoire ", 'CI'),
+            ("  Côte d’Ivoire ", 'CI'),  # with accent for apostrophe
             ("U.S. Mission Iraq\n\nIraq", 'IQ'),
             ("Pays:France ?".encode('ascii', 'ignore'), 'FR'),
             (",royaume-uni,", 'GB'),
