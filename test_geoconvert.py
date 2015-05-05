@@ -218,7 +218,8 @@ class AddressParserTestCase(unittest.TestCase):
             (u"direction de la Commande Publique, à l'attention de M. le président, 379 rue Hubert Delisle B.P 437 97838 Le Tampon Cedex", '97838', '978'),
             (u"M. le Directeur, Paris Bâtiment 153 93352 Paris", '93352', '93'),
             (u"M. le Directeur, Paris Bâtiment 53 93352 Paris", '93352', '93'),
-            (u"M. le Directeur, Paris Bâtiment 3 93352 Paris", '93352', '93')
+            (u"M. le Directeur, Paris Bâtiment 3 93352 Paris", '93352', '93'),
+            (u"Adresse : CS 72055 56002 Vannes", '56002', '56')
         ]
 
     def test_zipcode(self):

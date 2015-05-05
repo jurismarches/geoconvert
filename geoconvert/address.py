@@ -11,6 +11,8 @@ class Address(object):
 
         if zipcode is not None:
             self.zipcode_int = int(zipcode)
+        else:
+            self.zipcode_int = None
 
     def get_department(self):
         """
@@ -39,8 +41,9 @@ class AddressParser(object):
     """
     address_class = Address
     zipcode_filters_re = [
-        # Use \s before group because of words like "Publics", "Blancs"
-        re.compile(r'\s(B\.?P\.?|C\.?S\.?|CEDEX)\s*\d*', flags=re.IGNORECASE | re.UNICODE)
+        # Removes BP CS and CEDEX
+        # Use \b before group because of words like "Publics", "Blancs"
+        re.compile(r'\b(B\.?P\.?|C\.?S\.?|CEDEX)\s*\d*', flags=re.I | re.U),
     ]
     zipcode_re = re.compile(r'(?P<zipcode>(?<!\d)(\d{2}\s*?\d{2,3}|\d{5})(?!\d))')
 
