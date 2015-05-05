@@ -19,6 +19,7 @@ def remove_accents(text):
     except NameError:
         # unicode module doesn't exist on Python 3.X
         pass
+    text = text.replace(u"’", u"'")  # accent used as apostrophe
     text_normalized = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore')
     if sys.version_info >= (3,):
         text_normalized = text_normalized.decode()

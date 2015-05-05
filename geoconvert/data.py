@@ -228,6 +228,8 @@ countries_fr = [
     ('cocos (keeling)', 'CC'),
     ('colombie', 'CO'),
     ('comores', 'KM'),
+    ('rdc', 'CD'),
+    ('rd congo', 'CD'),
     ('republique democratique du congo', 'CD'),
     ('congo', 'CG'),
     ('cook', 'CK'),
@@ -487,6 +489,8 @@ countries_en = [
     ('cocos (keeling) islands', 'CC'),
     ('colombia', 'CO'),
     ('comoros', 'KM'),
+    ('rdc', 'CD'),
+    ('rd congo', 'CD'),
     ('congo, the democratic republic of the', 'CD'),
     ('congo', 'CG'),
     ('cook islands', 'CK'),
@@ -698,3 +702,17 @@ countries_en = [
     ('zimbabwe', 'ZW'),
     ('aland islands', 'AX'),
 ]
+
+
+"""An association from country to other country depending (in some way) on them
+"""
+country_territories = {
+    'NO': frozenset(['BV', 'SJ']),
+    'NZ': frozenset(['TK']),
+    'NL': frozenset(['SX', 'BQ', 'CW']),
+    'UK': frozenset(['SH', 'FK', 'GS', 'IO']),
+    'US': frozenset(['UM']),
+    'FR': frozenset(['RE', 'TF', 'BL', 'YT', 'WF', 'NC', 'PF', 'PM', 'MQ', 'GF', 'MF', 'GP'])}
+"""country_territories reciprocal"""
+territory_to_country = dict(
+    (t, c) for c, territories in country_territories.items() for t in territories)
