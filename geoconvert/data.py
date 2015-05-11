@@ -491,6 +491,7 @@ countries_en = [
     ('comoros', 'KM'),
     ('rdc', 'CD'),
     ('rd congo', 'CD'),
+    ('democratic republic of congo', 'CD'),
     ('congo, the democratic republic of the', 'CD'),
     ('congo', 'CG'),
     ('cook islands', 'CK'),
