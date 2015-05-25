@@ -151,7 +151,8 @@ class GeoconvertTestCase(unittest.TestCase):
             ('South Sudan', 'SS'),
             ('tanzania', 'TZ'),
             ("united states minor outlying islands", 'UM'),
-            ("Lorem ipsum Libya - LIBYA", 'LY')
+            ("Lorem ipsum Libya - LIBYA", 'LY'),
+            (' Democratic Republic of the Congo', 'CD'),
         ]
         for test in data:
             self.assertEqual(country_name_to_id(test[0], lang='EN'), test[1])
