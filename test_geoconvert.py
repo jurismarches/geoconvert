@@ -154,6 +154,8 @@ class GeoconvertTestCase(unittest.TestCase):
             ("united states minor outlying islands", 'UM'),
             ("Lorem ipsum Libya - LIBYA", 'LY'),
             (' Democratic Republic of the Congo', 'CD'),
+            ('CONGO, DEM. REPUBLIC', 'CD'),
+            ('TIMOR LESTE', 'TL'),
             ('state of palestine', 'PS'),
             ('palestine, state of', 'PS')
         ]
