@@ -43,7 +43,7 @@ def address_to_zipcode(text):
     """
 
     for line in text.splitlines():
-        zipcode_match = re.search(r"(?<!TSA)(?<!BP)(?<!B.P.)(?<!CS)(?:[^\d]|^)(?<!TSA)(?<!BP)(?<!B.P.)(?<!CS)(?P<zipcode>\d{2}\s?\d{3}|0?[1-9]\s?\d{3})\s*([^\d\s]|$)", line, re.IGNORECASE)
+        zipcode_match = re.search(r"(?<!TSA)(?<!BP)(?<!B.P.)(?<!CS)(?:[^\d]|^)(?<!TSA)(?<!BP)(?<!B.P.)(?<!CS)(?P<zipcode>\d{2}\s?\d{3})\s*([^\d\s]|$)", line, re.IGNORECASE)
         if zipcode_match:
             zipcode = zipcode_match.group('zipcode').replace(' ', '').zfill(5)
 
