@@ -500,6 +500,7 @@ countries_en = [
     ('democratic republic of the congo', 'CD'),
     ('congo, the democratic republic of the', 'CD'),
     ('congo, dem. republic', 'CD'),
+    ('congo, democratic republic of', 'CD'),
     ('congo', 'CG'),
     ('cook islands', 'CK'),
     ('costa rica', 'CR'),
