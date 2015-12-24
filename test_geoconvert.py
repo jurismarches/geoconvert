@@ -166,7 +166,7 @@ class GeoconvertTestCase(unittest.TestCase):
     def test_capital_name_to_country_id(self):
         data = [
             ('Bishkek', 'KG'),
-            ('lom\xc3\xa9', 'TG')
+            (u'lomé', 'TG')
         ]
         for test in data:
             self.assertEqual(
