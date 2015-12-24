@@ -9,6 +9,7 @@ from geoconvert.convert import zipcode_to_dept_name
 from geoconvert.convert import address_to_zipcode
 from geoconvert.convert import dept_name_to_zipcode
 from geoconvert.convert import country_name_to_id
+from geoconvert.convert import capital_name_to_country_id
 from geoconvert.address import AddressParser
 
 
@@ -161,6 +162,15 @@ class GeoconvertTestCase(unittest.TestCase):
         ]
         for test in data:
             self.assertEqual(country_name_to_id(test[0], lang='EN'), test[1])
+
+    def test_capital_name_to_country_id(self):
+        data = [
+            ('Bishkek', 'KG'),
+            ('lom\xc3\xa9', 'TG')
+        ]
+        for test in data:
+            self.assertEqual(
+                capital_name_to_country_id(test[0], lang='EN'), test[1])
 
 
 class AddressParserTestCase(unittest.TestCase):

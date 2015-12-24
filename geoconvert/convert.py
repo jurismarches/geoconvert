@@ -9,6 +9,8 @@ from .data import departments
 from .data import principal_places
 from .data import countries_en
 from .data import countries_fr
+from .data import capitals_en
+from .data import capitals_fr
 
 try:
     from itertools import ifilter
@@ -154,6 +156,29 @@ def country_name_to_id(country, lang='FR'):
         country = ' %s ' % re.sub(r'\s+', ' ', remove_accents(country).lower()).strip()
         for key, value in countries:
             if re.search(r'(\s|[^\w\s])%s(\s|[^\w\s])' % key, country):
+                items_found.append((key, value))
+
+        if items_found:
+            return max(items_found, key=lambda item: len(item[0]))[1]
+
+    return None
+
+
+def capital_name_to_country_id(capital, lang='FR'):
+    """
+    Get capital name and return corresponding country code.
+    """
+    if capital:
+        if lang == 'EN':
+            capitals = capitals_en
+        else:
+            capitals = capitals_fr
+
+        items_found = []
+        # Normalize string
+        capital = ' %s ' % re.sub(r'\s+', ' ', remove_accents(capital).lower()).strip()
+        for key, value in capitals:
+            if re.search(r'(\s|[^\w\s])%s(\s|[^\w\s])' % key, capital):
                 items_found.append((key, value))
 
         if items_found:
