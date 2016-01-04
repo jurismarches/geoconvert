@@ -1,33 +1,42 @@
 # -*- coding: utf8 -*-
 
 regions = {
-    "42": "alsace",
-    "72": "aquitaine",
-    "83": "auvergne",
-    "26": "bourgogne",
+    "42": "alsace",                         # old region (pre 2016)
+    "72": "aquitaine",                      # old region (pre 2016)
+    "83": "auvergne",                       # old region (pre 2016)
+    "26": "bourgogne",                      # old region (pre 2016)
     "53": "bretagne",
     "24": "centre",
-    "21": "champagne ardenne",
+    "21": "champagne ardenne",              # old region (pre 2016)
     "94": "corse",
-    "43": "franche comte",
+    "43": "franche comte",                  # old region (pre 2016)
     "01": "guadeloupe",
     "03": "guyane",
     "11": "ile de france",
-    "91": "languedoc roussillon",
-    "74": "limousin",
-    "41": "lorraine",
+    "91": "languedoc roussillon",           # old region (pre 2016)
+    "74": "limousin",                       # old region (pre 2016)
+    "41": "lorraine",                       # old region (pre 2016)
     "02": "martinique",
     "06": "mayotte",
-    "73": "midi pyrenees",
-    "31": "nord pas de calais",
-    "25": "basse normandie",
-    "23": "haute normandie",
+    "73": "midi pyrenees",                  # old region (pre 2016)
+    "31": "nord pas de calais",             # old region (pre 2016)
+    "25": "basse normandie",                # old region (pre 2016)
+    "23": "haute normandie",                # old region (pre 2016)
     "52": "pays de la loire",
-    "22": "picardie",
-    "54": "poitou charentes",
+    "22": "picardie",                       # old region (pre 2016)
+    "54": "poitou charentes",               # old region (pre 2016)
     "93": "provence alpes cote d'azur",
     "04": "reunion",
-    "82": "rhone alpes"
+    "82": "rhone alpes",                    # old region (pre 2016)
+    # New regions (2016)
+    "44": "alsace champagne ardenne lorraine",      # chef lieu: strasbourg
+    "75": "aquitaine limousin poitou charentes",    # chef lieu: Bordeaux
+    "84": "auvergne rhône alpes",                   # chef lieu: Lyon
+    "27": "bourgogne franche comté",                # chef lieu: Dijon
+    "76": "languedoc roussillon midi pyrénées",     # chef lieu: Toulouse
+    "32": "nord pas de calais picardie",            # chef lieu: Lille
+    "28": "normandie",                              # chef lieu: Normandie
+    "24": "centre val de loire", # renamed, so duplicates centre
 }
 
 # Region ID => Dept chef lieu id, (List of region"s dept)
@@ -58,7 +67,22 @@ principal_places = {
     "54": ("86", ["16", "17", "79", "86"]),
     "93": ("13", ["04", "05", "06", "13", "83", "84"]),
     "04": ("974", ["974"]),
-    "82": ("69", ["01", "07", "26", "38", "42", "69", "73", "74"])
+    "82": ("69", ["01", "07", "26", "38", "42", "69", "73", "74"]),
+    # New regions (2016)
+    "44": # merges 41, 42, 21
+        ("67", ["67", "68", "54", "55", "57", "88", "08", "10", "51", "52"]),
+    "75": # merges 72, 54, 74
+        ("33", ["24", "33", "40", "47", "64", "19", "23", "87", "16", "17", "79", "86"]),
+    "84": # merges 82, 83
+        ("69", ["03", "15", "43", "63", "01", "07", "26", "38", "42", "69", "73", "74"]),
+    "27": # merges 26, 43
+        ("21", ["21", "58", "71", "89", "25", "39", "70", "90"]),
+    "76": # merges 73, 91
+        ("31", ["11", "30", "34", "48", "66", "09", "12", "31", "32", "46", "65", "81", "82"]),
+    "32": # merges 31, 22
+        ("59", ["59", "62", "02", "60", "80"]),
+    "28": # merges 23, 25
+        ("76", ["27", "76", "14", "50", "61"]),
 }
 
 departments = {
