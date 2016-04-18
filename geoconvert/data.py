@@ -630,6 +630,7 @@ countries_en = [
     ('palestinian territory, occupied', 'PS'),
     ('state of palestine', 'PS'),
     ('palestine, state of', 'PS'),
+    ('palestinian territories', 'PS'),
     ('panama', 'PA'),
     ('papua new guinea', 'PG'),
     ('paraguay', 'PY'),
