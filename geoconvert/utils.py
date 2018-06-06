@@ -3,6 +3,10 @@ import re
 import sys
 import unicodedata
 
+python3 = False
+if re.search(r'^(\d)', sys.version).group(1) == '3':
+    python3 = True
+
 
 def remove_accents(text):
     """
@@ -42,29 +46,20 @@ def safe_string(text):
     """
     try:
         text = text.decode('utf-8')
-    except UnicodeEncodeError:
+    except (UnicodeEncodeError, AttributeError):
         pass
     text = remove_accents(text)
     text = text.replace('-', ' ')
     text = re.sub(r'\s+', ' ', text.strip())
-    text = text.lower().encode('ASCII', 'replace').replace('?', '.')
+    if python3:
+        text = text.lower().replace('?', '.')
+    else:
+        text = text.lower().encode('ASCII', 'replace').replace('?', '.')
     return text
 
 
 def reverse_dict(dict_to_reverse):
-    """
-    Reverse a dict
-    >>> reverse_dict({'key': 'value'})
-    {'value': 'key'}
-    >>> reverse_dict({'key1': 'value1', 'key2': 'value2'})
-    {'value2': 'key2', 'value1': 'key1'}
-    """
     reversed_dict = {}
     for key, value in dict_to_reverse.items():
         reversed_dict[value] = key
     return reversed_dict
-
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()

@@ -11,7 +11,7 @@ from geoconvert.convert import dept_name_to_zipcode
 from geoconvert.convert import country_name_to_id
 from geoconvert.convert import capital_name_to_country_id
 from geoconvert.address import AddressParser
-
+from geoconvert.utils import reverse_dict
 
 class GeoconvertTestCase(unittest.TestCase):
     def test_zipcode_to_dept_name(self):
@@ -256,5 +256,17 @@ class AddressParserTestCase(unittest.TestCase):
             self.assertEqual(address.get_department(), dept_number)
 
 
-if __name__ == '__main__':
-    unittest.main()
+class TestsUtils(unittest.TestCase):
+    def test_reverse_dict(self):
+        self.assertEqual(
+            reverse_dict({'key': 'value'}),
+            {'value': 'key'}
+        )
+        self.assertEqual(
+            reverse_dict({'key1': 'value1', 'key2': 'value2'})['value1'],
+            'key1'
+        )
+        self.assertEqual(
+            reverse_dict({'key1': 'value1', 'key2': 'value2'})['value2'],
+            'key2'
+        )
