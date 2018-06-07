@@ -8,6 +8,7 @@ python:
 
 install:
   - pip install -r requirements_test.txt
+  - pip install codecov
 
 script:
   - pytest
