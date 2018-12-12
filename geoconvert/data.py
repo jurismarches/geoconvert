@@ -28,15 +28,15 @@ regions = {
     "93": "provence alpes cote d'azur",
     "04": "reunion",
     "82": "rhone alpes",                    # old region (pre 2016)
-    # New regions (2016)
-    "44": "alsace champagne ardenne lorraine",      # chef lieu: strasbourg
-    "75": "aquitaine limousin poitou charentes",    # chef lieu: Bordeaux
-    "84": "auvergne rhône alpes",                   # chef lieu: Lyon
-    "27": "bourgogne franche comté",                # chef lieu: Dijon
-    "76": "languedoc roussillon midi pyrénées",     # chef lieu: Toulouse
-    "32": "nord pas de calais picardie",            # chef lieu: Lille
-    "28": "normandie",                              # chef lieu: Normandie
-    "24": "centre val de loire", # renamed, so duplicates centre
+    # New regions (2018)
+    "84": "auvergne rhone alpes",                   # chef lieu: Lyon
+    "27": "bourgogne franche comte",                # chef lieu: Dijon
+    "24": "centre val de loire",                    # chef lieu: Orleans
+    "44": "grand est",                              # chef lieu: strasbourg
+    "32": "hauts de france",                        # chef lieu: Lille
+    "75": "nouvelle aquitaine",                     # chef lieu: Bordeaux
+    "76": "occitanie",                              # chef lieu: Toulouse
+    "28": "normandie",                              # chef lieu: Rouen
 }
 
 # Region ID => Dept chef lieu id, (List of region"s dept)
@@ -83,6 +83,8 @@ principal_places = {
         ("59", ["59", "62", "02", "60", "80"]),
     "28": # merges 23, 25
         ("76", ["27", "76", "14", "50", "61"]),
+    "24":
+        ("45", ["45", "18", "28", "36", "37", "41"]),
 }
 
 departments = {
