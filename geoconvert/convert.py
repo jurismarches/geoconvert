@@ -122,11 +122,15 @@ def region_name_to_id(region_name):
         region_name = safe_string(region_name)
 
         try:
-            region_name = ' %s ' % re.sub(r'\s+', ' ', remove_accents(region_name).lower()).strip()
-            search = re.search(r'(\s|[^\w\s])(%s)(\s|[^\w\s])' % '|'.join([key for key, value in regions_reversed.items()]), region_name)
-            if search:
-                region_name = search.group(2)
-                return regions_reversed[region_name]
+            items_found = []
+
+            region = ' %s ' % re.sub(r'\s+', ' ', remove_accents(region_name).lower()).strip()
+            for key, value in regions_reversed.items():
+                if re.search(r'(\s|[^\w\s])%s(\s|[^\w\s])' % key, region):
+                    items_found.append((key, value))
+
+            if items_found:
+                return max(items_found, key=lambda item: len(item[0]))[1]
 
             return None
         except KeyError:
