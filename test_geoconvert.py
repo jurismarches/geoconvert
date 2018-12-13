@@ -100,6 +100,7 @@ class GeoconvertTestCase(unittest.TestCase):
             (u'VICE-RECTORAT DE MAYOTTE ( DCS)', '06'),
             ]
         for test in data:
+            print(region_name_to_id(test[0]))
             self.assertEqual(region_name_to_id(test[0]), test[1])
 
     def test_region_info_from_id(self):
