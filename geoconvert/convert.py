@@ -120,8 +120,19 @@ def region_name_to_id(region_name):
     if region_name:
         regions_reversed = reverse_dict(regions)
         region_name = safe_string(region_name)
+
         try:
-            return regions_reversed[region_name]
+            items_found = []
+
+            region = ' %s ' % re.sub(r'\s+', ' ', remove_accents(region_name).lower()).strip()
+            for key, value in regions_reversed.items():
+                if re.search(r'(\s|[^\w\s])%s(\s|[^\w\s])' % key, region):
+                    items_found.append((key, value))
+
+            if items_found:
+                return max(items_found, key=lambda item: len(item[0]))[1]
+
+            return None
         except KeyError:
             pass
     return None

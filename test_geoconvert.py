@@ -9,6 +9,7 @@ from geoconvert.convert import zipcode_to_dept_name
 from geoconvert.convert import address_to_zipcode
 from geoconvert.convert import dept_name_to_zipcode
 from geoconvert.convert import country_name_to_id
+from geoconvert.convert import region_name_to_id
 from geoconvert.convert import capital_name_to_country_id
 from geoconvert.address import AddressParser
 from geoconvert.utils import reverse_dict
@@ -74,7 +75,8 @@ class GeoconvertTestCase(unittest.TestCase):
             (u'Vendé?e', '85'),
             (u'Loire Atlanti)que', '44'),
             (u'Yonne', '89'),
-            (u'Saint Pierre et Miquelon', '975')]
+            (u'Saint Pierre et Miquelon', '975'),
+            ]
         for test in data:
             self.assertEqual(dept_name_to_zipcode(test[0]), test[1])
 
@@ -82,7 +84,23 @@ class GeoconvertTestCase(unittest.TestCase):
         pass
 
     def test_region_name_to_id(self):
-        pass
+        data = [
+            ('bourgogne franche comté', '27'),
+            ("midi pyrénées", '73'),
+            ("grand est", '44'),
+            (u'mayotte ', '06'),
+            (u'Centre val de Loire', '24'),
+            (u'Picardie ', '22'),
+            (u'provence alpes côte d\'azur', '93'),
+            (u'', None),
+            (u'hauts de france', '32'),
+            (u'auvergne rhône alpes', '84'),
+            (u'nouvelle aquitaine', '75'),
+            (u'La guadeloupe, une superbe région', '01'),
+            (u'VICE-RECTORAT DE MAYOTTE ( DCS)', '06'),
+            ]
+        for test in data:
+            self.assertEqual(region_name_to_id(test[0]), test[1])
 
     def test_region_info_from_id(self):
         pass
