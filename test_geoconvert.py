@@ -94,7 +94,10 @@ class GeoconvertTestCase(unittest.TestCase):
             (u'provence alpes côte d\'azur', '93'),
             (u'', None),
             (u'hauts de france', '32'),
-            (u'auvergne rhône alpes', '84')
+            (u'auvergne rhône alpes', '84'),
+            (u'nouvelle aquitaine', '75'),
+            (u'La guadeloupe, une superbe région', '01'),
+            (u'VICE-RECTORAT DE MAYOTTE ( DCS)', '06'),
             ]
         for test in data:
             self.assertEqual(region_name_to_id(test[0]), test[1])
