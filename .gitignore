@@ -9,3 +9,5 @@ virtualenv
 
 .coverage
 .pytest*
+*env*
+.vscode
