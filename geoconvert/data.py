@@ -511,6 +511,7 @@ countries_en = [
     ('curacao', 'CW'),
     ('cyprus', 'CY'),
     ('czech republic', 'CZ'),
+    ('czechia', 'CZ'),
     ('denmark', 'DK'),
     ('djibouti', 'DJ'),
     ('dominica', 'DM'),
