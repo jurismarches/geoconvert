@@ -142,7 +142,9 @@ class GeoconvertTestCase(unittest.TestCase):
             ('soudan du sud', 'SS'),
             ("PAYS-BRÉSIL", 'BR'),
             (u"Lorem ipsum Libye - LIBYE", 'LY'),
-            ("palestine", 'PS')
+            ("palestine", 'PS'),
+            ("Congo (Brazzaville)", 'CG'),
+            ("Congo (Kinshasa)", 'CD'),
         ]
         for test in data:
             self.assertEqual(country_name_to_id(test[0]), test[1])
