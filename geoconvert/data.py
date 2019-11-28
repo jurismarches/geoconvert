@@ -715,6 +715,7 @@ countries_en = [
     ("swaziland", "SZ"),
     ("sweden", "SE"),
     ("switzerland", "CH"),
+    ("swiss", "CH"),
     ("syria", "SY"),
     ("syrian arab republic", "SY"),
     ("taiwan", "TW"),
