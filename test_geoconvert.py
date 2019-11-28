@@ -210,18 +210,18 @@ class GeoconvertTestCase(unittest.TestCase):
 
     def test_capital_name_to_country_id_fr(self):
         data = [
-            ('Bishkek', 'KG'),
-            (u'lomé', 'TG')
+            ('bruxelles', 'BE'),
+            (u'La ville est Lomé.', 'TG')
         ]
         for test in data:
             self.assertEqual(
-                capital_name_to_country_id(test[0], lang='EN'), test[1])
+                capital_name_to_country_id(test[0], lang='FR'), test[1])
 
     def test_capital_name_to_country_id_en(self):
         data = [
             ('Copenhagen', 'DK'),
             ("bern", "CH"),
-            ("address is ulaanbaatar", "MN")
+            ("The city is ulaanbaatar.", "MN")
         ]
         for test in data:
             self.assertEqual(
