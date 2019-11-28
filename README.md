@@ -60,7 +60,7 @@ Tests
 =====
 
 ```python
-    python test_geoconvert.py
+    python -m unittest test_geoconvert.py
 ```
 
 Releases
