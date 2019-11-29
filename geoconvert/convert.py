@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 import re
 from .utils import remove_accents
 from .utils import safe_string
@@ -9,8 +9,10 @@ from .data import departments
 from .data import principal_places
 from .data import countries_en
 from .data import countries_fr
+from .data import countries_de
 from .data import capitals_en
 from .data import capitals_fr
+from .data import capitals_de
 
 try:
     from itertools import ifilter
@@ -159,6 +161,8 @@ def country_name_to_id(country, lang='FR'):
     if country:
         if lang == 'EN':
             countries = countries_en
+        elif lang == "DE":
+            countries = countries_de
         else:
             countries = countries_fr
 
@@ -182,6 +186,8 @@ def capital_name_to_country_id(capital, lang='FR'):
     if capital:
         if lang == 'EN':
             capitals = capitals_en
+        elif lang == 'DE':
+            capitals = capitals_de
         else:
             capitals = capitals_fr
 
