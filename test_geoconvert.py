@@ -184,14 +184,58 @@ class GeoconvertTestCase(unittest.TestCase):
         for test in data:
             self.assertEqual(country_name_to_id(test[0], lang='EN'), test[1])
 
-    def test_capital_name_to_country_id(self):
+    def test_country_name_to_id_de(self):
         data = [
-            ('Bishkek', 'KG'),
-            (u'lomé', 'TG')
+            ("Dänemark", "DK"),
+            ("weißrussland", "BY"),
+            ("Demokratische Republik Kongo", "CD"),
+            ("korea, süd", "KR"),
+            ("libanon", "LB"),
+            ("são tomé und príncipe", "ST"),
+            ("schweden", "SE"),
+            ("schweiz", "CH"),
+            ("st. vincent und die grenadinen", "VC"),
+            ("Korea, Nord", "KP"),
+            ("Lorem Ipsum, Bundesstaat Kanada ", "CA"),
+            ("   Palästina      ", "PS"),
+            ("Bundesstaat, der Palastina", "PS"),
+            ("frankreich einstaten", "FR"),
+            ("DOMINICA!!", "DM"),
+            (u"   Land der Hinrichtung : Deutschland", "DE"),
+            ("Dschibuti-Stadt", "DJ"),
+            ("elfenbeinküste und ecuador    ", "CI")
+        ]
+        for test in data:
+            self.assertEqual(country_name_to_id(test[0], lang='DE'), test[1])
+
+    def test_capital_name_to_country_id_fr(self):
+        data = [
+            ('bruxelles', 'BE'),
+            (u'La ville est Lomé.', 'TG')
+        ]
+        for test in data:
+            self.assertEqual(
+                capital_name_to_country_id(test[0], lang='FR'), test[1])
+
+    def test_capital_name_to_country_id_en(self):
+        data = [
+            ('Copenhagen', 'DK'),
+            ("bern", "CH"),
+            ("The city is ulaanbaatar.", "MN")
         ]
         for test in data:
             self.assertEqual(
                 capital_name_to_country_id(test[0], lang='EN'), test[1])
+
+    def test_capital_name_to_country_id_de(self):
+        data = [
+            ('Kopenhagen', 'DK'),
+            (u'são tomé', 'ST'),
+            ("Das stadt ist Ulaanbaatar.", "MN"),
+        ]
+        for test in data:
+            self.assertEqual(
+                capital_name_to_country_id(test[0], lang='DE'), test[1])
 
 
 class AddressParserTestCase(unittest.TestCase):
