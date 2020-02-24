@@ -45,7 +45,10 @@ class AddressParser(object):
         # Use \b before group because of words like "Publics", "Blancs"
         re.compile(r'\b(B\.?P\.?|C\.?S\.?|CEDEX)\s*\d*', flags=re.I | re.U),
     ]
-    zipcode_re = re.compile(r'(?P<zipcode>(?<!\d)(\d{2}\s*?\d{2,3}|\d{5})(?!\d))')
+    zipcode_re = re.compile(
+        r'(?P<zipcode>(?<!\d)(\d{2}\s*?\d{2,3}|\d{5})(?!\d))'  # Full zipcode
+    )
+    dept_code_re = re.compile(r'\((?P<zipcode>\d{2,3})\)')  # Only dept code
 
     def _clean_address(self, address):
         """
@@ -59,11 +62,17 @@ class AddressParser(object):
         """
         Tries to extract zipcode from address
         """
+        # Catch a full zipcode first.
         match_list = list(self.zipcode_re.finditer(address))
-
-        # It's easier to parse zipcode from the end of the string
+        # It's easier to parse zipcode from the end of the string.
         if match_list:
             return match_list[-1].group('zipcode').replace(' ', '').zfill(5)
+
+        # Catch only dept code second.
+        match_list = list(self.dept_code_re.finditer(address))
+        if match_list:
+            # The zipcode is filled with zeros on the right.
+            return match_list[-1].group('zipcode').ljust(5, "0")
 
     def get_address_class(self):
         """

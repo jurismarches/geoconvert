@@ -14,6 +14,7 @@ from geoconvert.convert import capital_name_to_country_id
 from geoconvert.address import AddressParser
 from geoconvert.utils import reverse_dict
 
+
 class GeoconvertTestCase(unittest.TestCase):
     def test_zipcode_to_dept_name(self):
         self.assertEqual(zipcode_to_dept_name('121'), None)
@@ -301,7 +302,11 @@ class AddressParserTestCase(unittest.TestCase):
             (u"M. le Directeur, Paris Bâtiment 153 93352 Paris", '93352', '93'),
             (u"M. le Directeur, Paris Bâtiment 53 93352 Paris", '93352', '93'),
             (u"M. le Directeur, Paris Bâtiment 3 93352 Paris", '93352', '93'),
-            (u"Adresse : CS 72055 56002 Vannes", '56002', '56')
+            (u"Adresse : CS 72055 56002 Vannes", '56002', '56'),
+            (u"Orléans (45)", "45000", "45"),
+            (u"Orléans (45000)", "45000", "45"),
+            (u"Bourg-en-Bresse (01)", "01000", "01"),
+            (u"Bourg-en-Bresse (1)", None, None),
         ]
 
     def test_zipcode(self):
