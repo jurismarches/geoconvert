@@ -1,6 +1,6 @@
 Geoconvert convert (obvious) data like zipcode, address, department name to generic data.
 
-Support Python 2.6, 2.7, 3.3 and 3.4.
+Support Python 2.7, 3.6, 3.7 and 3.8.
 
 [![Build Status](https://travis-ci.org/jurismarches/geoconvert.svg?branch=master)](https://travis-ci.org/jurismarches/geoconvert)
 
