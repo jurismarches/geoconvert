@@ -5,6 +5,8 @@
 
 import unittest
 
+import pytest
+
 from geoconvert.convert import zipcode_to_dept_name
 from geoconvert.convert import address_to_zipcode
 from geoconvert.convert import dept_name_to_zipcode
@@ -15,16 +17,10 @@ from geoconvert.address import AddressParser
 from geoconvert.utils import reverse_dict
 
 
-class GeoconvertTestCase(unittest.TestCase):
-    def test_zipcode_to_dept_name(self):
-        self.assertEqual(zipcode_to_dept_name('121'), None)
-        self.assertEqual(zipcode_to_dept_name('44000'), 'loire-atlantique')
-        self.assertEqual(zipcode_to_dept_name('2a'), 'corse-du-sud')
-        self.assertEqual(zipcode_to_dept_name('2A'), 'corse-du-sud')
-        self.assertEqual(zipcode_to_dept_name('20A'), 'corse-du-sud')
-
-    def test_address_to_zipcode(self):
-        data = [
+class TestGeoconvert:
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
             (u"Chemin du Solarium\\n Le Haut Vigneau\\n 33175 GRADIGNAN CEDEX", '33'),
             ("Chemin du Solarium 061256784589 Le Haut Vigneau 33175 GRADIGNAN CEDEX ", '33'),
             ("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX 061256784589", '33'),
@@ -56,14 +52,28 @@ class GeoconvertTestCase(unittest.TestCase):
             ('a l attention de M. Bon Jean, Avenue des client', None),
             ("13 avenue de la porte d'Italie TSA 61371, F - 75621 Paris", '75'),
             ("avenue René Cassin — BP 67190 97801 Saint-Denis Cedex 9", '974'),
-            ("M. le maire, hôtel de Ville 97717 Saint-Denis", '974')
-        ]
+            ("M. le maire, hôtel de Ville 97717 Saint-Denis", '974'),
+        ],
+    )
+    def test_address_to_zipcode(self, input_data, expected):
+        assert address_to_zipcode(input_data) == expected
 
-        for test in data:
-            self.assertEqual(address_to_zipcode(test[0]), test[1])
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
+            ("121", None),
+            ("44000", "loire-atlantique"),
+            ("2a", "corse-du-sud"),
+            ("2A", "corse-du-sud"),
+            ("20A", "corse-du-sud"),
+        ],
+    )
+    def test_zipcode_to_dept_name(self, input_data, expected):
+        assert zipcode_to_dept_name(input_data) == expected
 
-    def test_dept_name_to_zipcode(self):
-        data = [
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
             ('Martinique', '972'),
             ("cotes d'armr", None),
             ("cotes d'armor", '22'),
@@ -77,15 +87,17 @@ class GeoconvertTestCase(unittest.TestCase):
             (u'Loire Atlanti)que', '44'),
             (u'Yonne', '89'),
             (u'Saint Pierre et Miquelon', '975'),
-            ]
-        for test in data:
-            self.assertEqual(dept_name_to_zipcode(test[0]), test[1])
+        ],
+    )
+    def test_dept_name_to_zipcode(self, input_data, expected):
+        assert dept_name_to_zipcode(input_data) == expected
 
     def test_region_id_to_name(self):
         pass
 
-    def test_region_name_to_id(self):
-        data = [
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
             ('bourgogne franche comté', '27'),
             ("midi pyrénées", '73'),
             ("grand est", '44'),
@@ -99,10 +111,10 @@ class GeoconvertTestCase(unittest.TestCase):
             (u'nouvelle aquitaine', '75'),
             (u'La guadeloupe, une superbe région', '01'),
             (u'VICE-RECTORAT DE MAYOTTE ( DCS)', '06'),
-            ]
-        for test in data:
-            print(region_name_to_id(test[0]))
-            self.assertEqual(region_name_to_id(test[0]), test[1])
+        ],
+    )
+    def test_region_name_to_id(self, input_data, expected):
+        assert region_name_to_id(input_data) == expected
 
     def test_region_info_from_id(self):
         pass
@@ -110,8 +122,9 @@ class GeoconvertTestCase(unittest.TestCase):
     def test_region_info_from_name(self):
         pass
 
-    def test_country_name_to_id_fr(self):
-        data = [
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
             ('france', 'FR'),
             ('Comores', 'KM'),
             ('Madagascar', 'MG'),
@@ -146,12 +159,14 @@ class GeoconvertTestCase(unittest.TestCase):
             ("palestine", 'PS'),
             ("Congo (Brazzaville)", 'CG'),
             ("Congo (Kinshasa)", 'CD'),
-        ]
-        for test in data:
-            self.assertEqual(country_name_to_id(test[0]), test[1])
+        ],
+    )
+    def test_country_name_to_id_fr(self, input_data, expected):
+        assert country_name_to_id(input_data) == expected
 
-    def test_country_name_to_id_en(self):
-        data = [
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
             ('Mongolia', 'MN'),
             ('Marocco', 'MA'),
             ('Georgia', 'GE'),
@@ -180,13 +195,15 @@ class GeoconvertTestCase(unittest.TestCase):
             ('CONGO, DEM. REPUBLIC', 'CD'),
             ('TIMOR LESTE', 'TL'),
             ('state of palestine', 'PS'),
-            ('palestine, state of', 'PS')
-        ]
-        for test in data:
-            self.assertEqual(country_name_to_id(test[0], lang='EN'), test[1])
+            ('palestine, state of', 'PS'),
+        ],
+    )
+    def test_country_name_to_id_en(self, input_data, expected):
+        assert country_name_to_id(input_data, lang='EN') == expected
 
-    def test_country_name_to_id_de(self):
-        data = [
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
             ("Dänemark", "DK"),
             ("weißrussland", "BY"),
             ("Demokratische Republik Kongo", "CD"),
@@ -204,39 +221,43 @@ class GeoconvertTestCase(unittest.TestCase):
             ("DOMINICA!!", "DM"),
             (u"   Land der Hinrichtung : Deutschland", "DE"),
             ("Dschibuti-Stadt", "DJ"),
-            ("elfenbeinküste und ecuador    ", "CI")
-        ]
-        for test in data:
-            self.assertEqual(country_name_to_id(test[0], lang='DE'), test[1])
+            ("elfenbeinküste und ecuador    ", "CI"),
+        ],
+    )
+    def test_country_name_to_id_de(self, input_data, expected):
+        assert country_name_to_id(input_data, lang='DE') == expected
 
-    def test_capital_name_to_country_id_fr(self):
-        data = [
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
             ('bruxelles', 'BE'),
-            (u'La ville est Lomé.', 'TG')
-        ]
-        for test in data:
-            self.assertEqual(
-                capital_name_to_country_id(test[0], lang='FR'), test[1])
+            (u'La ville est Lomé.', 'TG'),
+        ],
+    )
+    def test_capital_name_to_country_id_fr(self, input_data, expected):
+        assert capital_name_to_country_id(input_data, lang='FR') == expected
 
-    def test_capital_name_to_country_id_en(self):
-        data = [
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
             ('Copenhagen', 'DK'),
             ("bern", "CH"),
-            ("The city is ulaanbaatar.", "MN")
-        ]
-        for test in data:
-            self.assertEqual(
-                capital_name_to_country_id(test[0], lang='EN'), test[1])
+            ("The city is ulaanbaatar.", "MN"),
+        ],
+    )
+    def test_capital_name_to_country_id_en(self, input_data, expected):
+        assert capital_name_to_country_id(input_data, lang='EN') == expected
 
-    def test_capital_name_to_country_id_de(self):
-        data = [
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
             ('Kopenhagen', 'DK'),
             (u'são tomé', 'ST'),
             ("Das stadt ist Ulaanbaatar.", "MN"),
-        ]
-        for test in data:
-            self.assertEqual(
-                capital_name_to_country_id(test[0], lang='DE'), test[1])
+        ],
+    )
+    def test_capital_name_to_country_id_de(self, input_data, expected):
+        assert capital_name_to_country_id(input_data, lang='DE') == expected
 
 
 class AddressParserTestCase(unittest.TestCase):
