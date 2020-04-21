@@ -10,6 +10,7 @@ from .data import principal_places
 from .data import countries_en
 from .data import countries_fr
 from .data import countries_de
+from .data import countries_pt
 from .data import capitals_en
 from .data import capitals_fr
 from .data import capitals_de
@@ -163,6 +164,8 @@ def country_name_to_id(country, lang='FR'):
             countries = countries_en
         elif lang == "DE":
             countries = countries_de
+        elif lang == "PT":
+            countries = countries_pt
         else:
             countries = countries_fr
 

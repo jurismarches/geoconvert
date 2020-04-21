@@ -225,6 +225,30 @@ class TestGeoconvert:
     def test_country_name_to_id_de(self, input_data, expected):
         assert country_name_to_id(input_data, lang="DE") == expected
 
+
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
+            ("Afeganistão", "AF"),
+            ("África do Sul", "ZA"),
+            ("Albânia", "AL"),
+            ("Butão", "BT"),
+            ("Camarões", "CM"),
+            ("República Centro-Africana", "CF"),
+            ("Grécia", "GR"),
+            ("Lituânia", "LT"),
+            ("Estados Federados da Micronésia", "FM"),
+            ("Nigéria!!", "NG"),
+            ("Lorem Ipsum, país Níger ", "NE"),
+            ("   Panamá      ", "PA"),
+            ("o país do peru", "PE"),
+            (u"País de execução: Polónia", "PL"),
+            ("São Vicente e Granadinas    ", "VC"),
+        ],
+    )
+    def test_country_name_to_id_pt(self, input_data, expected):
+        assert country_name_to_id(input_data, lang="PT") == expected
+
     @pytest.mark.parametrize(
         "input_data, expected",
         [
