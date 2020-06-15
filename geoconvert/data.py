@@ -669,6 +669,7 @@ countries_en = [
     ("palestine, state of", "PS"),
     ("palestinian territories", "PS"),
     ("panama", "PA"),
+    ("pap. new guinea", "PG"),
     ("papua new guinea", "PG"),
     ("paraguay", "PY"),
     ("peru", "PE"),
