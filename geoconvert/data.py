@@ -88,7 +88,6 @@ principal_places = {
     ),
     "32": ("59", ["59", "62", "02", "60", "80"]),  # merges 31, 22
     "28": ("76", ["27", "76", "14", "50", "61"]),  # merges 23, 25
-    "24": ("45", ["45", "18", "28", "36", "37", "41"]),
 }
 
 departments = {
@@ -391,6 +390,7 @@ countries_fr = [
     ("palaos", "PW"),
     ("palestinien occupe", "PS"),
     ("palestine", "PS"),
+    ("territoires autonomes palestiniens", "PS"),
     ("panama", "PA"),
     ("papouasie-nouvelle-guinee", "PG"),
     ("paraguay", "PY"),
@@ -668,6 +668,7 @@ countries_en = [
     ("state of palestine", "PS"),
     ("palestine, state of", "PS"),
     ("palestinian territories", "PS"),
+    ("west bank", "PS"),
     ("panama", "PA"),
     ("pap. new guinea", "PG"),
     ("papua new guinea", "PG"),
@@ -1217,14 +1218,15 @@ countries_pt = [
 """An association from country to other country depending (in some way) on them
 """
 country_territories = {
-    "NO": frozenset(["BV", "SJ"]),
-    "NZ": frozenset(["TK"]),
-    "NL": frozenset(["SX", "BQ", "CW"]),
-    "UK": frozenset(["SH", "FK", "GS", "IO"]),
-    "US": frozenset(["UM"]),
     "FR": frozenset(
         ["RE", "TF", "BL", "YT", "WF", "NC", "PF", "PM", "MQ", "GF", "MF", "GP"]
     ),
+    "NL": frozenset(["SX", "BQ", "CW"]),
+    "NO": frozenset(["BV", "SJ"]),
+    "NZ": frozenset(["TK"]),
+    "PS": frozenset(["GZ"]),
+    "UK": frozenset(["SH", "FK", "GS", "IO"]),
+    "US": frozenset(["UM"]),
 }
 """country_territories reciprocal"""
 territory_to_country = dict(
