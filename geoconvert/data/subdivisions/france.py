@@ -1,5 +1,7 @@
 import re
 
+from .united_states import US_STATES_CODES
+
 
 fr_regions = {
     # New region names first (2018)
@@ -235,7 +237,10 @@ fr_department_name_regex = re.compile(rf"(?P<dept>\b{names}\b)", re.I)
 names = r"\b|\b".join(name for name in fr_regions)
 fr_region_name_regex = re.compile(rf"(?P<region>\b{names}\b)", re.I)
 
+us_states_codes = r"\b|\b".join(code for code in US_STATES_CODES)
 fr_postcode_regex = re.compile(
-    r"(?<!TSA)(?<!BP)(?<!B.P.)(?<!CS)(?:[^\d]|^)(?<!TSA)(?<!BP)(?<!B.P.)(?<!CS)(?P<postcode>\d{2}\s?\d{3})\s*([^\d\s]|$)",
+    r"(?<!TSA)(?<!BP)(?<!B.P.)(?<!CS)(?:[^\d]|^)(?<!TSA)(?<!BP)(?<!B.P.)(?<!CS)"
+    + rf"(?<!(\b{us_states_codes}\b)\s)"
+    + r"(?P<postcode>\d{2}\s?\d{3})\s*([^\d\s]|$)",
     re.I,
 )

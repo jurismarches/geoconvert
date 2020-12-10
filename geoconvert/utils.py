@@ -1,6 +1,5 @@
 # -*- coding: utf8 -*-
 import re
-import sys
 import unicodedata
 
 python3 = False
@@ -43,18 +42,28 @@ def safe_string(text):
     "provence alpes cote d'azur"
     >>> safe_string('ile- de  france')
     'ile de france'
+    >>> safe_string('sao tome & principe')
+    'sao tome principe'
+    >>> safe_string('new_hampshire')
+    'new_hampshire'
+    >>> safe_string('washington, d.c.')
+    'washington dc'
     """
     try:
         text = text.decode("utf-8")
     except (UnicodeEncodeError, AttributeError):
         pass
     text = remove_accents(text)
-    text = text.replace("-", " ")
-    text = re.sub(r"\s+", " ", text.strip())
+    for char in ("-", ":"):
+        text = text.replace(char, " ")
     if python3:
         text = text.lower().replace("?", ".")
     else:
         text = text.lower().encode("ASCII", "replace").replace("?", ".")
+    # Only keep word or space characters as well as "_", and "'".
+    text = re.sub(r"[^\w\s']", "", text)
+    # Always remove multiple whitespace at the very last minute
+    text = re.sub(r"\s+", " ", text.strip())
     return text
 
 

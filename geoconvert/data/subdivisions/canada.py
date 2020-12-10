@@ -26,6 +26,8 @@ ca_provinces = {
 CA_PROVINCES_CODES = set(ca_provinces.values())
 
 # From https://en.wikipedia.org/wiki/Postal_codes_in_Canada#Table_of_all_postal_codes
+# Note that the same first letter is used for Nunavut and Northwest Territories,
+# so we have to treat those cases separately.
 CA_POSTCODE_FIRST_LETTER_TO_PROVINCE_CODE = {
     "a": "NL",
     "b": "NS",
@@ -53,6 +55,6 @@ names = r"\b|\b".join(name.replace(" ", "\s") for name in ca_provinces)
 ca_province_name_regex = re.compile(rf"(?P<province>\b{names}\b)", re.I)
 
 codes = r"\b|\b".join(code for code in CA_PROVINCES_CODES)
-ca_province_code_regex = re.compile(rf"(?P<code>\b{codes}\b)", re.I)
+ca_province_code_regex = re.compile(rf"(?P<code>\b{codes}\b)")
 
 ca_postcode_regex = re.compile(r"(?P<postcode>\b\w\d\w\s?\d\w\d\b)", re.I)

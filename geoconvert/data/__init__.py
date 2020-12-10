@@ -24,7 +24,6 @@ from .subdivisions.france import (
     fr_regions,
 )
 from .subdivisions.united_states import (
-    US_POSTCODE_PREFIX_TO_STATE_CODE,
     us_postcode_regex,
     us_state_code_regex,
     us_state_name_regex,
