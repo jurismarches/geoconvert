@@ -4,7 +4,7 @@ import sys
 import unicodedata
 
 python3 = False
-if re.search(r'^(\d)', sys.version).group(1) == '3':
+if re.search(r"^(\d)", sys.version).group(1) == "3":
     python3 = True
 
 
@@ -13,7 +13,7 @@ def remove_accents(text):
     Remove accents from a string
     """
     try:
-        text = text.decode('utf-8')
+        text = text.decode("utf-8")
     except UnicodeEncodeError:
         pass
     except AttributeError:
@@ -24,7 +24,7 @@ def remove_accents(text):
         # unicode module doesn't exist on Python 3.X
         pass
     text = text.replace(u"’", u"'")  # accent used as apostrophe
-    text_normalized = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore')
+    text_normalized = unicodedata.normalize("NFKD", text).encode("ascii", "ignore")
     if sys.version_info >= (3,):
         text_normalized = text_normalized.decode()
     return text_normalized
@@ -45,16 +45,16 @@ def safe_string(text):
     'ile de france'
     """
     try:
-        text = text.decode('utf-8')
+        text = text.decode("utf-8")
     except (UnicodeEncodeError, AttributeError):
         pass
     text = remove_accents(text)
-    text = text.replace('-', ' ')
-    text = re.sub(r'\s+', ' ', text.strip())
+    text = text.replace("-", " ")
+    text = re.sub(r"\s+", " ", text.strip())
     if python3:
-        text = text.lower().replace('?', '.')
+        text = text.lower().replace("?", ".")
     else:
-        text = text.lower().encode('ASCII', 'replace').replace('?', '.')
+        text = text.lower().encode("ASCII", "replace").replace("?", ".")
     return text
 
 
