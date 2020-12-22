@@ -20,12 +20,7 @@ from .data import (
     us_state_name_regex,
     us_states,
 )
-from .utils import remove_accents, reverse_dict, safe_string
-
-try:
-    from itertools import ifilter
-except ImportError:
-    ifilter = filter
+from .utils import remove_accents, safe_string
 
 
 def ca_address_to_province_code(text):

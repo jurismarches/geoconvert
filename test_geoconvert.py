@@ -33,7 +33,7 @@ from geoconvert.convert import (
     us_address_to_state_code,
     us_postcode_to_state_code,
 )
-from geoconvert.utils import reverse_dict, safe_string
+from geoconvert.utils import safe_string
 
 
 class TestGeoconvert:
@@ -1016,16 +1016,3 @@ class TestAddressParser:
         """
         address = self.address_parser.parse(address_string)
         assert address.get_department() == dept_number
-
-
-class TestUtils:
-    @pytest.mark.parametrize(
-        "input_dict, key, expected",
-        [
-            ({"key": "value"}, "value", "key"),
-            ({"key1": "value1", "key2": "value2"}, "value1", "key1"),
-            ({"key1": "value1", "key2": "value2"}, "value2", "key2"),
-        ],
-    )
-    def test_reverse_dict(self, input_dict, key, expected):
-        assert reverse_dict(input_dict).get(key) == expected

@@ -2,7 +2,7 @@
 import re
 
 
-class Address(object):
+class Address:
     """
     French address representation
     """
@@ -36,7 +36,7 @@ class Address(object):
             return dept_number
 
 
-class AddressParser(object):
+class AddressParser:
     """
     Simple french address parser
     """

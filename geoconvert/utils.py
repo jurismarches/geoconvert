@@ -2,10 +2,6 @@
 import re
 import unicodedata
 
-python3 = False
-if re.search(r"^(\d)", sys.version).group(1) == "3":
-    python3 = True
-
 
 def remove_accents(text):
     """
@@ -13,20 +9,12 @@ def remove_accents(text):
     """
     try:
         text = text.decode("utf-8")
-    except UnicodeEncodeError:
+    except (UnicodeEncodeError, AttributeError):
         pass
-    except AttributeError:
-        pass
-    try:
-        text = unicode(text)
-    except NameError:
-        # unicode module doesn't exist on Python 3.X
-        pass
-    text = text.replace(u"’", u"'")  # accent used as apostrophe
-    text_normalized = unicodedata.normalize("NFKD", text).encode("ascii", "ignore")
-    if sys.version_info >= (3,):
-        text_normalized = text_normalized.decode()
-    return text_normalized
+    text = text.replace("’", "'")  # accent used as apostrophe
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore")
+    text = text.decode()
+    return text
 
 
 def safe_string(text):
@@ -48,27 +36,14 @@ def safe_string(text):
     'new_hampshire'
     >>> safe_string('washington, d.c.')
     'washington dc'
+    >>> safe_string('How aRE yOU?')
+    'how are you'
     """
-    try:
-        text = text.decode("utf-8")
-    except (UnicodeEncodeError, AttributeError):
-        pass
     text = remove_accents(text)
-    for char in ("-", ":"):
-        text = text.replace(char, " ")
-    if python3:
-        text = text.lower().replace("?", ".")
-    else:
-        text = text.lower().encode("ASCII", "replace").replace("?", ".")
+    # Replace "-" and ":" with a whitespace
+    text = re.sub(r"[-:]", " ", text)
     # Only keep word or space characters as well as "_", and "'".
     text = re.sub(r"[^\w\s']", "", text)
-    # Always remove multiple whitespace at the very last minute
-    text = re.sub(r"\s+", " ", text.strip())
-    return text
-
-
-def reverse_dict(dict_to_reverse):
-    reversed_dict = {}
-    for key, value in dict_to_reverse.items():
-        reversed_dict[value] = key
-    return reversed_dict
+    # Always remove multiple whitespaces at the very last minute
+    text = re.sub(r"\s+", " ", text)
+    return text.strip().lower()
