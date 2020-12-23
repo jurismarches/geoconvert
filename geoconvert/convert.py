@@ -20,7 +20,7 @@ from .data import (
     us_state_name_regex,
     us_states,
 )
-from .utils import remove_accents, safe_string
+from .utils import safe_string
 
 
 def ca_address_to_province_code(text):
