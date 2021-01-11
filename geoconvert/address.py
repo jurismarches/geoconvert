@@ -2,10 +2,11 @@
 import re
 
 
-class Address(object):
+class Address:
     """
     French address representation
     """
+
     def __init__(self, zipcode):
         self.zipcode = zipcode
 
@@ -26,36 +27,37 @@ class Address(object):
                 dept_number = self.zipcode[:3]
 
             # Corse
-            if dept_number == '20':
+            if dept_number == "20":
                 if self.zipcode_int < 20190:
-                    dept_number = '2A'
+                    dept_number = "2A"
                 else:
-                    dept_number = '2B'
+                    dept_number = "2B"
 
             return dept_number
 
 
-class AddressParser(object):
+class AddressParser:
     """
     Simple french address parser
     """
+
     address_class = Address
     zipcode_filters_re = [
         # Removes BP CS and CEDEX
         # Use \b before group because of words like "Publics", "Blancs"
-        re.compile(r'\b(B\.?P\.?|C\.?S\.?|CEDEX)\s*\d*', flags=re.I | re.U),
+        re.compile(r"\b(B\.?P\.?|C\.?S\.?|CEDEX)\s*\d*", flags=re.I | re.U),
     ]
     zipcode_re = re.compile(
-        r'(?P<zipcode>(?<!\d)(\d{2}\s*?\d{2,3}|\d{5})(?!\d))'  # Full zipcode
+        r"(?P<zipcode>(?<!\d)(\d{2}\s*?\d{2,3}|\d{5})(?!\d))"  # Full zipcode
     )
-    dept_code_re = re.compile(r'\((?P<zipcode>\d{2,3})\)')  # Only dept code
+    dept_code_re = re.compile(r"\((?P<zipcode>\d{2,3})\)")  # Only dept code
 
     def _clean_address(self, address):
         """
         Returns filtered address
         """
         for regexp in self.zipcode_filters_re:
-            address = regexp.sub('', address)
+            address = regexp.sub("", address)
         return address
 
     def _parse_zipcode(self, address):
@@ -66,13 +68,13 @@ class AddressParser(object):
         match_list = list(self.zipcode_re.finditer(address))
         # It's easier to parse zipcode from the end of the string.
         if match_list:
-            return match_list[-1].group('zipcode').replace(' ', '').zfill(5)
+            return match_list[-1].group("zipcode").replace(" ", "").zfill(5)
 
         # Catch only dept code second.
         match_list = list(self.dept_code_re.finditer(address))
         if match_list:
             # The zipcode is filled with zeros on the right.
-            return match_list[-1].group('zipcode').ljust(5, "0")
+            return match_list[-1].group("zipcode").ljust(5, "0")
 
     def get_address_class(self):
         """
@@ -89,8 +91,6 @@ class AddressParser(object):
         zipcode = self._parse_zipcode(cleaned_address)
 
         if zipcode and zipcode.isdigit():
-            return address_class(
-                zipcode=zipcode)
+            return address_class(zipcode=zipcode)
 
-        return address_class(
-            zipcode=None)
+        return address_class(zipcode=None)
