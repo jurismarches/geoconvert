@@ -2,7 +2,7 @@ Geoconvert converts (obvious) data like zipcode, postcode, address, country name
 French department name, Americain state name, Canadian province or territory name
 to generic data.
 
-* Languages available for country names: deutsch, english, french, portuguese.
+* Languages available for country names: deutsch, english, french, portuguese, spanish.
 * Languages available for capital names: deutsch, english, french.
 
 Support Python 3.6, 3.7, 3.8 and 3.9.
@@ -38,6 +38,8 @@ pip install https://github.com/jurismarches/geoconvert/archive/master.zip
 'EG'
 >>> address_to_country_code("Bem vindo ao Afeganistão")  # PT
 'AF'
+>>> address_to_country_code("Bienvenidos a Nueva Zelanda")  # ES
+'NZ'
 >>> address_to_subdivision_code("2 pl. Saint-Pierre, 44000 Nantes, France")  # FR
 '44'
 >>> address_to_subdivision_code("2 pl. Saint-Pierre, 44000 Nantes", country="FR")
@@ -88,6 +90,8 @@ guess the country code:
 'EG'
 >>> address_to_country_code("Bem vindo ao Afeganistão")  # PT
 'AF'
+>>> address_to_country_code("Bienvenidos a Nueva Zelanda")  # ES
+'NZ'
 
 ```
 
@@ -103,6 +107,8 @@ for more efficiency (available choices: "de" for german, "en" for english,
 'EG'
 >>> address_to_country_code("Bem vindo ao Afeganistão", lang="pt")
 'AF'
+>>> address_to_country_code("Bienvenidos a Nueva Zelanda", lang="es")
+'NZ'
 
 ```
 
