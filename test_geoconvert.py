@@ -629,6 +629,30 @@ United States""",
         assert country_name_to_id(input_data, lang="PT") == expected
 
     @pytest.mark.parametrize(
+            "input_data, expected",
+            [
+                ("Los Emiratos Árabes Unidos", "AE"),
+                ("  Islas   Vírgenes   Británicas   ", "VG"),
+                ("Turkménistan\n", "TM"),
+                ("España!", "ES"),
+                ("Egipto", "EG"),
+                ("groenlandia", "GL"),
+                ("Camboya", "KH"),
+                ("Isla de Mauricio", "MU"),
+                ("San Cristóbal y Nieves", "KN"),
+                ("Nueva Zelanda", "NZ"),
+                ("Países Bajos ", "NL"),
+                ("Kirguistán", "KG"),
+                ("suiza", "CH"),
+                ("Tayikistán", "TJ"),
+                ("Tailandia", "TH"),
+            ],
+        )
+    def test_country_name_to_country_code_es(self, input_data, expected):
+        assert country_name_to_country_code(input_data, lang="ES") == expected
+        assert country_name_to_id(input_data, lang="ES") == expected
+
+    @pytest.mark.parametrize(
         "input_data, kwargs, expected",
         [
             # Look for the capital name in any language available by default
