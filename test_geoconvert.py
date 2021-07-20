@@ -774,6 +774,7 @@ United States""",
             ("1196 Voie Camillien-Houde, Montréal, QC H3H 1A1, Canada", "CA"),
             ("Los Angeles, CA\nUnited States", "US"),
             ("Cabul, Afeganistão", "AF"),
+            ("Try to find South Sudan in a address", "SS"),
             # The country code can be found using the capital name in any available language
             ("Kairo", "EG"),
             ("Paris", "FR"),

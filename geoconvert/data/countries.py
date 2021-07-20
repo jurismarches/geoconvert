@@ -17,6 +17,7 @@ special_countries = {
     "republik kongo": "CG",  # de
     "republica do congo": "CG",  # pt
     "congo": "CG",  # en, fr
+    "south sudan": "SS",  # en
 }
 
 
@@ -517,7 +518,6 @@ countries_en = {
         "spain": "ES",
         "sri lanka": "LK",
         "sudan": "SD",
-        "south sudan": "SS",
         "suriname": "SR",
         "svalbard and jan mayen": "SJ",
         "swaziland": "SZ",
