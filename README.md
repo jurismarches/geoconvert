@@ -40,6 +40,10 @@ pip install https://github.com/jurismarches/geoconvert/archive/master.zip
 'AF'
 >>> address_to_country_code("Bienvenidos a Nueva Zelanda")  # ES
 'NZ'
+>>> address_to_country_code("659 Ocean Ave, Lakewood, New Jersey 08701")
+'US'
+>>> address_to_country_code("Le Chemin des Garennes, Jersey JE3 2FE, Jersey")
+'JE'
 >>> address_to_subdivision_code("2 pl. Saint-Pierre, 44000 Nantes, France")  # FR
 '44'
 >>> address_to_subdivision_code("2 pl. Saint-Pierre, 44000 Nantes", country="FR")
@@ -50,6 +54,8 @@ pip install https://github.com/jurismarches/geoconvert/archive/master.zip
 >>> address_to_subdivision_code("1800 W Erie Ave, Lorain, OH 44052", country="FR")
 >>> address_to_subdivision_code("196 Voie Camillien-Houde, Montréal, QC H3H 1A1")  # CA
 'QC'
+>>> address_to_country_and_subdivision_codes("1170 Cattus Island Blvd, Toms River, New Jersey")  # US
+('US', 'NJ')
 >>> address_to_country_and_subdivision_codes("Montréal, Québec")  # CA
 ('CA', 'QC')
 >>> address_to_country_and_subdivision_codes("1800 W Erie Ave, Lorain, OH 44052")  # US
