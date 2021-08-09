@@ -40,6 +40,10 @@ pip install https://github.com/jurismarches/geoconvert/archive/master.zip
 'AF'
 >>> address_to_country_code("Bienvenidos a Nueva Zelanda")  # ES
 'NZ'
+>>> address_to_country_code("659 Ocean Ave, Lakewood, New Jersey 08701")
+'US'
+>>> address_to_country_code("Le Chemin des Garennes, Jersey JE3 2FE, Jersey")
+'JE'
 >>> address_to_subdivision_code("2 pl. Saint-Pierre, 44000 Nantes, France")  # FR
 '44'
 >>> address_to_subdivision_code("2 pl. Saint-Pierre, 44000 Nantes", country="FR")
