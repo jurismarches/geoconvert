@@ -17,7 +17,10 @@ special_countries = {
     "republik kongo": "CG",  # de
     "republica do congo": "CG",  # pt
     "congo": "CG",  # en, fr
-    "south sudan": "SS",  # en
+    # Avoid confusion with Sudan (SD)
+    "south sudan": "SS",
+    # Avoid confusion with Jersey (JE)
+    "new jersey": "US",
 }
 
 
