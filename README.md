@@ -50,6 +50,8 @@ pip install https://github.com/jurismarches/geoconvert/archive/master.zip
 >>> address_to_subdivision_code("1800 W Erie Ave, Lorain, OH 44052", country="FR")
 >>> address_to_subdivision_code("196 Voie Camillien-Houde, Montréal, QC H3H 1A1")  # CA
 'QC'
+>>> address_to_country_and_subdivision_codes("1170 Cattus Island Blvd, Toms River, New Jersey")  # US
+('US', 'NJ')
 >>> address_to_country_and_subdivision_codes("Montréal, Québec")  # CA
 ('CA', 'QC')
 >>> address_to_country_and_subdivision_codes("1800 W Erie Ave, Lorain, OH 44052")  # US

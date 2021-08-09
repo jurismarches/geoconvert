@@ -109,6 +109,7 @@ United States""",
             ("Washington DC", "DC"),
             ("Richmond, Virginia", "VA"),
             ("Charleston, West Virginia", "WV"),
+            ("650 Great Rd, Princeton, New Jersey", "NJ"),
             # Should be case-sensitive when detecting state code directly.
             # "de" is not mistaken for "DE", but "DE" gives "DE"
             (
@@ -775,6 +776,7 @@ United States""",
             ("Los Angeles, CA\nUnited States", "US"),
             ("Cabul, Afeganistão", "AF"),
             ("Try to find South Sudan in an address", "SS"),
+            ("650 Great Rd, Princeton, New Jersey", "US"),
             # The country code can be found using the capital name in any available language
             ("Kairo", "EG"),
             ("Paris", "FR"),
