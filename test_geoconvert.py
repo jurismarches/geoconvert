@@ -778,6 +778,8 @@ United States""",
             ("Try to find South Sudan in an address", "SS"),
             ("650 Great Rd, Princeton, New Jersey", "US"),
             ("St Peter, Jersey JE1 1BY, Jersey", "JE"),
+            ('East Asia and Pacific Region: Papua New Guinea', "PG"),
+            ('N1, Conakry, Guinea', "GN"),
             # The country code can be found using the capital name in any available language
             ("Kairo", "EG"),
             ("Paris", "FR"),

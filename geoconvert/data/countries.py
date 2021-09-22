@@ -23,6 +23,8 @@ special_countries = {
     "sudan del sur": "SS", # es
     # Make sure we never mistake it for JE
     "new jersey": "US",
+    # Make sure we never mistake it for GN
+    "papua new guinea": "PG"
 }
 
 
