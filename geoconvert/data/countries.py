@@ -17,21 +17,21 @@ special_countries = {
     "republik kongo": "CG",  # de
     "republica do congo": "CG",  # pt
     "congo": "CG",  # en, fr
-    # Make sure we never mistake it for SD
-    "south sudan": "SS",  # en
-    "sudsudan": "SS", # de
-    "sudan del sur": "SS", # es
-    # Make sure we never mistake it for JE
-    "new jersey": "US",
-    # Make sure we never mistake it for GN
-    "aquatorialguinea": "GQ", # de
-    "equatorial guinea": "GQ", # en
+    # Make sure we never mistake it for GN (Guinea)
+    "aquatorialguinea": "GQ", # es
+    "equatorial guinea": "GQ", # de / en
     "guinea bissau": "GW", # en / de
     "guinea ecuatorial": "GQ", # es
     "pap new guinea": "PG", # en
     "papua neuguinea": "PG", # de
     "papua new guinea": "PG", # en
     "papua nueva guinea": "PG", # es
+    # Make sure we never mistake it for JE (Jersey)
+    "new jersey": "US",
+    # Make sure we never mistake it for SD (Sudan)
+    "south sudan": "SS",  # en
+    "sudsudan": "SS", # de
+    "sudan del sur": "SS", # es
 }
 
 
@@ -133,7 +133,6 @@ countries_fr = {
         "guinee": "GN",
         "guinee bissau": "GW",
         "guinee equatoriale": "GQ",
-        "guinee bissau": "GW",
         "guyana": "GY",
         "guyane francaise": "GF",
         "haiti": "HT",
