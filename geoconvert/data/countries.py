@@ -17,14 +17,21 @@ special_countries = {
     "republik kongo": "CG",  # de
     "republica do congo": "CG",  # pt
     "congo": "CG",  # en, fr
-    # Make sure we never mistake it for SD
+    # Make sure we never mistake it for GN (Guinea)
+    "aquatorialguinea": "GQ", # es
+    "equatorial guinea": "GQ", # de / en
+    "guinea bissau": "GW", # en / de
+    "guinea ecuatorial": "GQ", # es
+    "pap new guinea": "PG", # en
+    "papua neuguinea": "PG", # de
+    "papua new guinea": "PG", # en
+    "papua nueva guinea": "PG", # es
+    # Make sure we never mistake it for JE (Jersey)
+    "new jersey": "US",
+    # Make sure we never mistake it for SD (Sudan)
     "south sudan": "SS",  # en
     "sudsudan": "SS", # de
     "sudan del sur": "SS", # es
-    # Make sure we never mistake it for JE
-    "new jersey": "US",
-    # Make sure we never mistake it for GN
-    "papua new guinea": "PG"
 }
 
 
@@ -126,7 +133,6 @@ countries_fr = {
         "guinee": "GN",
         "guinee bissau": "GW",
         "guinee equatoriale": "GQ",
-        "guinee bissau": "GW",
         "guyana": "GY",
         "guyane francaise": "GF",
         "haiti": "HT",
@@ -366,7 +372,6 @@ countries_en = {
         "ecuador": "EC",
         "egypt": "EG",
         "el salvador": "SV",
-        "equatorial guinea": "GQ",
         "eritrea": "ER",
         "estonia": "EE",
         "eswatini": "SZ",
@@ -393,7 +398,6 @@ countries_en = {
         "guatemala": "GT",
         "guernsey": "GG",
         "guinea": "GN",
-        "guinea bissau": "GW",
         "guyana": "GY",
         "haiti": "HT",
         "heard island": "HM",
@@ -482,8 +486,6 @@ countries_en = {
         "palestinian territories": "PS",
         "west bank": "PS",
         "panama": "PA",
-        "pap new guinea": "PG",
-        "papua new guinea": "PG",
         "paraguay": "PY",
         "peru": "PE",
         "philippines": "PH",
@@ -579,7 +581,6 @@ countries_de = {
     **special_countries,
     **{
         "agypten": "EG",
-        "aquatorialguinea": "GQ",
         "athiopien": "ET",
         "afghanistan": "AF",
         "albanien": "AL",
@@ -631,7 +632,6 @@ countries_de = {
         "griechenland": "GR",
         "guatemala": "GT",
         "guinea": "GN",
-        "guinea bissau": "GW",
         "guyana": "GY",
         "haiti": "HT",
         "honduras": "HN",
@@ -707,7 +707,6 @@ countries_de = {
         "palastina": "PS",
         "palau": "PW",
         "panama": "PA",
-        "papua neuguinea": "PG",
         "paraguay": "PY",
         "peru": "PE",
         "philippinen": "PH",
@@ -1133,9 +1132,7 @@ countries_es = {
         "guernsey": "GG",
         "guayana": "GY",
         "guayana francesa": "GF",
-        "guinea bissau": "GW",
         "guinea": "GN",
-        "guinea ecuatorial": "GQ",
         "haiti": "HT",
         "islas heard y mcdonald": "HM",
         "heard y mcdonald": "HM",
@@ -1211,7 +1208,6 @@ countries_es = {
         "palaos": "PW",
         "palestina": "PS",
         "panama": "PA",
-        "papua nueva guinea": "PG",
         "pakistan": "PK",
         "paraguay": "PY",
         "peru": "PE",

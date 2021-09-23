@@ -479,10 +479,34 @@ United States""",
             # If no country found, return None
             ("Wonderland", {}, None),
             ("Germany", {"lang": "fr"}, None),
-            # No confusion with Congo
+            # No confusion with Congo ("CD")
             ("Congo (Brazzaville)", {}, "CG"),
             ("Congo (Kinshasa)", {}, "CD"),
             ("Congo", {}, "CG"),
+            # No confusion with Guinea ("GN")
+            # "GQ"
+            ("equatorial guinea", {}, "GQ"), # de / en
+            ("aquatorialguinea", {}, "GQ"), # es
+            ("guinee equatoriale", {}, "GQ"), #fr
+            ("guine equatorial", {}, "GQ"), # pt
+            # "PG"
+            ("papua neuguinea", {}, "PG"), # de
+            ("pap new guinea", {}, "PG"), #  en
+            ("papua nueva guinea", {}, "PG"), # es
+            ("papouasie nouvelle guinee", {}, "PG"), # fr
+            ("papua nova guine", {}, "PG"), # pt
+            # "GW"
+            ("guinea bissau", {}, "GW"), # de / en / es
+            ("guinee bissau", {}, "GW"), # fr
+            ("guine bissau", {}, "GW"), # pt
+            # No confusion with Jersey ("JE")
+            ("new jersey", {}, "US"),
+            # No confusion with Sudan ("SD")
+            ("sudsudan", {}, "SS"), # de
+            ("south sudan", {}, "SS"), # en
+            ("sudan del sur", {}, "SS"), # es
+            ("Soudan du Sud", {}, "SS"), # fr
+            ("sudao do sul", {}, "SS"), # pt
             # Any capitalization for lang works
             ("Germany", {"lang": "en"}, "DE"),
             ("Germany", {"lang": "En"}, "DE"),
@@ -531,6 +555,7 @@ United States""",
             ("Congo (Brazzaville)", "CG"),
             ("Congo (Kinshasa)", "CD"),
             ("São tome & principe ", "ST"),
+            ("Papouasie Nouvelle Guinée", "PG"),
         ],
     )
     def test_country_name_to_country_code_fr(self, input_data, expected):
@@ -623,6 +648,7 @@ United States""",
             ("o país do peru", "PE"),
             (u"País de execução: Polónia", "PL"),
             ("São Vicente e Granadinas    ", "VC"),
+            ("Guine bissau", "GW"),
         ],
     )
     def test_country_name_to_country_code_pt(self, input_data, expected):
