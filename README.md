@@ -318,7 +318,7 @@ Do not forget to install the dependencies first, preferably in a vitrual environ
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install requirements_test.txt
+python -m pip install -r requirements_test.txt
 ```
 
 ## Releases
