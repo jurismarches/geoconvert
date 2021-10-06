@@ -1309,7 +1309,6 @@ country_territories = {
     "NZ": frozenset(["TK"]),
     "PS": frozenset(["GZ"]),
     "UK": frozenset(["SH", "FK", "GS", "IO"]),
-    "US": frozenset(["UM"]),
 }
 
 
