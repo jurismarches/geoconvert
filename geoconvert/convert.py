@@ -124,9 +124,9 @@ def fr_postcode_to_dept_code(text):
 
         # Let us treat special cases first
 
-        # Merge St Barthelemy (97701 or 97098) into Guadeloupe
+        # St Barthelemy (97701 or 97098)
         if postcode in ("97701", "97098"):
-            return "971"
+            return "977"
 
         # 978 or 977 may be used for Réunion: let's turn that into 974
         if postcode[:3] in ("977", "978"):

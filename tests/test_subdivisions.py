@@ -125,8 +125,8 @@ class TestCanada:
             ("Onalaska, WI", None),
             (
                 """15910 Hermosa avenue updated,Bldg 1,Central Research Park
-Sunnyvale , CA 94085
-United States""",
+                Sunnyvale , CA 94085
+                United States""",
                 None,
             ),
             # Detection via province code should be case-sensitive
@@ -209,8 +209,8 @@ class TestUSA:
             ("Onalaska, WI", None),
             (
                 """15910 Hermosa avenue updated,Bldg 1,Central Research Park
-Sunnyvale , CA 94085
-United States""",
+                Sunnyvale , CA 94085
+                United States""",
                 "CA",
             ),
             ("00000 Paris France", None),
@@ -278,8 +278,8 @@ class TestFrance:
             ("Avenue des clients CS 72152, F - 31020 Toulouse", "31"),
             ("Avenue des clients CS72152, F - 31020 Toulouse", "31"),
             ("6503 TARBES Cedex 9, tel. 05.62.54.58.63", None),
-            ("97701 Saint-Barthelemy", "971"),
-            ("97098 Saint-Barthelemy", "971"),
+            ("97701 Saint-Barthelemy", "977"),
+            ("97098 Saint-Barthelemy", "977"),
             ("a l attention de M. Bon Jean, Avenue des client", None),
             ("13 avenue de la porte d'Italie TSA 61371, F - 75621 Paris", "75"),
             ("avenue René Cassin — BP 67190 97801 Saint-Denis Cedex 9", "974"),
@@ -316,6 +316,9 @@ class TestFrance:
             (u"Loire Atlanti)que", "44"),
             (u"Yonne", "89"),
             (u"Saint Pierre et Miquelon", "975"),
+            ("Tout savoir sur Saint Barthélemy", "977"),
+            ("Tout savoir sur saint-barthelemy", "977"),
+            ("Tout savoir sur saint Barthélémy", "977"),
             # There can be some mistakes, that we may want to fix one day.
             # In this case, we could look for 2 or 3 digit
             ("Rue de l'Orne, Saint-Herblain (44)", "61"),
@@ -374,8 +377,8 @@ class TestFrance:
             ("Avenue des clients CS 72152, F - 31020 Toulouse", "31"),
             ("Avenue des clients CS72152, F - 31020 Toulouse", "31"),
             ("6503 TARBES Cedex 9, tel. 05.62.54.58.63", None),
-            ("97701 Saint-Barthelemy", "971"),
-            ("97098 Saint-Barthelemy", "971"),
+            ("97701 Saint-Barthelemy", "977"),
+            ("97098 Saint-Barthelemy", "977"),
             ("a l attention de M. Bon Jean, Avenue des client", None),
             ("13 avenue de la porte d'Italie TSA 61371, F - 75621 Paris", "75"),
             ("avenue René Cassin — BP 67190 97801 Saint-Denis Cedex 9", "974"),
@@ -423,6 +426,9 @@ class TestFrance:
             (u"Loire Atlanti)que", "44"),
             (u"Yonne", "89"),
             (u"Saint Pierre et Miquelon", "975"),
+            ("Tout savoir sur Saint Barthélemy", "977"),
+            ("Tout savoir sur saint-barthelemy", "977"),
+            ("Tout savoir sur saint Barthélémy", "977"),
             # There may be some mistakes, so be careful what is passed
             ("Rue de la Réunion, 75000 Paris", "974"),
             ("Rue de l'Orne, 44800 Saint-Herblain", "61"),

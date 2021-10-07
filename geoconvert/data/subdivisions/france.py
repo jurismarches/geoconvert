@@ -218,6 +218,7 @@ fr_departments = {
     "la-reunion": "974",
     "saint-pierre-et-miquelon": "975",
     "mayotte": "976",
+    "saint-barthelemy": "977",
     "terres-australes-et-antarctiques": "984",
     "wallis-et-futuna": "986",
     "polynesie-francaise": "987",
