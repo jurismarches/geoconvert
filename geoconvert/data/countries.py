@@ -49,6 +49,7 @@ countries_fr = {
         "anguilla": "AI",
         "antarctique": "AQ",
         "antigua et barbuda": "AG",
+        "antigue et barbude": "AG",
         "antilles neerlandaises": "AN",
         "arabie saoudite": "SA",
         "argentine": "AR",
