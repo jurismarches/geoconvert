@@ -15,6 +15,13 @@ from .subdivisions.canada import (
     ca_province_name_regex,
     ca_provinces,
 )
+from .subdivisions.germany import (
+    de_landers,
+    DE_HAUPTSTADT,
+    de_land_code_regex,
+    de_land_name_regex,
+    de_land_hauptstadt_regex,
+)
 from .subdivisions.france import (
     fr_department_name_regex,
     fr_departments,

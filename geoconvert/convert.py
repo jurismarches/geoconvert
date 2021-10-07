@@ -7,6 +7,11 @@ from .data import (
     ca_province_code_regex,
     ca_province_name_regex,
     ca_provinces,
+    de_landers,
+    DE_HAUPTSTADT,
+    de_land_code_regex,
+    de_land_name_regex,
+    de_land_hauptstadt_regex,
     fr_department_name_regex,
     fr_departments,
     fr_postcode_regex,
@@ -21,6 +26,9 @@ from .data import (
     us_states,
 )
 from .utils import safe_string
+
+
+# CANADA
 
 
 def ca_address_to_province_code(text):
@@ -71,6 +79,54 @@ def ca_province_name_to_province_code(text):
         return ca_provinces[province_name]
 
 
+# GERMANY
+
+
+def de_address_to_land_code(text):
+    # Look for the land name in the plain text
+    code = de_land_name_to_land_code(text)
+    if code:
+        return code
+    # Look for the land hauptstadt in the plain text
+    code = de_hauptstadt_to_land_code(text)
+    if code:
+        return code
+    # Look for the land code in the plain text
+    code_match = re.search(de_land_code_regex, text)
+    if code_match:
+        return code_match.group("code").upper()
+
+
+def de_hauptstadt_to_land_code(text):
+    text = safe_string(text)
+
+    # Quickly reach conclusion if possible
+    if text in DE_HAUPTSTADT.keys():
+        return DE_HAUPTSTADT[text]
+
+    # Otherwise use a regex
+    hauptstadt_match = re.search(de_land_hauptstadt_regex, text)
+    if hauptstadt_match:
+        land_name = hauptstadt_match.group("hauptstadt")
+        return DE_HAUPTSTADT[land_name]
+
+
+def de_land_name_to_land_code(text):
+    text = safe_string(text)
+
+    # Quickly reach conclusion if possible
+    if text in de_landers:
+        return de_landers[text]
+
+    # Otherwise use a regex
+    land_name_match = re.search(de_land_name_regex, text)
+    if land_name_match:
+        land_name = land_name_match.group("land")
+        return de_landers[land_name]
+
+# USA
+
+
 def us_address_to_state_code(text):
     # First, look for the postcode and derive the state code from it
     code = us_postcode_to_state_code(text)
@@ -106,6 +162,9 @@ def us_postcode_to_state_code(text):
     us_postcode_match = re.search(us_postcode_regex, text)
     if us_postcode_match:
         return us_postcode_match.group("state_code").upper()
+
+
+# FRANCE
 
 
 def fr_address_to_dept_code(text):
@@ -207,6 +266,9 @@ def fr_region_name_to_info(region_name):
 
 # Keep backward compatibility
 region_info_from_name = fr_region_name_to_info
+
+
+# GLOBAL
 
 
 def country_name_to_country_code(text, lang=None):
@@ -336,6 +398,7 @@ def address_to_country_code(text, lang=None):
 country_to_subdivision_lookup_function = {
     "CA": ca_address_to_province_code,
     "FR": fr_address_to_dept_code,
+    "DE": de_address_to_land_code,
     "US": us_address_to_state_code,
 }
 
@@ -352,10 +415,13 @@ country_to_subdivision_lookup_function = {
 #   is unknown, otherwise "RIO DE JANEIRO" would alose give "DE".
 # - French postcode matching, because 5-digit postcodes are used in
 #   many countries.
+# - German postcode matching, because 5-digit postcodes are used in
+#   many countries and the postcodes do not follow landers boudaries
 country_to_safe_subdivision_lookup_function = (
     ("CA", ca_postcode_to_province_code),
     ("CA", ca_province_name_to_province_code),
     ("FR", fr_dept_name_to_dept_code),
+    ("DE", de_address_to_land_code),
     ("US", us_postcode_to_state_code),
     ("US", us_state_name_to_state_code),
 )
