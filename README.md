@@ -293,7 +293,18 @@ You can derive both country and subdivision codes at the same time:
 ('EG', None)
 >>> address_to_country_and_subdivision_codes("Kairo", lang="de", country="US")
 (None, None)
+```
 
+Result format can be choosen between a tuple and an iso code
+```python
+>>> address_to_country_and_subdivision_codes("14467 Potsdam")
+('DE', 'BB')
+>>> address_to_country_and_subdivision_codes("14467 Potsdam", iso_format=True)
+'DE-BB'
+>>> address_to_country_and_subdivision_codes("14467 Germany")
+('DE', None)
+>>> address_to_country_and_subdivision_codes("14467 Germany", iso_format=True)
+'DE'
 ```
 
 There should be no confusion between French and US postcodes:

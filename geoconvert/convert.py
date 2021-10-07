@@ -467,7 +467,32 @@ def address_to_subdivision_code(text, country=None):
         return subdivision_code
 
 
-def address_to_country_and_subdivision_codes(text, lang=None, country=None):
+def _address_to_country_and_subdivision_codes(text, lang, country):
+    """
+    Hidden function to be used by address_to_country_and_subdivision_codes
+    """
+    if country:
+        country = country.upper()
+        # If a country is given, look for the subdivision of that specific country
+        if country in country_to_subdivision_lookup_function:
+            subdivision_code = address_to_subdivision_code(text, country=country)
+            if subdivision_code:
+                # If a subdivision is found,
+                # return it with the corresponding country code
+                return (country, subdivision_code)
+        # If no subdivision can be found for the given country,
+        # try and look for a country code from the input text,
+        # and return it if it matches the one given by the user.
+        country_code = address_to_country_code(text, lang)
+        if country_code == country:
+            return (country_code, None)
+    else:
+        return _guess_country_and_subdivision_codes(text, lang)
+
+    return (None, None)
+
+
+def address_to_country_and_subdivision_codes(text, lang=None, country=None, iso_format=False):
     """
     Return the country and subdivision code from the address.
 
@@ -520,26 +545,23 @@ def address_to_country_and_subdivision_codes(text, lang=None, country=None):
     (None, None)
     >>> address_to_country_and_subdivision_codes("6931 Rings Rd, Amlin, OH 43002", country="FR")
     (None, None)
-    """
-    if country:
-        country = country.upper()
-        # If a country is given, look for the subdivision of that specific country
-        if country in country_to_subdivision_lookup_function:
-            subdivision_code = address_to_subdivision_code(text, country=country)
-            if subdivision_code:
-                # If a subdivision is found,
-                # return it with the corresponding country code
-                return (country, subdivision_code)
-        # If no subdivision can be found for the given country,
-        # try and look for a country code from the input text,
-        # and return it if it matches the one given by the user.
-        country_code = address_to_country_code(text, lang)
-        if country_code == country:
-            return (country_code, None)
-    else:
-        return _guess_country_and_subdivision_codes(text, lang)
 
-    return (None, None)
+    You can choose to get results in a tuple or in iso format
+    >>> address_to_country_and_subdivision_codes("14467 Potsdam")
+    ('DE', 'BB')
+    >>> address_to_country_and_subdivision_codes("14467 Potsdam", iso_format=True)
+    'DE-BB'
+    >>> address_to_country_and_subdivision_codes("14467 Germany")
+    ('DE', None)
+    >>> address_to_country_and_subdivision_codes("14467 Germany", iso_format=True)
+    'DE'
+    """
+    result = _address_to_country_and_subdivision_codes(text, lang, country)
+    if iso_format:
+        if result[1]:
+            return '-'.join(result)
+        return result[0]
+    return result
 
 
 def _guess_country_and_subdivision_codes(text, lang=None):
