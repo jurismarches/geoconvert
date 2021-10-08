@@ -250,7 +250,7 @@ class TestCountries:
             ("", None),
             ("2 pl. Saint-Pierre, 44000 Nantes", None),
             (
-                "Av. Pres. Castelo Branco, Portão 3 - Maracanã, Rio de Janeiro - RJ, 20271-130",
+                "Av. Pres. Castelo Branco, Portão 3 - Maracanã",
                 None,
             ),
         ],

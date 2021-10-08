@@ -8,6 +8,13 @@ from .countries import (
     language_to_country_names,
     territory_to_country,
 )
+from .subdivisions.brazil import (
+    br_postcode_regex,
+    BR_POSTCODES_RANGE,
+    br_state_code_regex,
+    br_state_name_regex,
+    br_states,
+)
 from .subdivisions.canada import (
     CA_POSTCODE_FIRST_LETTER_TO_PROVINCE_CODE,
     ca_postcode_regex,
@@ -16,11 +23,11 @@ from .subdivisions.canada import (
     ca_provinces,
 )
 from .subdivisions.germany import (
-    de_landers,
     DE_HAUPTSTADT,
     de_land_code_regex,
-    de_land_name_regex,
     de_land_hauptstadt_regex,
+    de_land_name_regex,
+    de_landers,
 )
 from .subdivisions.france import (
     fr_department_name_regex,

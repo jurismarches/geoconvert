@@ -2,16 +2,21 @@
 import re
 
 from .data import (
+    br_postcode_regex,
+    BR_POSTCODES_RANGE,
+    br_state_code_regex,
+    br_state_name_regex,
+    br_states,
     CA_POSTCODE_FIRST_LETTER_TO_PROVINCE_CODE,
     ca_postcode_regex,
     ca_province_code_regex,
     ca_province_name_regex,
     ca_provinces,
-    de_landers,
     DE_HAUPTSTADT,
     de_land_code_regex,
-    de_land_name_regex,
     de_land_hauptstadt_regex,
+    de_land_name_regex,
+    de_landers,
     fr_department_name_regex,
     fr_departments,
     fr_postcode_regex,
@@ -26,6 +31,52 @@ from .data import (
     us_states,
 )
 from .utils import safe_string
+
+
+# BRESIL
+
+
+def br_address_to_state_code(text):
+    # First, look for the postcode and derive the state code from it
+    code = br_postcode_to_state_code(text)
+    if code is not None:
+        return code
+    # Look for the state name in plain text
+    state_code = br_state_name_to_state_code(text)
+    if state_code:
+        return state_code
+    # Look for the state code in the plain text
+    code_match = re.search(br_state_code_regex, text)
+    if code_match:
+        return code_match.group("code").upper()
+
+
+def br_state_name_to_state_code(text):
+    text = safe_string(text)
+
+    # Quickly reach conclusion if possible
+    if text in br_states:
+        return br_states[text]
+
+    # Otherwise use a regex
+    state_name_match = re.search(br_state_name_regex, text)
+    if state_name_match:
+        state_name = state_name_match.group("state")
+        return br_states[state_name]
+
+
+def br_postcode_to_state_code(text):
+    # An american postcode is made of 5 digit preceded by the state code
+    br_postcode_match = re.search(br_postcode_regex, text)
+    if not br_postcode_match:
+        return
+    
+    postcode = int(br_postcode_match.group("postcode"))
+    for max_range, state_code in BR_POSTCODES_RANGE.items():
+        if max_range < postcode:
+            continue
+        else:
+            return state_code  # in case this is first-time loop
 
 
 # CANADA
@@ -396,6 +447,7 @@ def address_to_country_code(text, lang=None):
 # for that given country, because the user explicitly said which country
 # the input text comes from.
 country_to_subdivision_lookup_function = {
+    "BR": br_address_to_state_code,
     "CA": ca_address_to_province_code,
     "FR": fr_address_to_dept_code,
     "DE": de_address_to_land_code,
@@ -413,11 +465,15 @@ country_to_subdivision_lookup_function = {
 # - US state matching via province code.
 #   For instance, "Bridgeville, DE" must not give "DE" when the country
 #   is unknown, otherwise "RIO DE JANEIRO" would alose give "DE".
+# - Brazilian state matching via province code
+#   For instance MS can be Mato Grosso do Sul or Mississippi
 # - French postcode matching, because 5-digit postcodes are used in
 #   many countries.
 # - German postcode matching, because 5-digit postcodes are used in
 #   many countries and the postcodes do not follow landers boudaries
 country_to_safe_subdivision_lookup_function = (
+    ("BR", br_state_name_to_state_code),
+    ("BR", br_postcode_to_state_code),
     ("CA", ca_postcode_to_province_code),
     ("CA", ca_province_name_to_province_code),
     ("FR", fr_dept_name_to_dept_code),

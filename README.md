@@ -160,6 +160,34 @@ There should be no confusion between French and US postcodes:
 
 ```
 
+### Brazil
+
+You can find the state code associated with an address, via the postcode,
+state name (in Portuguese) or code:
+```python
+>>> from geoconvert.convert import br_address_to_state_code
+>>> br_address_to_state_code("Luz, 01120-010")
+'SP'
+>>> br_address_to_state_code("Piauí")
+'PI'
+>>> br_address_to_state_code("Dourados, MS")
+'MS'
+
+```
+
+You may use more specific functions, depending on your needs:
+```python
+>>> from geoconvert.convert import (
+... 	br_postcode_to_state_code, br_state_name_to_state_code
+... )
+>>> br_postcode_to_state_code("Mariana, 04094-050")
+'SP'
+>>> br_state_name_to_state_code("a capital do estado do maranhao.")
+'MA'
+
+```
+
+
 ### Canada
 
 You can find the province or territory code associated with an address, via the postcode,
