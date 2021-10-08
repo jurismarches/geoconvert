@@ -1,4 +1,5 @@
-import pytest, mock
+import mock
+import pytest
 
 from geoconvert.convert import (
     address_to_country_and_subdivision_codes,
@@ -9,7 +10,6 @@ from geoconvert.convert import (
 
 
 class TestBrazil:
-
     @pytest.mark.parametrize(
         "input_data",
         [
@@ -18,7 +18,7 @@ class TestBrazil:
         ],
     )
     def test_not_found(self, input_data):
-        assert br_address_to_state_code(input_data) == None
+        assert br_address_to_state_code(input_data) is None
 
     @pytest.mark.parametrize(
         "input_data, expected",
@@ -31,8 +31,16 @@ class TestBrazil:
     def test_br_address_to_state_code(self, input_data, expected):
         assert br_address_to_state_code(input_data) == expected
         # unsafe : country must be precised
-        assert address_to_country_and_subdivision_codes(input_data, country="BR") == ("BR", expected)
-        assert address_to_country_and_subdivision_codes(input_data, country="BR", iso_format=True) == "BR-" + expected
+        assert address_to_country_and_subdivision_codes(input_data, country="BR") == (
+            "BR",
+            expected,
+        )
+        assert (
+            address_to_country_and_subdivision_codes(
+                input_data, country="BR", iso_format=True
+            )
+            == "BR-" + expected
+        )
 
     @pytest.mark.parametrize(
         "input_data, expected",
@@ -54,7 +62,10 @@ class TestBrazil:
         assert br_state_name_to_state_code(input_data) == expected
         assert br_address_to_state_code(input_data) == expected
         assert address_to_country_and_subdivision_codes(input_data) == ("BR", expected)
-        assert address_to_country_and_subdivision_codes(input_data, iso_format=True) == "BR-" + expected
+        assert (
+            address_to_country_and_subdivision_codes(input_data, iso_format=True)
+            == "BR-" + expected
+        )
 
     @pytest.mark.parametrize(
         "input_data, expected",
@@ -72,9 +83,12 @@ class TestBrazil:
         assert br_postcode_to_state_code(input_data) == expected
         assert br_address_to_state_code(input_data) == expected
         assert address_to_country_and_subdivision_codes(input_data) == ("BR", expected)
-        assert address_to_country_and_subdivision_codes(input_data, iso_format=True) == "BR-" + expected
+        assert (
+            address_to_country_and_subdivision_codes(input_data, iso_format=True)
+            == "BR-" + expected
+        )
 
     @mock.patch("geoconvert.convert.BR_POSTCODES_RANGE", {})
     def test_br_postcode_to_state_code_with_no_data(self):
         # NOTE : this test has no other use than to keep a 100% coverage
-        assert br_postcode_to_state_code("00000-000") == None
+        assert br_postcode_to_state_code("00000-000") is None

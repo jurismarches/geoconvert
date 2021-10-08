@@ -18,20 +18,20 @@ special_countries = {
     "republica do congo": "CG",  # pt
     "congo": "CG",  # en, fr
     # Make sure we never mistake it for GN (Guinea)
-    "aquatorialguinea": "GQ", # es
-    "equatorial guinea": "GQ", # de / en
-    "guinea bissau": "GW", # en / de
-    "guinea ecuatorial": "GQ", # es
-    "pap new guinea": "PG", # en
-    "papua neuguinea": "PG", # de
-    "papua new guinea": "PG", # en
-    "papua nueva guinea": "PG", # es
+    "aquatorialguinea": "GQ",  # es
+    "equatorial guinea": "GQ",  # de / en
+    "guinea bissau": "GW",  # en / de
+    "guinea ecuatorial": "GQ",  # es
+    "pap new guinea": "PG",  # en
+    "papua neuguinea": "PG",  # de
+    "papua new guinea": "PG",  # en
+    "papua nueva guinea": "PG",  # es
     # Make sure we never mistake it for JE (Jersey)
     "new jersey": "US",
     # Make sure we never mistake it for SD (Sudan)
     "south sudan": "SS",  # en
-    "sudsudan": "SS", # de
-    "sudan del sur": "SS", # es
+    "sudsudan": "SS",  # de
+    "sudan del sur": "SS",  # es
 }
 
 

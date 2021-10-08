@@ -9,7 +9,6 @@ from geoconvert.convert import (
 
 
 class TestGermany:
-
     @pytest.mark.parametrize(
         "input_data, expected",
         [
@@ -39,8 +38,10 @@ class TestGermany:
         assert de_land_name_to_land_code(input_data) == expected
         assert de_address_to_land_code(input_data) == expected
         assert address_to_country_and_subdivision_codes(input_data) == ("DE", expected)
-        assert address_to_country_and_subdivision_codes(input_data, iso_format=True) == "DE-" + expected
-    
+        assert (
+            address_to_country_and_subdivision_codes(input_data, iso_format=True)
+            == "DE-" + expected
+        )
 
     @pytest.mark.parametrize(
         "input_data, expected",
@@ -55,4 +56,7 @@ class TestGermany:
         assert de_hauptstadt_to_land_code(input_data) == expected
         assert de_address_to_land_code(input_data) == expected
         assert address_to_country_and_subdivision_codes(input_data) == ("DE", expected)
-        assert address_to_country_and_subdivision_codes(input_data, iso_format=True) == "DE-" + expected
+        assert (
+            address_to_country_and_subdivision_codes(input_data, iso_format=True)
+            == "DE-" + expected
+        )

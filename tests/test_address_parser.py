@@ -1,8 +1,7 @@
-
-
 import pytest
 
 from geoconvert.address import AddressParser
+
 
 class TestAddressParser:
 

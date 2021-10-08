@@ -11,7 +11,6 @@ from geoconvert.convert import (
 
 
 class TestFrance:
-
     @pytest.mark.parametrize(
         "input_data, expected",
         [
@@ -127,4 +126,3 @@ class TestFrance:
     def test_fr_region_name_to_info(self, input_data, expected):
         assert fr_region_name_to_info(input_data) == expected
         assert region_info_from_name(input_data) == expected
-

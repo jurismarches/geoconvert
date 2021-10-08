@@ -1,6 +1,5 @@
 import pytest
 
-from geoconvert.address import AddressParser
 from geoconvert.convert import (
     capital_name_to_country_code,
     capital_name_to_country_id,
@@ -80,4 +79,3 @@ class TestCapitals:
         for lang, capital_names in language_to_capital_names.items():
             for name in capital_names:
                 assert safe_string(name) == name
-

@@ -8,8 +8,8 @@ from geoconvert.convert import (
     fr_postcode_to_dept_code,
 )
 
-class TestFrance:
 
+class TestFrance:
     @pytest.mark.parametrize(
         "input_data, expected",
         [

@@ -8,7 +8,6 @@ from geoconvert.convert import (
 
 
 class TestCanada:
-
     @pytest.mark.parametrize(
         "input_data, expected",
         [

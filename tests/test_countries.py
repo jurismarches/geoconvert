@@ -10,7 +10,6 @@ from geoconvert.utils import safe_string
 
 
 class TestCountries:
-
     @pytest.mark.parametrize(
         "input_data, kwargs, expected",
         [
@@ -28,28 +27,28 @@ class TestCountries:
             ("Congo", {}, "CG"),
             # No confusion with Guinea ("GN")
             # "GQ"
-            ("equatorial guinea", {}, "GQ"), # de / en
-            ("aquatorialguinea", {}, "GQ"), # es
-            ("guinee equatoriale", {}, "GQ"), #fr
-            ("guine equatorial", {}, "GQ"), # pt
+            ("equatorial guinea", {}, "GQ"),  # de / en
+            ("aquatorialguinea", {}, "GQ"),  # es
+            ("guinee equatoriale", {}, "GQ"),  # fr
+            ("guine equatorial", {}, "GQ"),  # pt
             # "PG"
-            ("papua neuguinea", {}, "PG"), # de
-            ("pap new guinea", {}, "PG"), #  en
-            ("papua nueva guinea", {}, "PG"), # es
-            ("papouasie nouvelle guinee", {}, "PG"), # fr
-            ("papua nova guine", {}, "PG"), # pt
+            ("papua neuguinea", {}, "PG"),  # de
+            ("pap new guinea", {}, "PG"),  # en
+            ("papua nueva guinea", {}, "PG"),  # es
+            ("papouasie nouvelle guinee", {}, "PG"),  # fr
+            ("papua nova guine", {}, "PG"),  # pt
             # "GW"
-            ("guinea bissau", {}, "GW"), # de / en / es
-            ("guinee bissau", {}, "GW"), # fr
-            ("guine bissau", {}, "GW"), # pt
+            ("guinea bissau", {}, "GW"),  # de / en / es
+            ("guinee bissau", {}, "GW"),  # fr
+            ("guine bissau", {}, "GW"),  # pt
             # No confusion with Jersey ("JE")
             ("new jersey", {}, "US"),
             # No confusion with Sudan ("SD")
-            ("sudsudan", {}, "SS"), # de
-            ("south sudan", {}, "SS"), # en
-            ("sudan del sur", {}, "SS"), # es
-            ("Soudan du Sud", {}, "SS"), # fr
-            ("sudao do sul", {}, "SS"), # pt
+            ("sudsudan", {}, "SS"),  # de
+            ("south sudan", {}, "SS"),  # en
+            ("sudan del sur", {}, "SS"),  # es
+            ("Soudan du Sud", {}, "SS"),  # fr
+            ("sudao do sul", {}, "SS"),  # pt
             # Any capitalization for lang works
             ("Germany", {"lang": "en"}, "DE"),
             ("Germany", {"lang": "En"}, "DE"),
@@ -199,25 +198,25 @@ class TestCountries:
         assert country_name_to_id(input_data, lang="PT") == expected
 
     @pytest.mark.parametrize(
-            "input_data, expected",
-            [
-                ("Los Emiratos Árabes Unidos", "AE"),
-                ("  Islas   Vírgenes   Británicas   ", "VG"),
-                ("Turkménistan\n", "TM"),
-                ("España!", "ES"),
-                ("Egipto", "EG"),
-                ("groenlandia", "GL"),
-                ("Camboya", "KH"),
-                ("Isla de Mauricio", "MU"),
-                ("San Cristóbal y Nieves", "KN"),
-                ("Nueva Zelanda", "NZ"),
-                ("Países Bajos ", "NL"),
-                ("Kirguistán", "KG"),
-                ("suiza", "CH"),
-                ("Tayikistán", "TJ"),
-                ("Tailandia", "TH"),
-            ],
-        )
+        "input_data, expected",
+        [
+            ("Los Emiratos Árabes Unidos", "AE"),
+            ("  Islas   Vírgenes   Británicas   ", "VG"),
+            ("Turkménistan\n", "TM"),
+            ("España!", "ES"),
+            ("Egipto", "EG"),
+            ("groenlandia", "GL"),
+            ("Camboya", "KH"),
+            ("Isla de Mauricio", "MU"),
+            ("San Cristóbal y Nieves", "KN"),
+            ("Nueva Zelanda", "NZ"),
+            ("Países Bajos ", "NL"),
+            ("Kirguistán", "KG"),
+            ("suiza", "CH"),
+            ("Tayikistán", "TJ"),
+            ("Tailandia", "TH"),
+        ],
+    )
     def test_country_name_to_country_code_es(self, input_data, expected):
         assert country_name_to_country_code(input_data, lang="ES") == expected
         assert country_name_to_id(input_data, lang="ES") == expected
@@ -239,8 +238,8 @@ class TestCountries:
             ("Try to find South Sudan in an address", "SS"),
             ("650 Great Rd, Princeton, New Jersey", "US"),
             ("St Peter, Jersey JE1 1BY, Jersey", "JE"),
-            ('East Asia and Pacific Region: Papua New Guinea', "PG"),
-            ('N1, Conakry, Guinea', "GN"),
+            ("East Asia and Pacific Region: Papua New Guinea", "PG"),
+            ("N1, Conakry, Guinea", "GN"),
             # The country code can be found using the capital name in any available language
             ("Kairo", "EG"),
             ("Paris", "FR"),
@@ -266,4 +265,3 @@ class TestCountries:
         for lang, country_names in language_to_country_names.items():
             for name in country_names:
                 assert safe_string(name) == name
-

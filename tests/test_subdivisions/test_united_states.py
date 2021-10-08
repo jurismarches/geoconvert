@@ -1,13 +1,9 @@
 import pytest
 
-from geoconvert.convert import (
-    us_address_to_state_code,
-    us_postcode_to_state_code,
-)
+from geoconvert.convert import us_address_to_state_code, us_postcode_to_state_code
 
 
 class TestUSA:
-
     @pytest.mark.parametrize(
         "input_data, expected",
         [

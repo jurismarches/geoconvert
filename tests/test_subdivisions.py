@@ -7,7 +7,6 @@ from geoconvert.convert import (
 
 
 class TestNoCountryProvided:
-
     @pytest.mark.parametrize(
         "input_data, kwargs, expected",
         [

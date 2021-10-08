@@ -2,17 +2,17 @@
 import re
 
 from .data import (
-    br_postcode_regex,
     BR_POSTCODES_RANGE,
+    CA_POSTCODE_FIRST_LETTER_TO_PROVINCE_CODE,
+    DE_HAUPTSTADT,
+    br_postcode_regex,
     br_state_code_regex,
     br_state_name_regex,
     br_states,
-    CA_POSTCODE_FIRST_LETTER_TO_PROVINCE_CODE,
     ca_postcode_regex,
     ca_province_code_regex,
     ca_province_name_regex,
     ca_provinces,
-    DE_HAUPTSTADT,
     de_land_code_regex,
     de_land_hauptstadt_regex,
     de_land_name_regex,
@@ -31,7 +31,6 @@ from .data import (
     us_states,
 )
 from .utils import safe_string
-
 
 # BRAZIL
 
@@ -70,7 +69,7 @@ def br_postcode_to_state_code(text):
     br_postcode_match = re.search(br_postcode_regex, text)
     if not br_postcode_match:
         return
-    
+
     postcode = int(br_postcode_match.group("postcode"))
     state_code = None
     for max_range, state_code in BR_POSTCODES_RANGE.items():
@@ -174,6 +173,7 @@ def de_land_name_to_land_code(text):
     if land_name_match:
         land_name = land_name_match.group("land")
         return de_landers[land_name]
+
 
 # USA
 
@@ -548,7 +548,9 @@ def _address_to_country_and_subdivision_codes(text, lang, country):
     return (None, None)
 
 
-def address_to_country_and_subdivision_codes(text, lang=None, country=None, iso_format=False):
+def address_to_country_and_subdivision_codes(
+    text, lang=None, country=None, iso_format=False
+):
     """
     Return the country and subdivision code from the address.
 
@@ -615,7 +617,7 @@ def address_to_country_and_subdivision_codes(text, lang=None, country=None, iso_
     result = _address_to_country_and_subdivision_codes(text, lang, country)
     if iso_format:
         if result[1]:
-            return '-'.join(result)
+            return "-".join(result)
         return result[0]
     return result
 
