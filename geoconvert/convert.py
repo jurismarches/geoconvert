@@ -72,11 +72,11 @@ def br_postcode_to_state_code(text):
         return
     
     postcode = int(br_postcode_match.group("postcode"))
+    state_code = None
     for max_range, state_code in BR_POSTCODES_RANGE.items():
-        if max_range < postcode:
-            continue
-        else:
-            return state_code  # in case this is first-time loop
+        if max_range >= postcode:
+            break
+    return state_code
 
 
 # CANADA
