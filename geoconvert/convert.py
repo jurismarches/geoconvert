@@ -33,7 +33,7 @@ from .data import (
 from .utils import safe_string
 
 
-# BRESIL
+# BRAZIL
 
 
 def br_address_to_state_code(text):

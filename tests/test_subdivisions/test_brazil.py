@@ -45,7 +45,9 @@ class TestBrazil:
             ("Praça da Luz, 2 – Luz, São Paulo", "SP"),
             ("Dourados, État du Mato Grosso do Sul", "MS"),
             ("Dourados, État du Mato Grosso", "MT"),
-            ("PIAUÍ", "PI"),
+            ("PARA", "PA"),
+            ("Paraiba", "PB"),  # not mistaken for PA
+            ("parana", "PR"),  # not mistaken for PA
         ],
     )
     def test_br_state_name_to_state_code(self, input_data, expected):
