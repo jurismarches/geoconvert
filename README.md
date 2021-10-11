@@ -8,6 +8,7 @@ to generic data.
 Support Python 3.6, 3.7, 3.8 and 3.9.
 
 [![Build Status](https://travis-ci.org/jurismarches/geoconvert.svg?branch=master)](https://travis-ci.org/jurismarches/geoconvert)
+[![codecov](https://codecov.io/gh/jurismarches/geoconvert/branch/master/graph/badge.svg?token=UB3Vij6ygJ)](https://codecov.io/gh/jurismarches/geoconvert)
 
 # Installation
 
