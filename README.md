@@ -352,7 +352,7 @@ There should be no confusion between French and US postcodes:
 
 Just run pytest:
 ```bash
-pytest
+make test
 ```
 
 Do not forget to install the dependencies first, preferably in a vitrual environment:
