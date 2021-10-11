@@ -1,4 +1,4 @@
-tests:
+test:
 	make styles_check
 	pytest -s
 	python -m doctest README.md

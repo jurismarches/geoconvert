@@ -10,8 +10,7 @@ install:
   - pip install codecov
 
 script:
-  - make styles_check
-  - pytest
+  - make test
 
 after_success:
   - codecov

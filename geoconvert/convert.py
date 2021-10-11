@@ -2,11 +2,21 @@
 import re
 
 from .data import (
+    BR_POSTCODES_RANGE,
     CA_POSTCODE_FIRST_LETTER_TO_PROVINCE_CODE,
+    DE_HAUPTSTADT,
+    br_postcode_regex,
+    br_state_code_regex,
+    br_state_name_regex,
+    br_states,
     ca_postcode_regex,
     ca_province_code_regex,
     ca_province_name_regex,
     ca_provinces,
+    de_land_code_regex,
+    de_land_hauptstadt_regex,
+    de_land_name_regex,
+    de_landers,
     fr_department_name_regex,
     fr_departments,
     fr_postcode_regex,
@@ -21,6 +31,54 @@ from .data import (
     us_states,
 )
 from .utils import safe_string
+
+# BRAZIL
+
+
+def br_address_to_state_code(text):
+    # First, look for the postcode and derive the state code from it
+    code = br_postcode_to_state_code(text)
+    if code is not None:
+        return code
+    # Look for the state name in plain text
+    state_code = br_state_name_to_state_code(text)
+    if state_code:
+        return state_code
+    # Look for the state code in the plain text
+    code_match = re.search(br_state_code_regex, text)
+    if code_match:
+        return code_match.group("code").upper()
+
+
+def br_state_name_to_state_code(text):
+    text = safe_string(text)
+
+    # Quickly reach conclusion if possible
+    if text in br_states:
+        return br_states[text]
+
+    # Otherwise use a regex
+    state_name_match = re.search(br_state_name_regex, text)
+    if state_name_match:
+        state_name = state_name_match.group("state")
+        return br_states[state_name]
+
+
+def br_postcode_to_state_code(text):
+    # An american postcode is made of 5 digit preceded by the state code
+    br_postcode_match = re.search(br_postcode_regex, text)
+    if not br_postcode_match:
+        return
+
+    postcode = int(br_postcode_match.group("postcode"))
+    state_code = None
+    for max_range, state_code in BR_POSTCODES_RANGE.items():
+        if max_range >= postcode:
+            break
+    return state_code
+
+
+# CANADA
 
 
 def ca_address_to_province_code(text):
@@ -71,6 +129,55 @@ def ca_province_name_to_province_code(text):
         return ca_provinces[province_name]
 
 
+# GERMANY
+
+
+def de_address_to_land_code(text):
+    # Look for the land name in the plain text
+    code = de_land_name_to_land_code(text)
+    if code:
+        return code
+    # Look for the land hauptstadt in the plain text
+    code = de_hauptstadt_to_land_code(text)
+    if code:
+        return code
+    # Look for the land code in the plain text
+    code_match = re.search(de_land_code_regex, text)
+    if code_match:
+        return code_match.group("code").upper()
+
+
+def de_hauptstadt_to_land_code(text):
+    text = safe_string(text)
+
+    # Quickly reach conclusion if possible
+    if text in DE_HAUPTSTADT.keys():
+        return DE_HAUPTSTADT[text]
+
+    # Otherwise use a regex
+    hauptstadt_match = re.search(de_land_hauptstadt_regex, text)
+    if hauptstadt_match:
+        land_name = hauptstadt_match.group("hauptstadt")
+        return DE_HAUPTSTADT[land_name]
+
+
+def de_land_name_to_land_code(text):
+    text = safe_string(text)
+
+    # Quickly reach conclusion if possible
+    if text in de_landers:
+        return de_landers[text]
+
+    # Otherwise use a regex
+    land_name_match = re.search(de_land_name_regex, text)
+    if land_name_match:
+        land_name = land_name_match.group("land")
+        return de_landers[land_name]
+
+
+# USA
+
+
 def us_address_to_state_code(text):
     # First, look for the postcode and derive the state code from it
     code = us_postcode_to_state_code(text)
@@ -108,6 +215,9 @@ def us_postcode_to_state_code(text):
         return us_postcode_match.group("state_code").upper()
 
 
+# FRANCE
+
+
 def fr_address_to_dept_code(text):
     # First, look for the postcode and derive the dept code from it
     code = fr_postcode_to_dept_code(text)
@@ -124,9 +234,9 @@ def fr_postcode_to_dept_code(text):
 
         # Let us treat special cases first
 
-        # Merge St Barthelemy (97701 or 97098) into Guadeloupe
+        # St Barthelemy (97701 or 97098)
         if postcode in ("97701", "97098"):
-            return "971"
+            return "977"
 
         # 978 or 977 may be used for Réunion: let's turn that into 974
         if postcode[:3] in ("977", "978"):
@@ -207,6 +317,9 @@ def fr_region_name_to_info(region_name):
 
 # Keep backward compatibility
 region_info_from_name = fr_region_name_to_info
+
+
+# GLOBAL
 
 
 def country_name_to_country_code(text, lang=None):
@@ -334,8 +447,10 @@ def address_to_country_code(text, lang=None):
 # for that given country, because the user explicitly said which country
 # the input text comes from.
 country_to_subdivision_lookup_function = {
+    "BR": br_address_to_state_code,
     "CA": ca_address_to_province_code,
     "FR": fr_address_to_dept_code,
+    "DE": de_address_to_land_code,
     "US": us_address_to_state_code,
 }
 
@@ -350,12 +465,19 @@ country_to_subdivision_lookup_function = {
 # - US state matching via province code.
 #   For instance, "Bridgeville, DE" must not give "DE" when the country
 #   is unknown, otherwise "RIO DE JANEIRO" would alose give "DE".
+# - Brazilian state matching via province code
+#   For instance MS can be Mato Grosso do Sul or Mississippi
 # - French postcode matching, because 5-digit postcodes are used in
 #   many countries.
+# - German postcode matching, because 5-digit postcodes are used in
+#   many countries and the postcodes do not follow landers boudaries
 country_to_safe_subdivision_lookup_function = (
+    ("BR", br_state_name_to_state_code),
+    ("BR", br_postcode_to_state_code),
     ("CA", ca_postcode_to_province_code),
     ("CA", ca_province_name_to_province_code),
     ("FR", fr_dept_name_to_dept_code),
+    ("DE", de_address_to_land_code),
     ("US", us_postcode_to_state_code),
     ("US", us_state_name_to_state_code),
 )
@@ -401,7 +523,34 @@ def address_to_subdivision_code(text, country=None):
         return subdivision_code
 
 
-def address_to_country_and_subdivision_codes(text, lang=None, country=None):
+def _address_to_country_and_subdivision_codes(text, lang, country):
+    """
+    Hidden function to be used by address_to_country_and_subdivision_codes
+    """
+    if country:
+        country = country.upper()
+        # If a country is given, look for the subdivision of that specific country
+        if country in country_to_subdivision_lookup_function:
+            subdivision_code = address_to_subdivision_code(text, country=country)
+            if subdivision_code:
+                # If a subdivision is found,
+                # return it with the corresponding country code
+                return (country, subdivision_code)
+        # If no subdivision can be found for the given country,
+        # try and look for a country code from the input text,
+        # and return it if it matches the one given by the user.
+        country_code = address_to_country_code(text, lang)
+        if country_code == country:
+            return (country_code, None)
+    else:
+        return _guess_country_and_subdivision_codes(text, lang)
+
+    return (None, None)
+
+
+def address_to_country_and_subdivision_codes(
+    text, lang=None, country=None, iso_format=False
+):
     """
     Return the country and subdivision code from the address.
 
@@ -454,26 +603,23 @@ def address_to_country_and_subdivision_codes(text, lang=None, country=None):
     (None, None)
     >>> address_to_country_and_subdivision_codes("6931 Rings Rd, Amlin, OH 43002", country="FR")
     (None, None)
-    """
-    if country:
-        country = country.upper()
-        # If a country is given, look for the subdivision of that specific country
-        if country in country_to_subdivision_lookup_function:
-            subdivision_code = address_to_subdivision_code(text, country=country)
-            if subdivision_code:
-                # If a subdivision is found,
-                # return it with the corresponding country code
-                return (country, subdivision_code)
-        # If no subdivision can be found for the given country,
-        # try and look for a country code from the input text,
-        # and return it if it matches the one given by the user.
-        country_code = address_to_country_code(text, lang)
-        if country_code == country:
-            return (country_code, None)
-    else:
-        return _guess_country_and_subdivision_codes(text, lang)
 
-    return (None, None)
+    You can choose to get results in a tuple or in iso format
+    >>> address_to_country_and_subdivision_codes("14467 Potsdam")
+    ('DE', 'BB')
+    >>> address_to_country_and_subdivision_codes("14467 Potsdam", iso_format=True)
+    'DE-BB'
+    >>> address_to_country_and_subdivision_codes("14467 Germany")
+    ('DE', None)
+    >>> address_to_country_and_subdivision_codes("14467 Germany", iso_format=True)
+    'DE'
+    """
+    result = _address_to_country_and_subdivision_codes(text, lang, country)
+    if iso_format:
+        if result[1]:
+            return "-".join(result)
+        return result[0]
+    return result
 
 
 def _guess_country_and_subdivision_codes(text, lang=None):

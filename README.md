@@ -160,6 +160,34 @@ There should be no confusion between French and US postcodes:
 
 ```
 
+### Brazil
+
+You can find the state code associated with an address, via the postcode,
+state name (in Portuguese) or code:
+```python
+>>> from geoconvert.convert import br_address_to_state_code
+>>> br_address_to_state_code("Luz, 01120-010")
+'SP'
+>>> br_address_to_state_code("Piauí")
+'PI'
+>>> br_address_to_state_code("Dourados, MS")
+'MS'
+
+```
+
+You may use more specific functions, depending on your needs:
+```python
+>>> from geoconvert.convert import (
+... 	br_postcode_to_state_code, br_state_name_to_state_code
+... )
+>>> br_postcode_to_state_code("Mariana, 04094-050")
+'SP'
+>>> br_state_name_to_state_code("a capital do estado do maranhao.")
+'MA'
+
+```
+
+
 ### Canada
 
 You can find the province or territory code associated with an address, via the postcode,
@@ -296,6 +324,19 @@ You can derive both country and subdivision codes at the same time:
 
 ```
 
+Result format can be choosen between a tuple and an iso code
+```python
+>>> address_to_country_and_subdivision_codes("14467 Potsdam")
+('DE', 'BB')
+>>> address_to_country_and_subdivision_codes("14467 Potsdam", iso_format=True)
+'DE-BB'
+>>> address_to_country_and_subdivision_codes("14467 Germany")
+('DE', None)
+>>> address_to_country_and_subdivision_codes("14467 Germany", iso_format=True)
+'DE'
+
+```
+
 There should be no confusion between French and US postcodes:
 ```python
 >>> address_to_country_and_subdivision_codes("2 pl. Saint-Pierre, 44000 Nantes", country="US")
@@ -311,14 +352,14 @@ There should be no confusion between French and US postcodes:
 
 Just run pytest:
 ```bash
-pytest
+make test
 ```
 
 Do not forget to install the dependencies first, preferably in a vitrual environment:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install requirements_test.txt
+python -m pip install -r requirements_test.txt
 ```
 
 ## Releases
