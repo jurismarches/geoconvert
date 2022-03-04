@@ -32,10 +32,12 @@ from .subdivisions.france import (
 )
 from .subdivisions.germany import (
     DE_HAUPTSTADT,
+    DE_POSTCODE_RANGE,
     de_land_code_regex,
     de_land_hauptstadt_regex,
     de_land_name_regex,
     de_landers,
+    de_postcode_regex,
 )
 from .subdivisions.united_states import (
     us_postcode_regex,

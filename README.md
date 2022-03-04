@@ -61,6 +61,10 @@ pip install https://github.com/jurismarches/geoconvert/archive/master.zip
 ('CA', 'QC')
 >>> address_to_country_and_subdivision_codes("1800 W Erie Ave, Lorain, OH 44052")  # US
 ('US', 'OH')
+>>> address_to_country_and_subdivision_codes("96524 Föritztal OT Neuhaus-Schierschnitz")  # DE not found
+(None, None)
+>>> address_to_country_and_subdivision_codes("96524 Föritztal OT Neuhaus-Schierschnitz Germany")  # DE found
+('DE', 'TH')
 >>> address_to_country_and_subdivision_codes("Kairo", lang="de")
 ('EG', None)
 >>> address_to_country_and_subdivision_codes("Kairo", lang="de", country="EG")
@@ -158,6 +162,7 @@ There should be no confusion between French and US postcodes:
 ```python
 >>> address_to_subdivision_code("2 pl. Saint-Pierre, 44000 Nantes", country="US")
 >>> address_to_subdivision_code("1800 W Erie Ave, Lorain, OH 44052", country="FR")
+>>> address_to_subdivision_code("96524 Föritztal OT Neuhaus-Schierschnitz", country="US")
 
 ```
 
@@ -331,18 +336,20 @@ Result format can be choosen between a tuple and an iso code
 ('DE', 'BB')
 >>> address_to_country_and_subdivision_codes("14467 Potsdam", iso_format=True)
 'DE-BB'
->>> address_to_country_and_subdivision_codes("14467 Germany")
+>>> address_to_country_and_subdivision_codes("Eschborn Germany")
 ('DE', None)
->>> address_to_country_and_subdivision_codes("14467 Germany", iso_format=True)
+>>> address_to_country_and_subdivision_codes("Eschborn Germany", iso_format=True)
 'DE'
 
 ```
 
-There should be no confusion between French and US postcodes:
+There should be no confusion between french, deutsch and US postcodes:
 ```python
 >>> address_to_country_and_subdivision_codes("2 pl. Saint-Pierre, 44000 Nantes", country="US")
 (None, None)
 >>> address_to_country_and_subdivision_codes("6931 Rings Rd, Amlin, OH 43002", country="FR")
+(None, None)
+>>> address_to_country_and_subdivision_codes("Straße 3 53119 Bonn", country="US")
 (None, None)
 
 ```
