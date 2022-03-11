@@ -5,6 +5,7 @@ from geoconvert.convert import (
     de_address_to_land_code,
     de_hauptstadt_to_land_code,
     de_land_name_to_land_code,
+    de_postcode_to_land_code,
 )
 
 
@@ -12,13 +13,26 @@ class TestGermany:
     @pytest.mark.parametrize(
         "input_data, expected",
         [
-            ("Katharinenberg 14 – 20 18439 Stralsund ", None),
+            ("Katharinenberg 14 – 20 18439 Stralsund ", "MV"),
             # Detection via province code should be case-sensitive
             ("Be yourself!", None),
             ("This is BE", "BE"),
+            ("31-37 53179 Bonn Telefon: +49 228 4010 Fax: +49 228 4011223", "NW"),
         ],
     )
     def test_de_address_to_land_code(self, input_data, expected):
+        assert de_address_to_land_code(input_data) == expected
+
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
+            ("65760 Eschborn", "HE"),
+            ("Straße 3 53119 Bonn Telefon: +49 22899610-2928", "NW"),
+            ("80639        München", "BY"),
+        ],
+    )
+    def test_de_postcode_to_land_code(self, input_data, expected):
+        assert de_postcode_to_land_code(input_data)
         assert de_address_to_land_code(input_data) == expected
 
     @pytest.mark.parametrize(
@@ -37,11 +51,6 @@ class TestGermany:
     def test_de_land_name_to_land_code(self, input_data, expected):
         assert de_land_name_to_land_code(input_data) == expected
         assert de_address_to_land_code(input_data) == expected
-        assert address_to_country_and_subdivision_codes(input_data) == ("DE", expected)
-        assert (
-            address_to_country_and_subdivision_codes(input_data, iso_format=True)
-            == "DE-" + expected
-        )
 
     @pytest.mark.parametrize(
         "input_data, expected",
@@ -55,8 +64,44 @@ class TestGermany:
     def test_de_hauptstadt_to_land_code(self, input_data, expected):
         assert de_hauptstadt_to_land_code(input_data) == expected
         assert de_address_to_land_code(input_data) == expected
-        assert address_to_country_and_subdivision_codes(input_data) == ("DE", expected)
+
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
+            # land name
+            ("Hamburg liegt in Norddeutschland", ("DE", "HH")),
+            ("Metropolregion Hamburg", ("DE", "HH")),
+            ("Glockengießerwall 5 20095 Hamburg", ("DE", "HH")),
+            ("Nordrhein Westfalen", ("DE", "NW")),
+            ("nordrhein-westfalen", ("DE", "NW")),
+            ("Thüringen", ("DE", "TH")),
+            ("thuringen", ("DE", "TH")),
+            ("The capital of Germany is Berlin", ("DE", "BE")),
+            # hauptstadt
+            ("Humboldtstraße 5–6 14467 Potsdam", ("DE", "BB")),
+            ("is in Frankfurt-Am-Main", ("DE", "HE")),
+            ("GUTEN TAG KÖLN", ("DE", "NW")),
+            ("leipzig", ("DE", "SN")),
+            ("80639        München", ("DE", "BY")),
+            # land code
+            ("Be yourself!", (None, None)),
+            ("This is BE", (None, None)),
+            ("This is BE in Germany", ("DE", "BE")),
+            # Postcodes
+            ("Katharinenberg 14 – 20 18439 Stralsund", (None, None)),
+            ("Katharinenberg 14 – 20 18439 Stralsund GERMANY", ("DE", "MV")),
+            ("31-37 53179 Bonn Telefon: +49 228 4010", (None, None)),
+            ("31-37 53179 Bonn DEUTSCHLAND Telefon: +49 228 4010", ("DE", "NW")),
+            ("65760 Eschborn", (None, None)),
+            ("65760 Eschborn germany", ("DE", "HE")),
+        ],
+    )
+    def test_de_country_and_subdivision_codes(self, input_data, expected):
+        assert address_to_country_and_subdivision_codes(input_data) == expected
+        expected = (
+            f"{expected[0]}-{expected[1]}" if not expected == (None, None) else None
+        )
         assert (
             address_to_country_and_subdivision_codes(input_data, iso_format=True)
-            == "DE-" + expected
+            == expected
         )

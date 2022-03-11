@@ -5,6 +5,7 @@ from .data import (
     BR_POSTCODES_RANGE,
     CA_POSTCODE_FIRST_LETTER_TO_PROVINCE_CODE,
     DE_HAUPTSTADT,
+    DE_POSTCODE_RANGE,
     br_postcode_regex,
     br_state_code_regex,
     br_state_name_regex,
@@ -17,6 +18,7 @@ from .data import (
     de_land_hauptstadt_regex,
     de_land_name_regex,
     de_landers,
+    de_postcode_regex,
     fr_department_name_regex,
     fr_departments,
     fr_postcode_regex,
@@ -141,10 +143,27 @@ def de_address_to_land_code(text):
     code = de_hauptstadt_to_land_code(text)
     if code:
         return code
+    code = de_postcode_to_land_code(text)
+    if code is not None:
+        return code
     # Look for the land code in the plain text
     code_match = re.search(de_land_code_regex, text)
     if code_match:
         return code_match.group("code").upper()
+
+
+def de_postcode_to_land_code(text):
+    # A German postcode is made of 5 digit
+    de_postcode_match = re.search(de_postcode_regex, text)
+    if not de_postcode_match:
+        return
+
+    postcode = int(de_postcode_match.group("postcode"))
+    state_code = None
+    for max_range, state_code in DE_POSTCODE_RANGE.items():
+        if max_range >= postcode:
+            break
+    return state_code
 
 
 def de_hauptstadt_to_land_code(text):
@@ -470,14 +489,15 @@ country_to_subdivision_lookup_function = {
 # - French postcode matching, because 5-digit postcodes are used in
 #   many countries.
 # - German postcode matching, because 5-digit postcodes are used in
-#   many countries and the postcodes do not follow landers boudaries
+#   many countries
 country_to_safe_subdivision_lookup_function = (
     ("BR", br_state_name_to_state_code),
     ("BR", br_postcode_to_state_code),
     ("CA", ca_postcode_to_province_code),
     ("CA", ca_province_name_to_province_code),
     ("FR", fr_dept_name_to_dept_code),
-    ("DE", de_address_to_land_code),
+    ("DE", de_hauptstadt_to_land_code),
+    ("DE", de_land_name_to_land_code),
     ("US", us_postcode_to_state_code),
     ("US", us_state_name_to_state_code),
 )
@@ -507,9 +527,11 @@ def address_to_subdivision_code(text, country=None):
     >>> address_to_subdivision_code("")
     >>> address_to_subdivision_code("2 pl. Saint-Pierre, 44000 Nantes", country="ca")
 
-    There should not be false positives between French and American postcodes:
+    There should not be false positives between French, deutsch and American postcodes:
     >>> address_to_subdivision_code("2 pl. Saint-Pierre, 44000 Nantes", country="us")
     >>> address_to_subdivision_code("Los Angeles, CA 90068, États-Unis", country="fr")
+    >>> address_to_subdivision_code("29633 Munster")
+    >>> address_to_subdivision_code("29633 Munster", country="US")
     """
     # Find the subdivision code according to the country.
     if country:
@@ -598,10 +620,14 @@ def address_to_country_and_subdivision_codes(
     >>> address_to_country_and_subdivision_codes("2 pl. Saint-Pierre, Nantes")
     (None, None)
 
-    There should be no confusion between French and US postcodes:
+    There should be no confusion between French, deutsch and US postcodes:
     >>> address_to_country_and_subdivision_codes("2 pl. Saint-Pierre, 44000 Nantes", country="US")
     (None, None)
     >>> address_to_country_and_subdivision_codes("6931 Rings Rd, Amlin, OH 43002", country="FR")
+    (None, None)
+    >>> address_to_country_and_subdivision_codes("29633 Munster")
+    (None, None)
+    >>> address_to_country_and_subdivision_codes("29633 Munster", country="US")
     (None, None)
 
     You can choose to get results in a tuple or in iso format
@@ -610,9 +636,14 @@ def address_to_country_and_subdivision_codes(
     >>> address_to_country_and_subdivision_codes("14467 Potsdam", iso_format=True)
     'DE-BB'
     >>> address_to_country_and_subdivision_codes("14467 Germany")
-    ('DE', None)
+    ('DE', 'BE')
     >>> address_to_country_and_subdivision_codes("14467 Germany", iso_format=True)
+    'DE-BE'
+    >>> address_to_country_and_subdivision_codes("Munster Germany")
+    ('DE', None)
+    >>> address_to_country_and_subdivision_codes("Munster Germany", iso_format=True)
     'DE'
+
     """
     result = _address_to_country_and_subdivision_codes(text, lang, country)
     if iso_format:
