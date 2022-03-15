@@ -32,6 +32,12 @@ special_countries = {
     "south sudan": "SS",  # en
     "sudsudan": "SS",  # de
     "sudan del sur": "SS",  # es
+    # Make sure we never mistake some countries for IS (Iceland)
+    # We would mistake them because Iceland spells Island in German.
+    "bouvet island": "BV",  # en
+    "christmas island": "CX",  # en
+    "heard island": "HM",  # en
+    "norfolk island": "NF",  # en
 }
 
 
@@ -334,6 +340,7 @@ countries_en = {
         "bolivia plurinational state of": "BO",
         "bonaire saint eustatius and saba": "BQ",
         "bosnia and herzegovina": "BA",
+        "bosnia & herzegovina": "BA",
         "botswana": "BW",
         "bouvet island": "BV",
         "brazil": "BR",

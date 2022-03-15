@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [4.5.2] - 2022-03-15
+
+### Added
+
+- Detection for "Bosnia & Herzegovina" as "BA" in English
+
+### Fixed
+
+- No longer find "IS" for countries with "island" in their names.
 
 ## [4.5.1] - 2022-03-11
 
