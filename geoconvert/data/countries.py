@@ -340,7 +340,7 @@ countries_en = {
         "bolivia plurinational state of": "BO",
         "bonaire saint eustatius and saba": "BQ",
         "bosnia and herzegovina": "BA",
-        "bosnia & herzegovina": "BA",
+        "bosnia herzegovina": "BA",
         "botswana": "BW",
         "bouvet island": "BV",
         "brazil": "BR",

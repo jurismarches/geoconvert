@@ -29,10 +29,11 @@ class TestGermany:
             ("65760 Eschborn", "HE"),
             ("Straße 3 53119 Bonn Telefon: +49 22899610-2928", "NW"),
             ("80639        München", "BY"),
+            ("Eschborn", None),
         ],
     )
     def test_de_postcode_to_land_code(self, input_data, expected):
-        assert de_postcode_to_land_code(input_data)
+        assert de_postcode_to_land_code(input_data) == expected
         assert de_address_to_land_code(input_data) == expected
 
     @pytest.mark.parametrize(

@@ -51,7 +51,7 @@ class TestCountries:
             ("sudao do sul", {}, "SS"),  # pt
             # No confusion with Iceland, which spells "Island" in German ("IS")
             ("Cayman islands", {}, "KY"),  # en
-            ("Christmas island", {}, "CX"),  #en
+            ("Christmas island", {}, "CX"),  # en
             ("Bouvet Island", {}, "BV"),  # en
             ("Heard Island", {}, "HM"),  # en
             ("Norfolk Island", {}, "NF"),  # en
@@ -64,6 +64,10 @@ class TestCountries:
             ("Germany", {"lang": "En"}, "DE"),
             ("Germany", {"lang": "EN"}, "DE"),
             ("Germany", {"lang": "eN"}, "DE"),
+            # Special characters
+            ("Bosnia and Herzegovina", {}, "BA"),
+            ("Bosnia & Herzegovina", {}, "BA"),
+            ("Bosnia Herzegovina", {}, "BA"),
         ],
     )
     def test_country_name_to_country_code(self, input_data, kwargs, expected):
