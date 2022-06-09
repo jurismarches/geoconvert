@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [4.5.3] - 2022-06-09
+
+### Added
+
+- Detection for "palestinian territory" as "PS" in English
+- Detection for "turkiye" as "TR" in English + French
+- Detection for "birmanie" as "MM" in French
+
 ## [4.5.2] - 2022-03-15
 
 ### Added
