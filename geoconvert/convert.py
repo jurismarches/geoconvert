@@ -483,7 +483,9 @@ country_to_subdivision_lookup_function = {
 #   because otherwise "ON A SOIF!" would also give "ON".
 # - US state matching via province code.
 #   For instance, "Bridgeville, DE" must not give "DE" when the country
-#   is unknown, otherwise "RIO DE JANEIRO" would alose give "DE".
+#   is unknown, otherwise "RIO DE JANEIRO" would also give "DE".
+# - Brazilian state matching via state name,
+#   because the spanish word para can be confused with the Brazilian state Para.
 # - Brazilian state matching via province code
 #   For instance MS can be Mato Grosso do Sul or Mississippi
 # - French postcode matching, because 5-digit postcodes are used in
@@ -491,7 +493,6 @@ country_to_subdivision_lookup_function = {
 # - German postcode matching, because 5-digit postcodes are used in
 #   many countries
 country_to_safe_subdivision_lookup_function = (
-    ("BR", br_state_name_to_state_code),
     ("BR", br_postcode_to_state_code),
     ("CA", ca_postcode_to_province_code),
     ("CA", ca_province_name_to_province_code),
