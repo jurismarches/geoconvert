@@ -69,7 +69,7 @@ BR_POSTCODES_RANGE = {
 
 # Regexes
 
-names = r"\b|\b".join(name.replace(" ", "\s") for name in br_states)
+names = r"\b|\b".join(name.replace(" ", r"\s") for name in br_states)
 br_state_name_regex = re.compile(rf"(?P<state>\b{names}\b)", re.I)
 
 codes = r"\b|\b".join(code for code in BR_STATES_CODES)

@@ -51,7 +51,7 @@ CA_POSTCODE_FIRST_LETTER_TO_PROVINCE_CODE = {
 
 # Regexes
 
-names = r"\b|\b".join(name.replace(" ", "\s") for name in ca_provinces)
+names = r"\b|\b".join(name.replace(" ", r"\s") for name in ca_provinces)
 ca_province_name_regex = re.compile(rf"(?P<province>\b{names}\b)", re.I)
 
 codes = r"\b|\b".join(code for code in CA_PROVINCES_CODES)
