@@ -24,6 +24,7 @@ class TestCountries:
             # No confusion with Congo ("CD")
             ("Congo (Brazzaville)", {}, "CG"),
             ("Congo (Kinshasa)", {}, "CD"),
+            ("Congo Democratic Republic of", {}, "CD"),
             ("Congo", {}, "CG"),
             # No confusion with Guinea ("GN")
             # "GQ"
