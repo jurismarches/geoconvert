@@ -1,3 +1,4 @@
+import mock
 import pytest
 
 from geoconvert.convert import (
@@ -106,3 +107,8 @@ class TestGermany:
             address_to_country_and_subdivision_codes(input_data, iso_format=True)
             == expected
         )
+
+    @mock.patch("geoconvert.convert.DE_POSTCODE_RANGE", {})
+    def test_de_postcode_to_land_code_with_no_data(self):
+        # NOTE : this test has no other use than to keep a 100% coverage
+        assert de_postcode_to_land_code("00000") is None
