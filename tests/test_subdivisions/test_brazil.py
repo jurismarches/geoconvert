@@ -39,13 +39,13 @@ class TestBrazil:
             address_to_country_and_subdivision_codes(
                 input_data, country="BR", iso_format=True
             )
-            == "BR-" + expected
+            == f"BR-{expected}"
         )
 
     @pytest.mark.parametrize(
         "input_data, expected",
         [
-            ("Localização   :   Goiânia, Goiás, Brasil", "GO"),
+            ("Localização   :   Goiânia, Goiás", "GO"),
             ("São Luís (frequentemente chamado de São Luís do Maranhão)", "MA"),
             ("a capital do estado do maranhao.", "MA"),
             ("Avenida Pedro Alvares Cabral Vila Mariana, São Paulo", "SP"),
@@ -61,10 +61,33 @@ class TestBrazil:
     def test_br_state_name_to_state_code(self, input_data, expected):
         assert br_state_name_to_state_code(input_data) == expected
         assert br_address_to_state_code(input_data) == expected
+        # If country is specified, then there is a match with the
+        # generic function address_to_country_and_subdivision_codes.
+        assert address_to_country_and_subdivision_codes(input_data, country="BR") == (
+            "BR",
+            expected,
+        )
+        assert (
+            address_to_country_and_subdivision_codes(
+                input_data, country="BR", iso_format=True
+            )
+            == f"BR-{expected}"
+        )
+        # If country is not specified, then there is no match with the
+        # generic function address_to_country_and_subdivision_codes.
+        assert address_to_country_and_subdivision_codes(input_data) == (None, None)
+        assert (
+            address_to_country_and_subdivision_codes(input_data, iso_format=True)
+            is None
+        )
+        # However, if "Brasil" is explicitely in the input data,
+        # then the generic function address_to_country_and_subdivision_codes
+        # matches what is expected.
+        input_data = f"{input_data}, Brasil"
         assert address_to_country_and_subdivision_codes(input_data) == ("BR", expected)
         assert (
             address_to_country_and_subdivision_codes(input_data, iso_format=True)
-            == "BR-" + expected
+            == f"BR-{expected}"
         )
 
     @pytest.mark.parametrize(
