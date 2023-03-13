@@ -3,6 +3,36 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [5.0.0] - 2023-03-13
+
+### Added
+
+- Support for Python 3.10 and 3.11
+
+### Removed
+
+- Support for Python 3.6 and 3.7
+
+### Fixed
+
+- All tests pass, no warning
+
+### Upgrade
+
+- All libraries used for the dev/test environment
+
+## [4.5.5] - 2022-12-20
+
+### Fixed
+
+- Do not mistake para with the Brazilian state Pará
+
+## [4.5.4] - 2022-12-20
+
+### Added
+
+- Kyiv is a known capital name for French and English languages
+
 ## [4.5.3] - 2022-06-09
 
 ### Added
