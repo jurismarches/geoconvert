@@ -38,16 +38,16 @@ class TestFrance:
             ("Bienvenue en bourgogne franche comté", "27"),
             ("midi pyrénées", "73"),
             ("grand est", "44"),
-            (u"mayotte ", "06"),
-            (u"Centre val de Loire", "24"),
-            (u"Picardie ", "22"),
-            (u"provence alpes côte d'azur", "93"),
-            (u"", None),
-            (u"hauts de france", "32"),
-            (u"auvergne rhône alpes", "84"),
-            (u"nouvelle aquitaine", "75"),
-            (u"La guadeloupe, une superbe région", "01"),
-            (u"VICE-RECTORAT DE MAYOTTE ( DCS)", "06"),
+            ("mayotte ", "06"),
+            ("Centre val de Loire", "24"),
+            ("Picardie ", "22"),
+            ("provence alpes côte d'azur", "93"),
+            ("", None),
+            ("hauts de france", "32"),
+            ("auvergne rhône alpes", "84"),
+            ("nouvelle aquitaine", "75"),
+            ("La guadeloupe, une superbe région", "01"),
+            ("VICE-RECTORAT DE MAYOTTE ( DCS)", "06"),
         ],
     )
     def test_fr_region_name_to_id(self, input_data, expected):
@@ -66,17 +66,17 @@ class TestFrance:
                 "grand est",
                 ("67", ["67", "68", "54", "55", "57", "88", "08", "10", "51", "52"]),
             ),
-            (u"mayotte ", ("976", ["976"])),
-            (u"Centre val de Loire", ("45", ["18", "28", "36", "37", "41", "45"])),
-            (u"Picardie ", ("80", ["02", "60", "80"])),
+            ("mayotte ", ("976", ["976"])),
+            ("Centre val de Loire", ("45", ["18", "28", "36", "37", "41", "45"])),
+            ("Picardie ", ("80", ["02", "60", "80"])),
             (
-                u"provence alpes côte d'azur",
+                "provence alpes côte d'azur",
                 ("13", ["04", "05", "06", "13", "83", "84"]),
             ),
-            (u"", None),
-            (u"hauts de france", ("59", ["59", "62", "02", "60", "80"])),
+            ("", None),
+            ("hauts de france", ("59", ["59", "62", "02", "60", "80"])),
             (
-                u"auvergne rhône alpes",
+                "auvergne rhône alpes",
                 (
                     "69",
                     [
@@ -96,7 +96,7 @@ class TestFrance:
                 ),
             ),
             (
-                u"nouvelle aquitaine",
+                "nouvelle aquitaine",
                 (
                     "33",
                     [
@@ -115,8 +115,8 @@ class TestFrance:
                     ],
                 ),
             ),
-            (u"La guadeloupe, une superbe région", ("971", ["971"])),
-            (u"VICE-RECTORAT DE MAYOTTE ( DCS)", ("976", ["976"])),
+            ("La guadeloupe, une superbe région", ("971", ["971"])),
+            ("VICE-RECTORAT DE MAYOTTE ( DCS)", ("976", ["976"])),
             (
                 "Les Pays de la Loire, une superbe région",
                 ("44", ["44", "49", "53", "72", "85"]),
