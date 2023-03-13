@@ -18,7 +18,7 @@ def remove_accents(text):
 
 
 def safe_string(text):
-    u"""
+    """
     Safe a string
     >>> safe_string('Alsace')
     'alsace'

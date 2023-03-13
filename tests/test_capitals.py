@@ -33,7 +33,7 @@ class TestCapitals:
         "input_data, expected",
         [
             ("bruxelles", "BE"),
-            (u"La ville est Lomé.", "TG"),
+            ("La ville est Lomé.", "TG"),
         ],
     )
     def test_capital_name_to_country_code_fr(self, input_data, expected):
@@ -56,7 +56,7 @@ class TestCapitals:
         "input_data, expected",
         [
             ("Kopenhagen", "DK"),
-            (u"são tomé", "ST"),
+            ("são tomé", "ST"),
             ("Das stadt ist Ulaanbaatar.", "MN"),
         ],
     )
