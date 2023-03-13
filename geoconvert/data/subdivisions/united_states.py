@@ -61,7 +61,7 @@ US_STATES_CODES = set(us_states.values())
 
 # Regexes
 
-names = r"\b|\b".join(name.replace(" ", "\s") for name in us_states)
+names = r"\b|\b".join(name.replace(" ", r"\s") for name in us_states)
 us_state_name_regex = re.compile(rf"(?P<state>\b{names}\b)", re.I)
 
 codes = r"\b|\b".join(code for code in US_STATES_CODES)
