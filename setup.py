@@ -18,8 +18,8 @@ def get_version():
 
 setup(
     name="Geoconvert",
-    author="Jurismarches",
-    author_email="informatique@jurismarches.com",
+    author="OctopusMind",
+    author_email="informatique@octopusmind.info",
     version=get_version(),
     license="MIT",
     packages=["geoconvert", "geoconvert/data", "geoconvert/data/subdivisions"],
