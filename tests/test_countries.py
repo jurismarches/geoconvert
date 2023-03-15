@@ -113,6 +113,7 @@ class TestCountries:
             ("Congo (Kinshasa)", "CD"),
             ("São tome & principe ", "ST"),
             ("Papouasie Nouvelle Guinée", "PG"),
+            ("Irak", "IQ"),
         ],
     )
     def test_country_name_to_country_code_fr(self, input_data, expected):
@@ -154,6 +155,7 @@ class TestCountries:
             ("TIMOR LESTE", "TL"),
             ("state of palestine", "PS"),
             ("palestine, state of", "PS"),
+            ("Irak", None),
         ],
     )
     def test_country_name_to_country_code_en(self, input_data, expected):

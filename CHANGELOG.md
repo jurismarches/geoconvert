@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Added
 
 - Support for Python 3.10 and 3.11
+- Detection for "Irak" as IQ in French (not just "Iraq" for this language)
 
 ### Removed
 
@@ -16,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Fixed
 
 - All tests pass, no warning
-- Find CG if "Congo Democratic Republic" (without "of" in the end)
+- Detection for "Congo Democratic Republic" as CG (without "of" in the end)
 - Do not mistake "Haute-Vienne" French department with the Austrian capital name "Vienne" (in French)
 
 ### Upgrade
