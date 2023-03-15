@@ -16,6 +16,7 @@ class TestCapitals:
             ("Kairo?", {}, "EG"),  # de
             ("    Cairo   ", {}, "EG"),  # en
             ("Le Caire\n", {}, "EG"),  # fr
+            ("Vienne", {}, "AT"),  # fr
             # If no country found, return None
             ("Wonderland", {}, None),
             ("Kairo", {"lang": "fr"}, None),
@@ -34,6 +35,7 @@ class TestCapitals:
         [
             ("bruxelles", "BE"),
             ("La ville est Lomé.", "TG"),
+            ("Vienne", "AT"),  # fr
         ],
     )
     def test_capital_name_to_country_code_fr(self, input_data, expected):

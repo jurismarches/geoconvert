@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 - All tests pass, no warning
 - Find CG if "Congo Democratic Republic" (without "of" in the end)
+- Do not mistake "Haute-Vienne" French department with the Austrian capital name "Vienne" (in French)
 
 ### Upgrade
 
