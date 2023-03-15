@@ -32,8 +32,10 @@ special_countries = {
     "south sudan": "SS",  # en
     "sudsudan": "SS",  # de
     "sudan del sur": "SS",  # es
-    # Make sure we never mistake some countries for IS (Iceland)
+    # Make sure we never mistake some countries or subdivisions for IS (Iceland)
     # We would mistake them because Iceland spells Island in German.
+    "prince edward island": "CA",  # en
+    "rhode island": "US",  # en
     "bouvet island": "BV",  # en
     "christmas island": "CX",  # en
     "heard island": "HM",  # en

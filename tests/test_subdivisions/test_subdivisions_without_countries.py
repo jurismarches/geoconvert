@@ -48,6 +48,9 @@ class TestNoCountryProvided:
             ("2 pl. Saint-Pierre, 44000 Nantes", {"country": "FR"}, "44"),
             ("2 pl. Saint-Pierre, 44000 Nantes, France", {}, "44"),
             ("2 pl. Saint-Pierre, 44000 Nantes, France", {"country": "FR"}, "44"),
+            # No mistakes with Iceland (IS)
+            ("Prince Edward Island", {}, "PE"),
+            ("Rhode Island", {}, "RI"),
         ],
     )
     def test_address_to_subdivision_code(self, input_data, kwargs, expected):
@@ -95,6 +98,9 @@ class TestNoCountryProvided:
                 {},
                 ("AT", None),  # Precedence goes to the French capital name for Austria
             ),
+            # No mistakes with Iceland (IS)
+            ("Prince Edward Island", {}, ("CA", "PE")),
+            ("Rhode Island", {}, ("US", "RI")),
         ],
     )
     def test_address_to_country_and_subdivision_code(

@@ -57,6 +57,8 @@ class TestCountries:
             ("Heard Island", {}, "HM"),  # en
             ("Norfolk Island", {}, "NF"),  # en
             ("Solomon Islands", {}, "SB"),  # en
+            ("Prince Edward Island", {}, "CA"),  # en
+            ("Rhode Island", {}, "US"),  # en
             # However, in cases where island is singular instead of plural,
             # there can be confusion.
             ("Solomon Island Nationals", {}, "IS"),  # en
