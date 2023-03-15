@@ -156,6 +156,7 @@ countries_fr = {
         "inde": "IN",
         "indonesie": "ID",
         "iran": "IR",
+        "irak": "IQ",
         "iraq": "IQ",
         "irlande": "IE",
         "islande": "IS",
