@@ -88,6 +88,13 @@ class TestNoCountryProvided:
             # The default results is a tuple made of two Nones.
             ("", {}, (None, None)),
             ("2 pl. Saint-Pierre, Nantes", {}, (None, None)),
+            # Special case
+            ("Haute-Vienne", {}, ("FR", "87")),
+            (
+                "Vienne",
+                {},
+                ("AT", None),  # Precedence goes to the French capital name for Austria
+            ),
         ],
     )
     def test_address_to_country_and_subdivision_code(

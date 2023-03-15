@@ -267,6 +267,9 @@ class TestCountries:
                 "Av. Pres. Castelo Branco, Portão 3 - Maracanã",
                 None,
             ),
+            # Special case
+            ("Haute-Vienne", "FR"),
+            ("Vienne", "AT"),  # Precedence goes to the French capital name for Austria
         ],
     )
     def test_address_to_country_code(self, input_data, expected):
