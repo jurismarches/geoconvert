@@ -1314,8 +1314,7 @@ language_to_country_names = {
 
 # Association from a country code to another country code.
 # These territories generally have a code but are not considered as an
-# independent country and actually and depend
-# from another country.
+# independent country and actually depend from another country.
 country_territories = {
     "FR": frozenset(
         ["RE", "TF", "BL", "YT", "WF", "NC", "PF", "PM", "MQ", "GF", "MF", "GP"]
