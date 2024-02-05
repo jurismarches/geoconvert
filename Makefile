@@ -7,11 +7,11 @@ clean:
 	find . -name "*.pyc" -delete
 
 styles:
-	black .
 	isort --ws .
-	flake8
+	black .
+	ruff --fix .
 
 styles_check:
-	black . --check
 	isort --ws --check-only .
-	flake8
+	black . --check
+	ruff check .
