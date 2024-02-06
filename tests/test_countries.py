@@ -50,6 +50,11 @@ class TestCountries:
             ("sudan del sur", {}, "SS"),  # es
             ("Soudan du Sud", {}, "SS"),  # fr
             ("sudao do sul", {}, "SS"),  # pt
+            # No confusion between the indian ocean, the British Indian Ocean Territory
+            # and the deutsch name for india
+            ("indien", {}, "IN"),  # de
+            ("Territoire britannique de l’océan Indien", {}, "IO"),  # fr
+            ("Océan Indien", {}, None),  # fr
             # No confusion with Iceland, which spells "Island" in German ("IS")
             ("Cayman islands", {}, "KY"),  # en
             ("Christmas island", {}, "CX"),  # en

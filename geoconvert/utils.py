@@ -38,10 +38,14 @@ def safe_string(text):
     'washington dc'
     >>> safe_string('How aRE yOU?')
     'how are you'
+    >>> safe_string("l’ocean")
+    "l'ocean"
     """
     text = remove_accents(text)
     # Replace "-" and ":" with a whitespace
     text = re.sub(r"[-:]", " ", text)
+    # Replace weird '
+    text = re.sub(r"[ʼ]", "'", text)
     # Only keep word or space characters as well as "_", and "'".
     text = re.sub(r"[^\w\s']", "", text)
     # Always remove multiple whitespaces at the very last minute

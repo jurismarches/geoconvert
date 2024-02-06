@@ -32,6 +32,10 @@ special_countries = {
     "south sudan": "SS",  # en
     "sudsudan": "SS",  # de
     "sudan del sur": "SS",  # es
+    # Make sure we never mistake "océan Indien" for IN
+    "territoire britannique de l'ocean indien": "IO",  # fr
+    "ocean indien": None,  # fr
+    "indien": "IN",  # de
     # Make sure we never mistake some countries or subdivisions for IS (Iceland)
     # We would mistake them because Iceland spells Island in German.
     "prince edward island": "CA",  # en
@@ -222,7 +226,6 @@ countries_fr = {
         "norvege": "NO",
         "nouvelle caledonie": "NC",
         "nouvelle zelande": "NZ",
-        "ocean indien": "IO",
         "oman": "OM",
         "ouganda": "UG",
         "ouzbekistan": "UZ",
@@ -651,7 +654,6 @@ countries_de = {
         "guyana": "GY",
         "haiti": "HT",
         "honduras": "HN",
-        "indien": "IN",
         "indonesien": "ID",
         "irak": "IQ",
         "iran": "IR",

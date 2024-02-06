@@ -9,6 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 - Support for Python 3.12
 - Detection for DE and FR subdivisions using NUTS codes
+- escape ’ character as '
+
+### Fixed
+
+- Do not mistake "océan indien" as IN
 
 ### Dependencies
 
