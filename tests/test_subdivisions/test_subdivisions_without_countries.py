@@ -51,6 +51,22 @@ class TestNoCountryProvided:
             # No mistakes with Iceland (IS)
             ("Prince Edward Island", {}, "PE"),
             ("Rhode Island", {}, "RI"),
+            #
+            # Detection with nuts code.
+            #
+            # With different countries we take different nuts levels
+            # FR metropolitain
+            ("code FR103", {}, "78"),  #  Yvelines
+            ("code FR10", {}, None),  #  Nuts level 2 : not precise enough
+            ("code FR1", {}, None),  #  Nuts level 1 : not precise enough
+            # FR overseeas
+            ("\tFRY30\t", {}, "973"),  #  French Guiana
+            ("\tFRY3\t", {}, "973"),  #  French Guiana
+            ("\tFRY\t", {}, None),  #  Nuts level 1 : not precise enough
+            # DE
+            ("code DEB", {}, "RP"),  # Nuts level 1 is precise enough
+            ("code DEB1", {}, "RP"),
+            ("code DEB11", {}, "RP"),
         ],
     )
     def test_address_to_subdivision_code(self, input_data, kwargs, expected):
@@ -101,6 +117,34 @@ class TestNoCountryProvided:
             # No mistakes with Iceland (IS)
             ("Prince Edward Island", {}, ("CA", "PE")),
             ("Rhode Island", {}, ("US", "RI")),
+            #
+            # Detection with nuts code.
+            #
+            # With different countries we take different nuts levels
+            # FR metropolitain
+            ("code fr103", {}, ("FR", "78")),  #  Yvelines
+            (
+                "code FR10",
+                {},
+                ("FR", None),
+            ),  #  Nuts level 2 : take country, not subdivision
+            (
+                "code FR1",
+                {},
+                ("FR", None),
+            ),  #  Nuts level 1 : take country, not subdivision
+            # FR overseeas
+            ("\tFRY30\t", {}, ("FR", "973")),  #  French Guiana
+            ("\tfry3\t", {}, ("FR", "973")),  #  French Guiana
+            (
+                "\tFRY\t",
+                {},
+                ("FR", None),
+            ),  #  Nuts level 1 : take country, not subdivision
+            # DE
+            ("code DEB", {}, ("DE", "RP")),
+            ("code DEB1", {}, ("DE", "RP")),
+            ("code DEB11", {}, ("DE", "RP")),
         ],
     )
     def test_address_to_country_and_subdivision_code(

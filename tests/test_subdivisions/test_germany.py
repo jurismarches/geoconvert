@@ -19,6 +19,9 @@ class TestGermany:
             ("Be yourself!", None),
             ("This is BE", "BE"),
             ("31-37 53179 Bonn Telefon: +49 228 4010 Fax: +49 228 4011223", "NW"),
+            # nuts code
+            ("stasticial region de119", "BW"),
+            ("stasticial region DE2", "BY"),
         ],
     )
     def test_de_address_to_land_code(self, input_data, expected):

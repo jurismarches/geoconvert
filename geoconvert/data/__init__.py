@@ -39,6 +39,12 @@ from .subdivisions.germany import (
     de_landers,
     de_postcode_regex,
 )
+from .subdivisions.nuts import (
+    ALL_NUTS_CODES,
+    NUTS_CODES_BY_COUNTRY,
+    all_nuts_regex,
+    nuts_regexes_by_country,
+)
 from .subdivisions.united_states import (
     us_postcode_regex,
     us_state_code_regex,
