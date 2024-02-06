@@ -281,6 +281,10 @@ def fr_postcode_to_dept_code(text):
             else:
                 return "20B"
 
+        # Saint-Martin
+        if postcode[:3] == "970":
+            return "971"
+
         # Other cases
         for code in (postcode[:2], postcode[:3]):
             if code in fr_departments.values():
