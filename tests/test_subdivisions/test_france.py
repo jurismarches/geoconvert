@@ -172,6 +172,10 @@ class TestFrance:
             ("Rue de la Réunion, 75000 Paris", "75"),
             ("Rue de l'Orne, 44800 Saint-Herblain", "44"),
             ("D7, Sainte-Luce 97228, Martinique", "972"),
+            # Saint-Martin postcodes
+            ("Code postal 97150", "971"),
+            ("Code postal 97051", "971"),
+            ("Code postal 97080", "971"),
             ("99999", None),
         ],
     )
