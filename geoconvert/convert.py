@@ -2,10 +2,13 @@
 import re
 
 from .data import (
+    ALL_NUTS_CODES,
     BR_POSTCODES_RANGE,
     CA_POSTCODE_FIRST_LETTER_TO_PROVINCE_CODE,
     DE_HAUPTSTADT,
     DE_POSTCODE_RANGE,
+    NUTS_CODES_BY_COUNTRY,
+    all_nuts_regex,
     br_postcode_regex,
     br_state_code_regex,
     br_state_name_regex,
@@ -27,6 +30,7 @@ from .data import (
     fr_regions,
     language_to_capital_names,
     language_to_country_names,
+    nuts_regexes_by_country,
     us_postcode_regex,
     us_state_code_regex,
     us_state_name_regex,
@@ -135,6 +139,10 @@ def ca_province_name_to_province_code(text):
 
 
 def de_address_to_land_code(text):
+    # First, look for NUTS code in the plain text
+    nuts_match = re.search(nuts_regexes_by_country["DE"], text)
+    if nuts_match:
+        return NUTS_CODES_BY_COUNTRY["DE"].get(nuts_match.group().upper())
     # Look for the land name in the plain text
     code = de_land_name_to_land_code(text)
     if code:
@@ -143,6 +151,7 @@ def de_address_to_land_code(text):
     code = de_hauptstadt_to_land_code(text)
     if code:
         return code
+    # Look for the postcode and derive the state code from it
     code = de_postcode_to_land_code(text)
     if code is not None:
         return code
@@ -238,7 +247,11 @@ def us_postcode_to_state_code(text):
 
 
 def fr_address_to_dept_code(text):
-    # First, look for the postcode and derive the dept code from it
+    # First, look for NUTS code in the plain text
+    nuts_match = re.search(nuts_regexes_by_country["FR"], text)
+    if nuts_match:
+        return NUTS_CODES_BY_COUNTRY["FR"].get(nuts_match.group().upper())
+    # Look for the postcode and derive the dept code from it
     code = fr_postcode_to_dept_code(text)
     if code is not None:
         return code
@@ -658,9 +671,16 @@ def _guess_country_and_subdivision_codes(text, lang=None):
     """
     Just guess the subdivision when no country is explicitly given.
     """
+    # Look for NUTS code in the plain text
+    nuts_match = re.search(all_nuts_regex, text)
+    if nuts_match:
+        nuts_code = nuts_match.group().upper()
+        return nuts_code[:2], ALL_NUTS_CODES.get(nuts_code)
+
     country_code, subdivision_code = _guess_country_then_subdivision_codes(text, lang)
     if country_code is not None:
         return country_code, subdivision_code
+
     return _guess_subdivision_then_country_codes(text)
 
 

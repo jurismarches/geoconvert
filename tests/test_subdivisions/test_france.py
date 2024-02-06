@@ -68,6 +68,10 @@ class TestFrance:
             ("M. le maire, hôtel de Ville 97717 Saint-Denis", "974"),
             ("Rue de la Réunion, 75000 Paris", "75"),
             ("Rue de l'Orne, 44800 Saint-Herblain", "44"),
+            # nuts code
+            ("stasticial region FRB04", "37"),
+            ("stasticial region fr244", "37"),
+            # dept names
             ("Martinique", "972"),
             ("cotes d'armr", None),
             ("cotes d'armor", "22"),
