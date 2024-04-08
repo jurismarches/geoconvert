@@ -68,10 +68,10 @@ class TestFrance:
             ("M. le maire, hôtel de Ville 97717 Saint-Denis", "974"),
             ("Rue de la Réunion, 75000 Paris", "75"),
             ("Rue de l'Orne, 44800 Saint-Herblain", "44"),
-            # nuts code
+            # NUTS code
             ("stasticial region FRB04", "37"),
             ("stasticial region fr244", "37"),
-            # dept names
+            # Dept names
             ("Martinique", "972"),
             ("cotes d'armr", None),
             ("cotes d'armor", "22"),
@@ -105,6 +105,18 @@ class TestFrance:
             ("Tout savoir sur Saint Barthélemy", "977"),
             ("Tout savoir sur saint-barthelemy", "977"),
             ("Tout savoir sur saint Barthélémy", "977"),
+            # Region names
+            ("Pays de la Loire", "44"),
+            # Special cases for the old French région "Centre"
+            ("Région Centre", "45"),
+            ("Conseil Régional centre", "45"),
+            # No confusion with the old "Centre" name for the French region "Centre-Val-de-Loire"
+            ("Centre Pompidou", None),
+            # No confusion with the "Nord" department
+            ("Hopital nord Franche Comté", "25"),
+            # Both dept name and region name
+            ("Guyane", "973"),
+            ("Guadeloupe", "971"),
             # There can be some mistakes, that we may want to fix one day.
             # In this case, we could look for 2 or 3 digit
             ("Rue de l'Orne, Saint-Herblain (44)", "61"),

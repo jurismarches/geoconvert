@@ -248,13 +248,14 @@ def us_postcode_to_state_code(text):
 
 def fr_address_to_dept_code(text):
     # First, look for NUTS code in the plain text
-    nuts_match = re.search(nuts_regexes_by_country["FR"], text)
-    if nuts_match:
+    if nuts_match := re.search(nuts_regexes_by_country["FR"], text):
         return NUTS_CODES_BY_COUNTRY["FR"].get(nuts_match.group().upper())
     # Look for the postcode and derive the dept code from it
-    code = fr_postcode_to_dept_code(text)
-    if code is not None:
+    if (code := fr_postcode_to_dept_code(text)) is not None:
         return code
+    # Look for the region name in plain text
+    if region_info := fr_region_name_to_info(text):
+        return region_info[0]
     # Look for the dept name in plain text
     return fr_dept_name_to_dept_code(text)
 

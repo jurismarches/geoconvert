@@ -51,6 +51,8 @@ class TestNoCountryProvided:
             # No mistakes with Iceland (IS)
             ("Prince Edward Island", {}, "PE"),
             ("Rhode Island", {}, "RI"),
+            # No confusion with the old French région Centre
+            ("London Centre for Nanotechnology", {}, None),
             #
             # Detection with nuts code.
             #
