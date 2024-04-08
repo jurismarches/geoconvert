@@ -3,7 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## Unreleased
+## [5.2.0] - 2024-04-08
+
+- Use French region names when finding French subdivisions
+  (the dept of the regional prefecture is used if a region name matched)
+
+## [5.1.0] - 2024-02-27
 
 ### Added
 
@@ -15,8 +20,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 - Do not mistake "océan indien" as IN
 - Support for Saint-Martin (France) postcodes
-- Use French region names when finding French subdivisions
-  (the dept of the regional prefecture is used if a region name matched)
 
 ### Dependencies
 
