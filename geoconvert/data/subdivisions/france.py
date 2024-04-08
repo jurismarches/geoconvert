@@ -19,7 +19,6 @@ fr_regions = {
     "auvergne": "83",  # old region (pre 2016)
     "bourgogne": "26",  # old region (pre 2016)
     "bretagne": "53",
-    "centre": "24",
     "champagne ardenne": "21",  # old region (pre 2016)
     "corse": "94",
     "franche comte": "43",  # old region (pre 2016)
@@ -41,6 +40,10 @@ fr_regions = {
     "provence alpes cote d'azur": "93",
     "reunion": "04",
     "rhone alpes": "82",  # old region (pre 2016)
+    # For the old region name "Centre", use longer names,
+    # to avoid false positives (especially for places such as "Centre Pompidou").
+    "region centre": "24",
+    "conseil regional centre": "24",
 }
 
 # Keep backward compatibility
