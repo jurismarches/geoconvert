@@ -19,6 +19,7 @@ class TestCountries:
             ("Allemagne", {}, "DE"),  # fr
             ("Alemanha", {}, "DE"),  # pt
             # If no country found, return None
+            ("Southern Africa", {}, None),
             ("Wonderland", {}, None),
             ("Germany", {"lang": "fr"}, None),
             # No confusion with Congo ("CD")
