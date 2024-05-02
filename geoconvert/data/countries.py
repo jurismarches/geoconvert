@@ -541,7 +541,6 @@ countries_en = {
         "somalia": "SO",
         "south africa": "ZA",
         "south georgia and the south sandwich islands": "GS",
-        "southern africa": "ZA",
         "spain": "ES",
         "sri lanka": "LK",
         "sudan": "SD",
