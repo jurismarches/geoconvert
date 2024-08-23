@@ -206,6 +206,7 @@ countries_fr = {
         "mayotte": "YT",
         "mexique": "MX",
         "micronesie": "FM",
+        "moldavie": "MD",
         "moldova": "MD",
         "monaco": "MC",
         "mongolia": "MN",
