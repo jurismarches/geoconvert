@@ -44,6 +44,7 @@ special_countries = {
     "christmas island": "CX",  # en
     "heard island": "HM",  # en
     "norfolk island": "NF",  # en
+    "pacific island": "",  # en
     # Special case where it can be mistaken for the Austrian capital
     "haute vienne": "FR",  # fr
 }
