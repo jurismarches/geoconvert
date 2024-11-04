@@ -65,6 +65,8 @@ class TestCountries:
             ("Solomon Islands", {}, "SB"),  # en
             ("Prince Edward Island", {}, "CA"),  # en
             ("Rhode Island", {}, "US"),  # en
+            ("Pacific island", {}, None),  # en
+            ("Fiji/Pacific island", {}, "FJ"),  # en
             # However, in cases where island is singular instead of plural,
             # there can be confusion.
             ("Solomon Island Nationals", {}, "IS"),  # en
@@ -191,6 +193,7 @@ class TestCountries:
             ("   Land der Hinrichtung : Deutschland", "DE"),
             ("Dschibuti-Stadt", "DJ"),
             ("elfenbeinküste und ecuador    ", "CI"),
+            ("Fiji/Pacific island", None),  # en
         ],
     )
     def test_country_name_to_country_code_de(self, input_data, expected):

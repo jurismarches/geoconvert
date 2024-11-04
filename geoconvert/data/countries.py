@@ -48,6 +48,12 @@ special_countries = {
     "haute vienne": "FR",  # fr
 }
 
+# We want to make sure pacific island is not registered as IS (Iceland) in German.
+# Other languages doesn't have issues with it and we shouldn't prevent them from retrieving
+# other countries like FJ (Fiji) in "Fiji/Pacific Island"
+special_countries_de = {
+    "pacific island": None,  # en
+}
 
 countries_fr = {
     **special_countries,
@@ -597,6 +603,7 @@ countries_en = {
 
 
 countries_de = {
+    **special_countries_de,
     **special_countries,
     **{
         "agypten": "EG",
