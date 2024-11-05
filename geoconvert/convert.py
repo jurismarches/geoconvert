@@ -9,6 +9,7 @@ from .data import (
     DE_POSTCODE_RANGE,
     NUTS_CODES_BY_COUNTRY,
     all_nuts_regex,
+    ambiguous_countries,
     br_postcode_regex,
     br_state_code_regex,
     br_state_name_regex,
@@ -413,8 +414,15 @@ def _full_name_to_country_code(text, lang, language_to_full_names):
         # If the language is unknown, just do not use any language.
         language_to_full_names = {}
 
-    for lang, full_names in language_to_full_names.items():
-        country_code = _full_name_to_country_code_for_lang(text, lang, full_names)
+    for language, full_names in language_to_full_names.items():
+        # When language is not set, we remove ambiguous countries names from the countries list
+        if not lang:
+            full_names = {
+                name: code
+                for name, code in full_names.items()
+                if name not in ambiguous_countries
+            }
+        country_code = _full_name_to_country_code_for_lang(text, language, full_names)
         if country_code:
             return country_code
 

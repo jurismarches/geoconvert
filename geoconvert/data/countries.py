@@ -55,6 +55,11 @@ special_countries_de = {
     "pacific island": None,  # en
 }
 
+# We register here names matching common words in other languages to prevent
+# matching them when language is not defined
+ambiguous_countries = ["island"]
+
+
 countries_fr = {
     **special_countries,
     **{
