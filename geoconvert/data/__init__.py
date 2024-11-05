@@ -1,6 +1,6 @@
 from .capitals import capitals_de, capitals_en, capitals_fr, language_to_capital_names
 from .countries import (
-    ambiguous_countries,
+    ambiguous_country_names,
     countries_de,
     countries_en,
     countries_fr,

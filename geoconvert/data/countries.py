@@ -57,7 +57,7 @@ special_countries_de = {
 
 # We register here names matching common words in other languages to prevent
 # matching them when language is not defined
-ambiguous_countries = ["island"]
+ambiguous_country_names = ["island"]
 
 
 countries_fr = {
