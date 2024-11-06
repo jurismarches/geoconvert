@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [5.3.1] - 2024-11-06
+
+### Added
+
+- 'KNOWN_LANGUAGES_FOR_COUNTRY' variable containing languages geoconvert can process to find countries.
+
 ## [5.3.0] - 2024-11-04
 
 ### Changed

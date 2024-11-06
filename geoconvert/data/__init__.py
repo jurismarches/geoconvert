@@ -52,3 +52,5 @@ from .subdivisions.united_states import (
     us_state_name_regex,
     us_states,
 )
+
+KNOWN_LANGUAGES_FOR_COUNTRY = set(language_to_country_names.keys())
