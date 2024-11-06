@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [5.3.0] - 2024-11-04
+
+### Changed
+
+- "Island" no longer matches Iceland when language is not set.
+
+### Fixed
+
+- "Pacific Island" no longer matches Iceland.
+
 ## [5.2.2] - 2024-08-23
 
 - Detection for "moldavie" as "MD" in French.
