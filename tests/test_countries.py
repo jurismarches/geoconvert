@@ -63,14 +63,14 @@ class TestCountries:
             ("Heard Island", {}, "HM"),  # en
             ("Norfolk Island", {}, "NF"),  # en
             ("Solomon Islands", {}, "SB"),  # en
+            # However, in cases where island is singular instead of plural,
+            # there can be confusion.
+            ("Solomon Island Nationals", {}, None),  # en
             ("Prince Edward Island", {}, "CA"),  # en
             ("Rhode Island", {}, "US"),  # en
             ("Pacific island", {}, None),  # en
             ("Fiji/Pacific island", {}, "FJ"),  # en
             ("island", {}, None),  # en
-            # However, in cases where island is singular instead of plural,
-            # there can be confusion.
-            ("Solomon Island Nationals", {}, None),  # en
             # Any capitalization for lang works
             ("Germany", {"lang": "en"}, "DE"),
             ("Germany", {"lang": "En"}, "DE"),
