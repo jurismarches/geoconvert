@@ -102,9 +102,9 @@ class TestFrance:
             ("Loire Atlanti)que", "44"),
             ("Yonne", "89"),
             ("Saint Pierre et Miquelon", "975"),
-            ("Tout savoir sur Saint Barthélemy", "977"),
-            ("Tout savoir sur saint-barthelemy", "977"),
-            ("Tout savoir sur saint Barthélémy", "977"),
+            ("Tout savoir à propos de Saint Barthélemy", "977"),
+            ("Tout savoir à propos de saint-barthelemy", "977"),
+            ("Tout savoir à propos de saint Barthélémy", "977"),
             # Region names
             ("Pays de la Loire", "44"),
             # Special cases for the old French région "Centre"
@@ -117,9 +117,23 @@ class TestFrance:
             # Both dept name and region name
             ("Guyane", "973"),
             ("Guadeloupe", "971"),
+            # Avoid disambiguations
+            # due to street names
+            ("Rue de la Réunion 61000 Alencon", "61"),  # "réunion" could mean 974
+            ("rue de Paris, Nantes", None),  # "paris" could mean 75
+            ("Rue de l'Orne, 44800 Saint-Herblain (44)", "44"),  # "Orne" could be 61
+            # due to city names
+            ("Sully sur Loire (Loiret)", "45"),  # "Loire" could mean 42
+            ("Gournay-sous-Marne (Seine saint Denis)", "93"),  # "Marne" could be 51
+            # due to phrase
+            ("en val-de-Loire", None),  # "Loire" could be 42
+            # The current strategy has drawbacks
+            ("Tout savoir sur Saint Barthélemy", None),
             # There can be some mistakes, that we may want to fix one day.
+            ("Vallées de l'Orne et de l'Odon", "61"),  # in 14
+            ("commune de Saint-Vincent-des-Landes", "40"),  # in 44
             # In this case, we could look for 2 or 3 digit
-            ("Rue de l'Orne, Saint-Herblain (44)", "61"),
+            ("CHU 44", None),  # in 44
         ],
     )
     def test_fr_address_to_dept_code(self, input_data, expected):
@@ -228,12 +242,24 @@ class TestFrance:
             ("Loire Atlanti)que", "44"),
             ("Yonne", "89"),
             ("Saint Pierre et Miquelon", "975"),
-            ("Tout savoir sur Saint Barthélemy", "977"),
-            ("Tout savoir sur saint-barthelemy", "977"),
-            ("Tout savoir sur saint Barthélémy", "977"),
-            # There may be some mistakes, so be careful what is passed
-            ("Rue de la Réunion, 75000 Paris", "974"),
-            ("Rue de l'Orne, 44800 Saint-Herblain", "61"),
+            ("Tout savoir à propos de Saint Barthélemy", "977"),
+            ("Tout savoir à propos de saint-barthelemy", "977"),
+            ("Tout savoir à propos de saint Barthélémy", "977"),
+            # Avoid disambiguations
+            # due to street names
+            ("Rue de la Réunion 61000 Alencon", None),  # "réunion" could mean 974
+            ("rue de Paris, Nantes", None),  # "paris" could mean 75
+            ("Rue de l'Orne, Saint-Herblain (44)", None),  # "Orne" could be 61
+            # due to city names
+            ("Sully sur Loire (Loiret)", "45"),  # "Loire" could mean 42
+            ("Gournay-sous-Marne (Seine saint Denis)", "93"),  # "Marne" could be 51
+            # due to phrase
+            ("en val-de-Loire", None),  # "Loire" could be 42
+            # The current strategy has drawbacks
+            ("Tout savoir sur Saint Barthélemy", None),
+            # There can be some mistakes, that we may want to fix one day.
+            ("Vallées de l'Orne et de l'Odon", "61"),  # in 14
+            ("commune de Saint-Vincent-des-Landes", "40"),  # in 44
         ],
     )
     def test_fr_dept_name_dept_code(self, input_data, expected):
