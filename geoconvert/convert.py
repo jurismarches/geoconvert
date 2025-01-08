@@ -296,11 +296,38 @@ def fr_postcode_to_dept_code(text):
 # Keep backward compatibility
 address_to_zipcode = fr_postcode_to_dept_code
 
+# Avoid "rue de Paris" situations
+fr_street_names_re = "|".join(
+    (
+        "boulevard",
+        "avenue",
+        "chemin",
+        "rue",
+        "route",
+        "impasse",
+        "place",
+        "passage",
+        "ruelle",
+        "quai",
+        "all.e",
+    )
+)
+fr_street_name_cleaning_re = re.compile(
+    rf"\b({fr_street_names_re})\b[^\d\(,\n-]{{,20}}", flags=re.I
+)
+# Avoid "Ville-sur-Loire" situations
+fr_town_name_cleaning_re = re.compile(r"\w+.\b(sous|sur|val\Wde)\b.(\w+)", flags=re.I)
+
 
 def fr_dept_name_to_dept_code(text):
     """
     Return the departement number from the departement name
     """
+    # Avoid "rue de Paris" situations
+    text = fr_street_name_cleaning_re.sub("", text)
+    # Avoid "Ville-sur-Loire" situations
+    text = fr_town_name_cleaning_re.sub("", text)
+
     # There is no space in french dept names, but hyphens instead.
     text = safe_string(text).replace(" ", "-")
 
