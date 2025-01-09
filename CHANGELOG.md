@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [5.3.2] - 2025-01-09
+
 ### Fixed
 
 - Avoid disambiguation from street names and city names in fr_dept_name_to_dept_code
