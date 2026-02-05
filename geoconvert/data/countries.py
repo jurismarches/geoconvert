@@ -2,21 +2,23 @@
 # so let us make sure we never confuse them.
 special_countries = {
     "demokratische republik kongo": "CD",  # de
+    "kongo demokratische republik": "CD",  # de
     "democratic republic of congo": "CD",  # en
     "democratic republic of the congo": "CD",  # en
     "congo the democratic republic of the": "CD",  # en
     "congo dem republic": "CD",  # en
     "congo democratic republic": "CD",  # en
     "republique democratique du congo": "CD",  # fr
+    "congo republique democratique": "CD",  # fr
     "republica democratica do congo": "CD",  # pt
+    "congo republica democratica": "CD",  # pt
     "rdc": "CD",
     "rd congo": "CD",
     "kinshasa": "CD",
     "brazzaville": "CG",
     # Keep as last country, to make sure we never mistake it for CD
-    "republik kongo": "CG",  # de
-    "republica do congo": "CG",  # pt
-    "congo": "CG",  # en, fr
+    "congo": "CG",  # en, fr, pt
+    "kongo": "CG",  # de
     # Make sure we never mistake it for GN (Guinea)
     "aquatorialguinea": "GQ",  # es
     "equatorial guinea": "GQ",  # de / en
