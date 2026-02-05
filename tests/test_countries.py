@@ -25,8 +25,28 @@ class TestCountries:
             # No confusion with Congo ("CD")
             ("Congo (Brazzaville)", {}, "CG"),
             ("Congo (Kinshasa)", {}, "CD"),
-            ("Congo Democratic Republic of", {}, "CD"),
+            ("Congo Democratic Republic of", {}, "CD"),  # en
+            ("Congo, the Democratic Republic of the", {}, "CD"),  # en
+            ("Congo Dem Republic", {}, "CD"),  # en
+            ("Democratic Republic of Congo", {}, "CD"),  # en
+            ("Democratic Republic of the Congo", {}, "CD"),  # en
+            ("Congo, Republic of", {}, "CG"),  # en
+            ("Congo, République démocratique de", {}, "CD"),  # fr
+            ("Congo, République démocratique du", {}, "CD"),  # fr
+            ("République démocratique du congo", {}, "CD"),  # fr
+            ("Congo République du", {}, "CG"),  # fr
+            ("demokratische republik kongo", {}, "CD"),  # de
+            ("Kongo, demokratische republik", {}, "CD"),  # de
+            ("republik kongo", {}, "CG"),  # de
+            ("Kongo, republik", {}, "CG"),  # de
+            ("republica democratica do congo", {}, "CD"),  # pt
+            ("Congo, republica democratica", {}, "CD"),  # pt
+            ("republica do congo", {}, "CG"),  # pt
+            ("Congo, republica", {}, "CG"),  # pt
             ("Congo", {}, "CG"),
+            ("Kongo", {}, "CG"),
+            ("RDC", {}, "CD"),
+            ("RD Congo", {}, "CD"),
             # No confusion with Guinea ("GN")
             # "GQ"
             ("equatorial guinea", {}, "GQ"),  # de / en
