@@ -20,7 +20,7 @@ pip install https://github.com/jurismarches/geoconvert/archive/master.zip
 # TL;DR
 
 ```python
->>> from geoconvert.convert import (
+>>> from geoconvert import (
 ... 	address_to_country_code,
 ... 	address_to_subdivision_code,
 ... 	address_to_country_and_subdivision_codes,
@@ -92,7 +92,7 @@ The main function you are looking for is the following, converting a country or
 a capital name to a country code. By default, it uses all the available languages to
 guess the country code:
 ```python
->>> from geoconvert.convert import address_to_country_code
+>>> from geoconvert import address_to_country_code
 >>> address_to_country_code("Bienvenue à Kinshasa")  # FR
 'CD'
 >>> address_to_country_code("Welcome to Cyprus")  # EN
@@ -126,7 +126,7 @@ for more efficiency (available choices: "de" for german, "en" for english,
 There are more specific functions, for which you can also select a language
 (all of them are used by default):
 ```python
->>> from geoconvert.convert import (
+>>> from geoconvert import (
 ... 	country_name_to_country_code, capital_name_to_country_code
 ... )
 >>> country_name_to_country_code(" Le  nigéria c'est trop   sympa", lang="fr")
@@ -171,7 +171,7 @@ There should be no confusion between French and US postcodes:
 You can find the state code associated with an address, via the postcode,
 state name (in Portuguese) or code:
 ```python
->>> from geoconvert.convert import br_address_to_state_code
+>>> from geoconvert import br_address_to_state_code
 >>> br_address_to_state_code("Luz, 01120-010")
 'SP'
 >>> br_address_to_state_code("Piauí")
@@ -183,7 +183,7 @@ state name (in Portuguese) or code:
 
 You may use more specific functions, depending on your needs:
 ```python
->>> from geoconvert.convert import (
+>>> from geoconvert import (
 ... 	br_postcode_to_state_code, br_state_name_to_state_code
 ... )
 >>> br_postcode_to_state_code("Mariana, 04094-050")
@@ -199,7 +199,7 @@ You may use more specific functions, depending on your needs:
 You can find the province or territory code associated with an address, via the postcode,
 province or territory name (in French or English) or code:
 ```python
->>> from geoconvert.convert import ca_address_to_province_code
+>>> from geoconvert import ca_address_to_province_code
 >>> ca_address_to_province_code("H3T 1X6")
 'QC'
 >>> ca_address_to_province_code("Toronto, Ontario")
@@ -221,7 +221,7 @@ province or territory name (in French or English) or code:
 
 You may use more specific functions, depending on your needs:
 ```python
->>> from geoconvert.convert import (
+>>> from geoconvert import (
 ... 	ca_postcode_to_province_code, ca_province_name_to_province_code
 ... )
 >>> ca_postcode_to_province_code("Iqaluit X0A 0H0")
@@ -237,7 +237,7 @@ You may use more specific functions, depending on your needs:
 
 You can find the department code associated with an address or department name:
 ```python
->>> from geoconvert.convert import fr_address_to_dept_code
+>>> from geoconvert import fr_address_to_dept_code
 >>> fr_address_to_dept_code("Chemin du Solarium Le Haut Vigneau 33175 GRADIGNAN CEDEX")
 '33'
 >>> fr_address_to_dept_code("Loire-Atlantique")
@@ -252,7 +252,7 @@ You can find the department code associated with an address or department name:
 You can also derive the main department and the list of all departments
 which are part of a given region from its name:
 ```python
->>> from geoconvert.convert import fr_region_name_to_info
+>>> from geoconvert import fr_region_name_to_info
 >>> # Returns the deparment code where the head of the region is
 >>> # and the list of all the departments in the region.
 >>> fr_region_name_to_info('Les Pays de la Loire, une superbe région')
@@ -262,7 +262,7 @@ which are part of a given region from its name:
 
 You may use more specific functions, depending on your needs:
 ```python
->>> from geoconvert.convert import (
+>>> from geoconvert import (
 ... 	fr_address_to_dept_code,
 ... 	fr_dept_name_to_dept_code,
 ... 	fr_postcode_to_dept_code,
@@ -281,7 +281,7 @@ You may use more specific functions, depending on your needs:
 You can find the state code associated with an address, via the postcode,
 state name (in English) or code:
 ```python
->>> from geoconvert.convert import us_address_to_state_code
+>>> from geoconvert import us_address_to_state_code
 >>> us_address_to_state_code("Sunnyvale, CA 94085")
 'CA'
 >>> us_address_to_state_code("New Hampshire")
@@ -293,7 +293,7 @@ state name (in English) or code:
 
 You may use more specific functions, depending on your needs:
 ```python
->>> from geoconvert.convert import (
+>>> from geoconvert import (
 ... 	us_postcode_to_state_code, us_state_name_to_state_code
 ... )
 >>> us_postcode_to_state_code("6931 Rings Rd, Amlin, OH 43002")
@@ -308,7 +308,7 @@ You may use more specific functions, depending on your needs:
 
 You can derive both country and subdivision codes at the same time:
 ```python
->>> from geoconvert.convert import address_to_country_and_subdivision_codes
+>>> from geoconvert import address_to_country_and_subdivision_codes
 >>> address_to_country_and_subdivision_codes("Montréal, QC, Canada")
 ('CA', 'QC')
 >>> address_to_country_and_subdivision_codes("Montréal, Québec")

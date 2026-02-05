@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Added
 
 - add more formal format for congo : "congo, republic of"
+- allow geoconvert convertion functions to be imported from geoconvert
 
 ## [5.3.2] - 2025-01-09
 
