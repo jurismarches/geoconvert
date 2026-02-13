@@ -42,10 +42,14 @@ def safe_string(text):
     "l'ocean"
     >>> safe_string('Fiji/Pacific Island')
     'fiji pacific island'
+    >>> safe_string('<li>Congo</li>')
+    'li congo li'
+    >>> safe_string('Loire Atlanti)que')
+    'loire atlantique'
     """
     text = remove_accents(text)
-    # Replace "-", ":" and "/" with a whitespace
-    text = re.sub(r"[-:/]", " ", text)
+    # Replace "-", ":", "/" and "<>" with a whitespace
+    text = re.sub(r"[-:/<>]", " ", text)
     # Replace weird '
     text = re.sub(r"[ʼ]", "'", text)
     # Only keep word or space characters as well as "_", and "'".

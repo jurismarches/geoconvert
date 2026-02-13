@@ -14,6 +14,7 @@ from .convert import (
     ca_province_name_to_province_code,
     capital_name_to_country_code,
     country_name_to_country_code,
+    country_name_to_country_name_and_code,
     de_address_to_land_code,
     de_hauptstadt_to_land_code,
     de_land_name_to_land_code,
