@@ -387,6 +387,33 @@ region_info_from_name = fr_region_name_to_info
 # GLOBAL
 
 
+def country_name_to_country_name_and_code(text, lang=None):
+    """
+    Get country names and return his code associated with found name.
+
+    We go through all languages by default:
+    >>> country_name_to_country_name_and_code("Deutschland")  # de
+    ('deutschland', 'DE')
+    >>> country_name_to_country_name_and_code("Germany")  # en
+    ('germany', 'DE')
+    >>> country_name_to_country_name_and_code("Allemagne")  # fr
+    ('allemagne', 'DE')
+    >>> country_name_to_country_name_and_code("Alemanha")  # pt
+    ('alemanha', 'DE')
+
+    You may specify the language to make it more efficient to get the
+    countries codes, but you must use the correct language to get a match:
+    >>> country_name_to_country_name_and_code("Allemagne", lang="fr")
+    ('allemagne', 'DE')
+    >>> country_name_to_country_name_and_code("Allemagne", lang="de")
+
+    There are no errors nor warnings when the language is unknown:
+    >>> country_name_to_country_name_and_code("Germania", lang="it")
+
+    """
+    return _full_name_to_country_name_and_code(text, lang, language_to_country_names)
+
+
 def country_name_to_country_code(text, lang=None):
     """
     Get country name and return his code.
@@ -410,23 +437,34 @@ def country_name_to_country_code(text, lang=None):
     There are no errors nor warnings when the language is unknown:
     >>> country_name_to_country_code("Germania", lang="it")
     """
-    return _full_name_to_country_code(text, lang, language_to_country_names)
+    found_country = country_name_to_country_name_and_code(text, lang)
+    if found_country:
+        return found_country[1]
 
 
 # Keep backward compatibility
 country_name_to_id = country_name_to_country_code
 
 
+def capital_name_to_country_name_and_code(text, lang=None):
+    """
+    Find the corresponding country code from the capital name.
+    """
+    return _full_name_to_country_name_and_code(text, lang, language_to_capital_names)
+
+
 def capital_name_to_country_code(text, lang=None):
     """
     Find the corresponding country code from the capital name.
     """
-    return _full_name_to_country_code(text, lang, language_to_capital_names)
+    found_country = capital_name_to_country_name_and_code(text, lang)
+    if found_country:
+        return found_country[1]
 
 
-def _full_name_to_country_code(text, lang, language_to_full_names):
+def _full_name_to_country_name_and_code(text, lang, language_to_full_names):
     """
-    Find the corresponding country code from the capital name.
+    Find the corresponding country code from the full name.
     """
     # Make sure the text has the expected format
     text = safe_string(text)
@@ -447,15 +485,17 @@ def _full_name_to_country_code(text, lang, language_to_full_names):
             full_names = full_names.copy()
             for name in ambiguous_country_names:
                 full_names.pop(name, None)
-        country_code = _full_name_to_country_code_for_lang(text, language, full_names)
+        country_name, country_code = _full_name_to_country_name_and_code_for_lang(
+            text, language, full_names
+        )
         if country_code:
-            return country_code
+            return (country_name, country_code)
 
 
-def _full_name_to_country_code_for_lang(text, lang, full_names):
+def _full_name_to_country_name_and_code_for_lang(text, lang, full_names):
     # Quickly reach conclusion if possible
     if text in full_names:
-        return full_names[text]
+        return (text, full_names[text])
 
     # Otherwise use a regex
     items_found = []
@@ -463,7 +503,8 @@ def _full_name_to_country_code_for_lang(text, lang, full_names):
         if re.search(rf"(\s|[^\w\s]|\b){name}(\s|[^\w\s]|\b)", text):
             items_found.append((name, code))
     if items_found:
-        return max(items_found, key=lambda item: len(item[0]))[1]
+        return max(items_found, key=lambda item: len(item[0]))
+    return (None, None)
 
 
 # Keep backward compatibility
@@ -510,6 +551,47 @@ def address_to_country_code(text, lang=None):
     # the subdivision)
     country_code, _ = _guess_subdivision_then_country_codes(text)
     return country_code
+
+
+def address_to_found_text_and_country_code(text, lang=None):
+    """
+    Return the found text and country code from the address. If nothing is found, (None, None)
+    is returned.
+
+    The country code can be found via the country or capital name in any
+    available language if lang is None, otherwise all available
+    languages are used.
+
+    All languages available in geoconvert are used by default:
+    >>> address_to_found_text_and_country_code("Bienvenue à Kinshasa")  # FR
+    ('kinshasa', 'CD')
+    >>> address_to_found_text_and_country_code("Welcome to Cyprus")  # EN
+    ('cyprus', 'CY')
+    >>> address_to_found_text_and_country_code("Willkommen bei Kairo")  # DE
+    ('kairo', 'EG')
+    >>> address_to_found_text_and_country_code("Bem vindo ao Afeganistão")  # PT
+    ('afeganistao', 'AF')
+
+    You may use a specific language to go faster, but you'll lose the
+    genericity of the result for any available language.
+    >>> address_to_found_text_and_country_code("Ungarn", lang="us")
+    (None, None)
+    >>> address_to_found_text_and_country_code("Ungarn", lang="de")
+    ('ungarn', 'HU')
+    """
+    # Look for the country code from the country name first.
+    if country := country_name_to_country_name_and_code(text, lang):
+        return country
+
+    # Look for the country code from the capital name second.
+    if country := capital_name_to_country_name_and_code(text, lang):
+        return country
+
+    # Go through all countries, one after the other, to guess the country
+    # from a subdivision (but only via safe-enough means of identifying
+    # the subdivision)
+    country_code, _ = _guess_subdivision_then_country_codes(text)
+    return (None, country_code)
 
 
 # Here are the lookup functions to use when the country is known.
