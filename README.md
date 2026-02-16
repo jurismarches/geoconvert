@@ -136,6 +136,14 @@ There are more specific functions, for which you can also select a language
 
 ```
 
+You can also find multiples countries at once:
+```python
+>>> from geoconvert import find_countries
+>>> find_countries("Germany and Britain will send representatives to Paris.", lang="en")
+['DE', 'FR', 'GB']
+
+```
+
 ## Finding subdivision codes
 
 Geoconvert also gives you the abilty to find the code associated to a smaller

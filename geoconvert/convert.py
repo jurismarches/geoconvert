@@ -2,6 +2,7 @@
 import re
 
 from .data import (
+    ALL_COUNTRY_CODES,
     ALL_NUTS_CODES,
     BR_POSTCODES_RANGE,
     CA_POSTCODE_FIRST_LETTER_TO_PROVINCE_CODE,
@@ -831,3 +832,36 @@ def _guess_subdivision_then_country_codes(text):
             return (country_code, subdivision_code)
 
     return (None, None)
+
+
+def find_countries(text, lang=None):
+    """
+    Detect countries from a given text.
+    >>> find_countries('In france and trinidad y tobago')
+    ['FR', 'TT']
+    >>> find_countries('FR In Gabon and Germany, CH')
+    ['CH', 'DE', 'FR', 'GA']
+    """
+
+    # Remove countries found in text gradually.
+    # "France and trinidad y tobago" -> "France and" -> "and"
+    # "Congo, Congo, Democratic Republic of the" -> "Congo" -> ""
+    safe_text = safe_string(text)
+    countries = set()
+    # Find countries from addresses
+    while (
+        country := address_to_found_text_and_country_code(safe_text, lang)
+    ) and country[1]:
+        countries.add(country[1])
+        # Check if found text is detectable, else break to avoid infinite loop
+        if country[0] is None:
+            break
+        safe_text = safe_text.replace(country[0], "")
+
+    # Find countries from country codes
+    safe_text = re.sub(r"[^A-Z\s]", " ", text)
+    for sub_text in safe_text.split():
+        if len(sub_text) == 2 and sub_text in ALL_COUNTRY_CODES:
+            countries.add(sub_text)
+
+    return sorted(list(countries))
