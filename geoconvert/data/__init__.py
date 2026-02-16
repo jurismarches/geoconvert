@@ -54,3 +54,4 @@ from .subdivisions.united_states import (
 )
 
 KNOWN_LANGUAGES_FOR_COUNTRY = set(language_to_country_names.keys())
+ALL_COUNTRY_CODES = list(set(val for _, val in countries_en.items() if val))

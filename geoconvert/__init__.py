@@ -19,6 +19,7 @@ from .convert import (
     de_hauptstadt_to_land_code,
     de_land_name_to_land_code,
     de_postcode_to_land_code,
+    find_countries,
     fr_address_to_dept_code,
     fr_dept_name_to_dept_code,
     fr_postcode_to_dept_code,
