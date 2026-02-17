@@ -1,5 +1,5 @@
 __author__ = "Octopusmind <informatique@octopusmind.info>"
-__version__ = "5.4.0"
+__version__ = "5.5.0"
 
 
 from .convert import (

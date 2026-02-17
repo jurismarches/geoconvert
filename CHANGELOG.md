@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [5.5.0] - 2026-02-17
+
+### Added
+
+- add 'find_countries' function to search for all countries in a text
+- add 'ALL_COUNTRY_CODES' to access all country codes of geoconvert
+
 ## [5.4.0] - 2026-02-11
 
 ### Added
