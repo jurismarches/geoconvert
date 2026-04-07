@@ -9,7 +9,7 @@ clean:
 styles:
 	isort --ws .
 	black .
-	ruff --fix .
+	ruff check --fix .
 
 styles_check:
 	isort --ws --check-only .

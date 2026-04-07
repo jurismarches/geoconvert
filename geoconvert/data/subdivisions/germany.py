@@ -1,6 +1,5 @@
 import re
 
-
 de_landers = {
     "baden wurttemberg": "BW",
     "bayern": "BY",

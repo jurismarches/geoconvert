@@ -1,6 +1,5 @@
 import re
 
-
 ca_provinces = {
     "yukon": "YT",
     "territoires du nord ouest": "NT",
