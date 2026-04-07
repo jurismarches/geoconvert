@@ -8,7 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Added
 
 - Support for Python 3.13 and 3.14
-- Detection for "Irak" as IQ in French (not just "Iraq" for this language)
 
 ### Removed
 
