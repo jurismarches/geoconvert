@@ -4,4 +4,3 @@ ignore = [
     "E501",  # line length is black's job
     "F401",  # imports are isort's job
 ]
-ignore-init-module-imports = true

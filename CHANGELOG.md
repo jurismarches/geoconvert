@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [6.0.0] - 2026-04-07
+
+### Added
+
+- Support for Python 3.13 and 3.14
+- Detection for "Irak" as IQ in French (not just "Iraq" for this language)
+
+### Removed
+
+- Support for Python 3.8 and 3.9
+
+### Upgrade
+
+- All libraries used for the dev/test environment
+
 ## [5.6.0] - 2026-04-07
 
 - Add "brussels" (for "BE") to the known capital names in English.

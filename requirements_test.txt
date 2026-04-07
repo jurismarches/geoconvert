@@ -1,9 +1,9 @@
 black==26.3.1
-ruff==0.2.0
-isort==5.13.2
-pytest==7.2.2
-pytest-cov==4.0.0
-mock==5.0.1
-tox==4.4.7
+ruff==0.15.9
+isort==8.0.1
+pytest==9.0.2
+pytest-cov==7.1.0
+mock==5.2.0
+tox==4.52.0
 
 ipdb

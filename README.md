@@ -5,7 +5,7 @@ to generic data.
 * Languages available for country names: deutsch, english, french, portuguese, spanish.
 * Languages available for capital names: deutsch, english, french.
 
-Supports Python 3.8, 3.9, 3.10 and 3.11.
+Supports Python from 3.10 to 3.14.
 
 [![Build Status](https://app.travis-ci.com/jurismarches/geoconvert.svg?branch=master)](https://app.travis-ci.com/jurismarches/geoconvert)
 [![codecov](https://codecov.io/gh/jurismarches/geoconvert/branch/master/graph/badge.svg?token=UB3Vij6ygJ)](https://codecov.io/gh/jurismarches/geoconvert)

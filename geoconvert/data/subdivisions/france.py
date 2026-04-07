@@ -2,7 +2,6 @@ import re
 
 from .united_states import US_STATES_CODES
 
-
 fr_regions = {
     # New region names first (2018)
     "auvergne rhone alpes": "84",  # chef lieu: Lyon

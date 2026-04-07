@@ -1,6 +1,5 @@
 import re
 
-
 br_states = {
     "acre": "AC",
     "alagoas": "AL",
