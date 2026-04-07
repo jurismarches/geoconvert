@@ -218,6 +218,7 @@ capitals_en = {
     "bratislava": "SK",
     "brazzaville": "CG",
     "bridgetown": "BB",
+    "brussels": "BE",
     "bucharest": "RO",
     "budapest": "HU",
     "buenos aires": "AR",
