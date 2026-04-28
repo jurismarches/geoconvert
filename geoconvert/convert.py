@@ -19,6 +19,7 @@ from .data import (
     ca_province_code_regex,
     ca_province_name_regex,
     ca_provinces,
+    corse_du_sud_special_zipcodes,
     de_land_code_regex,
     de_land_hauptstadt_regex,
     de_land_name_regex,
@@ -279,10 +280,10 @@ def fr_postcode_to_dept_code(text):
 
         # Corse
         if postcode[:2] == "20":
-            if int(postcode) < 20200 or int(postcode) in [20223, 20900]:
+            postcode_int = int(postcode)
+            if postcode_int < 20200 or postcode_int in corse_du_sud_special_zipcodes:
                 return "20A"
-            else:
-                return "20B"
+            return "20B"
 
         # Saint-Martin
         if postcode[:3] == "970":
