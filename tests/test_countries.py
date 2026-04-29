@@ -31,8 +31,10 @@ class TestCountries:
             ("Democratic Republic of Congo", {}, "CD"),  # en
             ("Democratic Republic of the Congo", {}, "CD"),  # en
             ("Congo, Republic of", {}, "CG"),  # en
+            ("Congo, the Republic of", {}, "CG"),  # en
             ("Congo, République démocratique de", {}, "CD"),  # fr
             ("Congo, République démocratique du", {}, "CD"),  # fr
+            ("Congo, La République démocratique du", {}, "CD"),  # fr
             ("République démocratique du congo", {}, "CD"),  # fr
             ("Congo République du", {}, "CG"),  # fr
             ("demokratische republik kongo", {}, "CD"),  # de

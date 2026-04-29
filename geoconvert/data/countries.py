@@ -8,8 +8,10 @@ special_countries = {
     "congo the democratic republic of the": "CD",  # en
     "congo dem republic": "CD",  # en
     "congo democratic republic": "CD",  # en
+    "congo the democratic republic": "CD",  # en
     "republique democratique du congo": "CD",  # fr
     "congo republique democratique": "CD",  # fr
+    "congo la republique democratique": "CD",  # fr
     "republica democratica do congo": "CD",  # pt
     "congo republica democratica": "CD",  # pt
     "rdc": "CD",
