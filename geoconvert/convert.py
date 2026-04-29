@@ -834,12 +834,18 @@ def _guess_subdivision_then_country_codes(text):
     return (None, None)
 
 
-def find_countries(text, lang=None):
+def find_countries(text, lang=None, enable_ambiguous_detection=False):
     """
     Detect countries from a given text.
+
+    If the given text is known to contain only countries data,
+    set enable_ambiguous_detection=True to improve the detection by enabling country detection using country codes.
+
     >>> find_countries('In france and trinidad y tobago')
     ['FR', 'TT']
     >>> find_countries('FR In Gabon and Germany, CH')
+    ['DE', 'GA']
+    >>> find_countries('FR In Gabon and Germany, CH', enable_ambiguous_detection=True)
     ['CH', 'DE', 'FR', 'GA']
     """
 
@@ -859,9 +865,10 @@ def find_countries(text, lang=None):
         safe_text = safe_text.replace(country[0], "")
 
     # Find countries from country codes
-    safe_text = re.sub(r"[^A-Z\s]", " ", text)
-    for sub_text in safe_text.split():
-        if len(sub_text) == 2 and sub_text in ALL_COUNTRY_CODES:
-            countries.add(sub_text)
+    if enable_ambiguous_detection:
+        two_letter_codes = re.findall(r"\b([A-Z]{2})\b", text)
+        for two_letter_code in two_letter_codes:
+            if two_letter_code in ALL_COUNTRY_CODES:
+                countries.add(two_letter_code)
 
     return sorted(list(countries))
