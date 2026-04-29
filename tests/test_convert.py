@@ -7,15 +7,6 @@ class TestConvert:
     @pytest.mark.parametrize(
         "input_data, expected",
         [
-            # As codes
-            (
-                "AT,KO,NO",
-                ["AT", "KO", "NO"],
-            ),
-            (  # non valids codes are not taken
-                "AT,KO,NO,XX",
-                ["AT", "KO", "NO"],
-            ),
             # only one word
             (
                 "spain",
@@ -81,6 +72,62 @@ class TestConvert:
         Test countries detection
         """
         result = find_countries(input_data)
+        assert result == expected
+
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
+            # Codes are not detected if not safe
+            (
+                "AT,KO,NO",
+                [],
+            ),
+            (
+                "AT,KO,NO,XX",
+                [],
+            ),
+            # Avoid taking non-country codes as country codes
+            ("TEST NO 3", []),
+            ("TO DO", []),
+            ("AN OBJECT", []),
+            # not a country code anyway
+            ("TeST", []),
+        ],
+    )
+    def test_find_countries_with_codes_safe_detection(self, input_data, expected):
+        """
+        Test countries detection with codes.
+        Without the "enable_ambiguous_detection" flag, codes are not detected.
+        """
+        result = find_countries(input_data, enable_ambiguous_detection=False)
+        assert result == expected
+
+    @pytest.mark.parametrize(
+        "input_data, expected",
+        [
+            # Codes
+            (
+                "AT,KO,NO",
+                ["AT", "KO", "NO"],
+            ),
+            (  # non-valid codes are not taken
+                "AT,KO,NO,XX",
+                ["AT", "KO", "NO"],
+            ),
+            # Risk of taking non-country codes as country codes
+            ("TEST NO 3", ["NO"]),
+            ("TO DO", ["DO", "TO"]),
+            ("AN OBJECT", ["AN"]),
+            # not a country code anyway
+            ("TeST", []),
+        ],
+    )
+    def test_find_countries_with_codes_ambiguous_detection(self, input_data, expected):
+        """
+        Test countries detection with codes.
+        With the "enable_ambiguous_detection" flag, codes are detected.
+        """
+        result = find_countries(input_data, enable_ambiguous_detection=True)
         assert result == expected
 
     @pytest.mark.parametrize(
