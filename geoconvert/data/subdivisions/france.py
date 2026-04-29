@@ -5,6 +5,7 @@ from .united_states import US_STATES_CODES
 fr_regions = {
     # New region names first (2018)
     "auvergne rhone alpes": "84",  # chef lieu: Lyon
+    "aura": "84",  # short for "auvergne rhone alpes"
     "bourgogne franche comte": "27",  # chef lieu: Dijon
     "centre val de loire": "24",  # chef lieu: Orleans
     "grand est": "44",  # chef lieu: strasbourg
@@ -37,6 +38,7 @@ fr_regions = {
     "picardie": "22",  # old region (pre 2016)
     "poitou charentes": "54",  # old region (pre 2016)
     "provence alpes cote d'azur": "93",
+    "paca": "93",  # short for "provence alpes cote d'azur"
     "reunion": "04",
     "rhone alpes": "82",  # old region (pre 2016)
     # For the old region name "Centre", use longer names,
