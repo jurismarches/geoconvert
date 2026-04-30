@@ -229,13 +229,33 @@ fr_departments = {
     "nouvelle-caledonie": "988",
 }
 
+# Corse special cases, they do not respect the "natural" split between 20A and 20B
+ajaccio_zipcodes = [
+    20302,
+    20303,
+    20304,
+    20305,
+    20306,
+    20309,
+    20311,
+    20501,
+    20502,
+    20503,
+    20504,
+    20700,
+    20701,
+    20702,
+    20703,
+    20900,
+]
+porto_vecchio_zipcodes = [20537, 20538]
+# 2A
+corse_du_sud_special_zipcodes = ajaccio_zipcodes + porto_vecchio_zipcodes
 
 # Keep backward compatibility
 departments = fr_departments
 
-
 # Regexes
-
 names = r"\b|\b".join(name for name in fr_departments)
 fr_department_name_regex = re.compile(rf"(?P<dept>\b{names}\b)", re.I)
 

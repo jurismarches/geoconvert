@@ -24,6 +24,7 @@ from .subdivisions.canada import (
     ca_provinces,
 )
 from .subdivisions.france import (
+    corse_du_sud_special_zipcodes,
     fr_department_name_regex,
     fr_departments,
     fr_postcode_regex,
