@@ -18,6 +18,7 @@ special_countries = {
     "rd congo": "CD",
     "kinshasa": "CD",
     "brazzaville": "CG",
+    "suomi": "FI",  # fi
     # Keep as last country, to make sure we never mistake it for CD
     "congo": "CG",  # en, fr, pt
     "kongo": "CG",  # de
